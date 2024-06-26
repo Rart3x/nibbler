@@ -3,6 +3,9 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "../libs/openGL/openGL.hpp"
+
+
 
 bool isNumeric(const std::string &str);
 

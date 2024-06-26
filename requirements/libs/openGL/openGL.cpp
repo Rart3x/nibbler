@@ -1,6 +1,10 @@
 #include "openGL.hpp"
 
-extern "C" void display() {
+void printA() {
+    printf("test");
+}
+
+void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glBegin(GL_TRIANGLES);
         glVertex2f(-0.5, -0.5);
