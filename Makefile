@@ -1,7 +1,12 @@
 NAME = Nibbler
 
 SRC_DIR = requirements/functions
-OBJ_DIR = .obj
+OBJ_DIR = .objs
+LIB_DIR = .libs
+
+LIB_NAME1 = openGL.a
+# LIB_NAME2 = openGL.a
+# LIB_NAME3 = openGL.a
 
 SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS := $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
@@ -17,7 +22,7 @@ DIRDUP = mkdir -p $(@D)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MAIN_OBJ)
+$(NAME): $(OBJS) $(MAIN_OBJ) $(LIB_DIR)/$(LIB_NAME1)
 	@printf "\033[0;32mCompilation successful.\033[0m\n"
 	@$(CC) $(OBJS) $(MAIN_OBJ) -o $(NAME)
 
@@ -29,10 +34,14 @@ $(MAIN_OBJ): $(MAIN_SRC)
 	@$(DIRDUP)
 	@$(CC) $(CPPFLAGS) -c -o $@ $<
 
+$(LIB_DIR)/$(LIB_NAME1): $(filter-out $(MAIN_SRC), $(SRCS))
+	@$(DIRDUP)
+	@ar rcs $@ $^
+
 -include $(DEPS)
 
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR) $(LIB_DIR)
 	@printf "\033[0;32mCleanup successful.\033[0m\n"
 
 fclean: clean
