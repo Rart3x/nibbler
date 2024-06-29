@@ -2,7 +2,7 @@
 
 SDL::SDL(void) {
     
-    if((SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) == -1)) {
+    if((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == -1)) {
         std::cerr << "Error: Could not initialize SDL" << std::endl;
         exit(EXIT_FAILURE);
     }
@@ -11,6 +11,7 @@ SDL::SDL(void) {
 }
 
 SDL::~SDL() {
+    SDL_DestroyWindow(this->win);
     SDL_Quit();
 }
 
@@ -23,8 +24,6 @@ void SDL::display() {
         input();
         SDL_Delay(16);
     }
-
-    SDL_DestroyWindow(this->win);
 }
 
 void SDL::input() {
