@@ -1,5 +1,6 @@
-SRC_DIR = requirements/functions
+LIB_DIR = .libs
 OBJ_DIR = .objs
+SRC_DIR = requirements/functions
 
 SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS := $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
@@ -9,13 +10,14 @@ MAIN_SRC = requirements/main.cpp
 MAIN_OBJ = $(OBJ_DIR)/main.o
 
 CC = g++
-CPPFLAGS = -Wall -Wextra -Werror -MMD -MP -gdwarf-2 -lSDL2
+CPPFLAGS = -Wall -Wextra -Werror -MMD -MP -gdwarf-2
 
 DIRDUP = mkdir -p $(@D)
 
 NAME = Nibbler
+SDL_LIB = $(LIB_DIR)/libSDL.so
 
-all: $(NAME)
+all: $(NAME) $(SDL_LIB)
 
 $(NAME): $(OBJS) $(MAIN_OBJ)
 	@printf "\033[0;32mCompilation successful.\033[0m\n"
@@ -28,6 +30,14 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
 $(MAIN_OBJ): $(MAIN_SRC)
 	@$(DIRDUP)
 	@$(CC) $(CPPFLAGS) -c -o $@ $<
+
+$(OBJ_DIR)/SDL.o: $(SRC_DIR)/SDL.cpp
+	@$(DIRDUP)
+	@$(CC) $(CPPFLAGS) -fPIC -c -o $@ $<
+
+$(SDL_LIB): $(OBJ_DIR)/SDL.o
+	@mkdir -p $(dir $@)
+	@$(CC) -shared -o $@ $^
 
 -include $(DEPS)
 
