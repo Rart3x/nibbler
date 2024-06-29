@@ -1,8 +1,5 @@
 SRC_DIR = requirements/functions
-OBJ_DIR =.objs
-LIB_DIR =.libs
-
-LIB_NAME1 = libopenGL.a
+OBJ_DIR = .objs
 
 SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS := $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
@@ -12,7 +9,7 @@ MAIN_SRC = requirements/main.cpp
 MAIN_OBJ = $(OBJ_DIR)/main.o
 
 CC = g++
-CPPFLAGS = -Wall -Wextra -Werror -MMD -MP -gdwarf-2
+CPPFLAGS = -Wall -Wextra -Werror -MMD -MP -gdwarf-2 -lSDL2
 
 DIRDUP = mkdir -p $(@D)
 
@@ -20,9 +17,9 @@ NAME = Nibbler
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MAIN_OBJ) $(LIB_DIR)/$(LIB_NAME1)
+$(NAME): $(OBJS) $(MAIN_OBJ)
 	@printf "\033[0;32mCompilation successful.\033[0m\n"
-	@$(CC) $(OBJS) $(MAIN_OBJ) -L$(LIB_DIR) -lopenGL -o $(NAME)
+	@$(CC) $(OBJS) $(MAIN_OBJ) -lSDL2 -o $(NAME)
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
 	@$(DIRDUP)
@@ -31,12 +28,6 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
 $(MAIN_OBJ): $(MAIN_SRC)
 	@$(DIRDUP)
 	@$(CC) $(CPPFLAGS) -c -o $@ $<
-
-$(LIB_DIR)/$(LIB_NAME1): $(filter-out $(MAIN_SRC), $(SRCS))
-	@$(DIRDUP)
-	@$(CC) $(CPPFLAGS) -c -o $(OBJ_DIR)/libopenGL.o $^
-	@ar rcs $@ $(OBJ_DIR)/libopenGL.o
-	@ranlib $@
 
 -include $(DEPS)
 
