@@ -1,6 +1,5 @@
 #include "../includes/Utils.hpp"
 
-
 bool isNumeric(const std::string& str) {
     for (char c : str)
         if (!isdigit(c))
@@ -98,6 +97,47 @@ SDL* loadSDLInstance() {
     }
 
     std::cout << BLUE << "SDL instance initialized" << RESET << std::endl;
+
+    dlclose(dl_handle);
+    return instance;
+}
+
+
+SFML* loadSFMLInstance() {
+    const std::string funcName = "createSFMLInstance";
+
+    void* dl_handle;
+    void* func;
+
+    SFML* instance;
+
+    std::cout << BLUE << "Loading SFML instance..." << RESET << std::endl;
+
+    dl_handle = dlopen(SFML_PATH, RTLD_LAZY | RTLD_LOCAL);
+    if (!dl_handle) {
+        std::cerr << RED << "Error: Failed to load SFML instance." << RESET << std::endl;
+        return NULL;
+    }
+
+    std::cout << BLUE << "SFML instance loaded" << RESET << std::endl;
+
+    func = dlsym(dl_handle, funcName.c_str());
+    if (!func) {
+        std::cerr << RED << "Error: Failed to get function pointer." << RESET << std::endl;
+        dlclose(dl_handle);
+        return NULL;
+    }
+
+    std::cout << BLUE << "SFML instance created" << RESET << std::endl;
+
+    instance = reinterpret_cast<SFML * (*)(void)>(func)();
+    if (!instance) {
+        std::cerr << RED << "Error: Failed to initialize SFML instance." << RESET << std::endl;
+        dlclose(dl_handle);
+        return NULL;
+    }
+
+    std::cout << BLUE << "SFML instance initialized" << RESET << std::endl;
 
     dlclose(dl_handle);
     return instance;

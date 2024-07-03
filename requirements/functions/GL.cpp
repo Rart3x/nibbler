@@ -17,6 +17,7 @@ GL::GL(void) {
     this->running = false;
 }
 
+
 GL::~GL() {
     glfwDestroyWindow(this->win);
     glfwTerminate();
@@ -40,6 +41,7 @@ void GL::display() {
         glfwPollEvents();
     }
 }
+
 
 void GL::input() {
     if (glfwGetKey(this->win, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
