@@ -17,14 +17,14 @@ CPPFLAGS = -Wall -Wextra -Werror -MMD -MP -gdwarf-2
 
 DIRDUP = mkdir -p $(@D)
 
+GL_LIB = $(LIB_DIR)/GL.so
 SDL_LIB = $(LIB_DIR)/libSDL.so
 
-
-all: $(NAME) $(SDL_LIB)
+all: $(NAME) $(GL_LIB) $(SDL_LIB)
 
 $(NAME): $(OBJS) $(MAIN_OBJ)
 	@printf "\033[0;32mCompilation successful.\033[0m\n"
-	@$(CC) $(OBJS) $(MAIN_OBJ) -lSDL2 -o $(NAME)
+	@$(CC) $(OBJS) $(MAIN_OBJ) -lSDL2 -lglfw -o $(NAME)
 
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
@@ -37,10 +37,18 @@ $(MAIN_OBJ): $(MAIN_SRC)
 	@$(CC) $(CPPFLAGS) -c -o $@ $<
 
 
+$(OBJ_DIR)/GL.o: $(SRC_DIR)/GL.cpp
+	@$(DIRDUP)
+	@$(CC) $(CPPFLAGS) -shared -fPIC -c -o $@ $<
+
 $(OBJ_DIR)/SDL.o: $(SRC_DIR)/SDL.cpp
 	@$(DIRDUP)
 	@$(CC) $(CPPFLAGS) -shared -fPIC -c -o $@ $<
 
+
+$(GL_LIB): $(OBJ_DIR)/GL.o
+	@mkdir -p $(dir $@)
+	@$(CC) -shared -o $@ $^
 
 $(SDL_LIB): $(OBJ_DIR)/SDL.o
 	@mkdir -p $(dir $@)

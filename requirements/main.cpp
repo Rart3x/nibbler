@@ -2,9 +2,15 @@
 
 int main(int ac, char **av) {
 
-    SDL* instance = loadSDLInstance();
+    GL * GLinstance = loadGLInstance();
+    SDL* SDLinstance = loadSDLInstance();
 
-    if (!instance) {
+    if (!GLinstance) {
+        std::cerr << RED << "Error: Could not load GL instance" << RESET << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    if (!SDLinstance) {
         std::cerr << RED << "Error: Could not load SDL instance" << RESET << std::endl;
         return EXIT_FAILURE;
     }
@@ -16,7 +22,8 @@ int main(int ac, char **av) {
         std::cerr << e.what() << std::endl;
     }
 
-    instance->display();
+    GLinstance->display();
+    // SDLinstance->display();
 
     return EXIT_SUCCESS;
 }
