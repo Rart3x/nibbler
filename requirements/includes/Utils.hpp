@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include <stdexcept>
 
+#include "Instance.hpp"
 #include "SDL.hpp"
 
 bool isNumeric(const std::string &str);

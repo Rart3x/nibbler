@@ -1,5 +1,11 @@
 #include "../includes/SDL.hpp"
 
+extern "C" {
+    SDL *createSDLInstance() {
+        return new SDL();
+    }
+}
+
 SDL::SDL(void) {
     
     if((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == -1)) {
@@ -16,7 +22,7 @@ SDL::~SDL() {
 }
 
 void SDL::display() {
-    
+
     this->win = SDL_CreateWindow("Nibbler", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, 0);
     this->running = true;
 
@@ -64,4 +70,8 @@ void SDL::input() {
             }
         }
     }
+}
+
+void SDL::print() const {
+    std::cout << "SDL" << std::endl;
 }

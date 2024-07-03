@@ -9,7 +9,14 @@ int main(int ac, char **av) {
         std::cerr << e.what() << std::endl;
     }
 
-    SDL sdl;
+    SDL* sdlInstance = loadSDLInstance();
 
-    sdl.display();
+    if (!sdlInstance) {
+        std::cerr << "Error: Could not load SDL instance" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    sdlInstance->display();
+
+    return EXIT_SUCCESS;
 }

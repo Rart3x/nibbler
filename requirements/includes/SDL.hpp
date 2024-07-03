@@ -13,6 +13,7 @@ class SDL {
 
         void display(void);
         void input(void);
+        void print(void) const;
 
     private:
         bool running;

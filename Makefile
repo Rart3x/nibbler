@@ -1,4 +1,4 @@
-LIB_DIR = .libs
+LIB_DIR = requirements/libs
 OBJ_DIR = .objs
 SRC_DIR = requirements/functions
 
@@ -33,7 +33,7 @@ $(MAIN_OBJ): $(MAIN_SRC)
 
 $(OBJ_DIR)/SDL.o: $(SRC_DIR)/SDL.cpp
 	@$(DIRDUP)
-	@$(CC) $(CPPFLAGS) -fPIC -c -o $@ $<
+	@$(CC) $(CPPFLAGS) -shared -fPIC -c -o $@ $<
 
 $(SDL_LIB): $(OBJ_DIR)/SDL.o
 	@mkdir -p $(dir $@)
