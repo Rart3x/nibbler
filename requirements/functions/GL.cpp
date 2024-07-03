@@ -34,8 +34,8 @@ void GL::display() {
     glfwMakeContextCurrent(this->win);
     this->running = true;
 
-    while (running) {
-        input();
+    while (this->running) {
+        this->input();
         glfwSwapBuffers(this->win);
         glfwPollEvents();
     }
@@ -44,5 +44,19 @@ void GL::display() {
 void GL::input() {
     if (glfwGetKey(this->win, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         this->running = false;
+    } else if (glfwGetKey(this->win, GLFW_KEY_1) == GLFW_PRESS) {
+        return;
+    } else if (glfwGetKey(this->win, GLFW_KEY_2) == GLFW_PRESS) {
+        return;
+    } else if (glfwGetKey(this->win, GLFW_KEY_3) == GLFW_PRESS) {
+        return;
+    } else if (glfwGetKey(this->win, GLFW_KEY_W) || glfwGetKey(this->win, GLFW_KEY_UP)) {
+        return;
+    } else if (glfwGetKey(this->win, GLFW_KEY_A) || glfwGetKey(this->win, GLFW_KEY_LEFT)) {
+        return;
+    } else if (glfwGetKey(this->win, GLFW_KEY_S) || glfwGetKey(this->win, GLFW_KEY_DOWN)) {
+        return;
+    } else if (glfwGetKey(this->win, GLFW_KEY_D) || glfwGetKey(this->win, GLFW_KEY_RIGHT)) {
+        return;
     }
 }

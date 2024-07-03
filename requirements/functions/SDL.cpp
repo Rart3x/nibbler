@@ -29,8 +29,8 @@ void SDL::display() {
     this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, 0);
     this->running = true;
 
-    while (running) {
-        input();
+    while (this->running) {
+        this->input();
         SDL_Delay(16);
     }
 }
