@@ -6,6 +6,7 @@ extern "C" {
     }
 }
 
+
 SDL::SDL(void) {
     
     if((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == -1)) {
@@ -16,14 +17,16 @@ SDL::SDL(void) {
     this->running = false;
 }
 
+
 SDL::~SDL() {
     SDL_DestroyWindow(this->win);
     SDL_Quit();
 }
 
+
 void SDL::display() {
 
-    this->win = SDL_CreateWindow("Nibbler", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, 0);
+    this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, 0);
     this->running = true;
 
     while (running) {
@@ -31,6 +34,7 @@ void SDL::display() {
         SDL_Delay(16);
     }
 }
+
 
 void SDL::input() {
     SDL_Event event;
@@ -47,6 +51,13 @@ void SDL::input() {
 
             case SDL_SCANCODE_ESCAPE:
                 this->running = false;
+                break;
+
+            case SDL_SCANCODE_1:
+                break;
+            case SDL_SCANCODE_2:
+                break;
+            case SDL_SCANCODE_3:
                 break;
 
             case SDL_SCANCODE_W:
@@ -70,8 +81,4 @@ void SDL::input() {
             }
         }
     }
-}
-
-void SDL::print() const {
-    std::cout << "SDL" << std::endl;
 }

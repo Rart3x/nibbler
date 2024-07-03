@@ -5,6 +5,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
 
+#include "Library.hpp"
+
 class SDL {
 
     public:
@@ -13,7 +15,6 @@ class SDL {
 
         void display(void);
         void input(void);
-        void print(void) const;
 
     private:
         bool running;

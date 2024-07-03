@@ -1,7 +1,14 @@
 #include "includes/Utils.hpp"
 
 int main(int ac, char **av) {
-    
+
+    SDL* instance = loadSDLInstance();
+
+    if (!instance) {
+        std::cerr << RED << "Error: Could not load SDL instance" << RESET << std::endl;
+        return EXIT_FAILURE;
+    }
+
     try {
         check_args_validity(ac, av);
     }
@@ -9,14 +16,7 @@ int main(int ac, char **av) {
         std::cerr << e.what() << std::endl;
     }
 
-    SDL* sdlInstance = loadSDLInstance();
-
-    if (!sdlInstance) {
-        std::cerr << "Error: Could not load SDL instance" << std::endl;
-        return EXIT_FAILURE;
-    }
-
-    sdlInstance->display();
+    instance->display();
 
     return EXIT_SUCCESS;
 }
