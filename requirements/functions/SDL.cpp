@@ -27,6 +27,11 @@ SDL::~SDL() {
 void SDL::display() {
 
     this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, 0);
+    if (!this->win) {
+        std::cerr << "Error: Could not create SDL window" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
     this->running = true;
 
     while (this->running) {
