@@ -7,7 +7,7 @@ extern "C" {
 }
 
 
-SDL::SDL(void) {
+SDL::SDL(void) : Library() {
     
     if((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == -1)) {
         std::cerr << "Error: Could not initialize SDL" << std::endl;

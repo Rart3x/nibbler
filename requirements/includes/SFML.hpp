@@ -6,7 +6,7 @@
 
 #include "Library.hpp"
 
-class SFML {
+class SFML : public Library {
     public:
         SFML();
         ~SFML();

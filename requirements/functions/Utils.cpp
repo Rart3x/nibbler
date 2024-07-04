@@ -37,11 +37,11 @@ GL * loadGLInstance() {
         return NULL;
     }
 
-    std::cout << BLUE << "GL instance loaded" << RESET << std::endl;
+    std::cout << BLUE << "GL instance creation method imported" << RESET << std::endl;
 
     func = dlsym(dl_handle, funcName.c_str());
     if (!func) {
-        std::cerr << RED << "Error: Failed to get function pointer." << RESET << std::endl;
+        std::cerr << RED << "Error: Failed to get method pointer." << RESET << std::endl;
         dlclose(dl_handle);
         return NULL;
     }
@@ -55,9 +55,8 @@ GL * loadGLInstance() {
         return NULL;
     }
 
-    std::cout << BLUE << "GL instance initialized" << RESET << std::endl;
+    std::cout << BLUE << "GL instance initialized" << RESET << std::endl << std::endl;
 
-    dlclose(dl_handle);
     return instance;
 }
 
@@ -78,11 +77,11 @@ SDL* loadSDLInstance() {
         return NULL;
     }
 
-    std::cout << BLUE << "SDL instance loaded" << RESET << std::endl;
+    std::cout << BLUE << "SDL instance creation method imported" << RESET << std::endl;
 
     func = dlsym(dl_handle, funcName.c_str());
     if (!func) {
-        std::cerr << RED << "Error: Failed to get function pointer." << RESET << std::endl;
+        std::cerr << RED << "Error: Failed to get method pointer." << RESET << std::endl;
         dlclose(dl_handle);
         return NULL;
     }
@@ -96,9 +95,8 @@ SDL* loadSDLInstance() {
         return NULL;
     }
 
-    std::cout << BLUE << "SDL instance initialized" << RESET << std::endl;
+    std::cout << BLUE << "SDL instance initialized" << RESET << std::endl << std::endl;
 
-    dlclose(dl_handle);
     return instance;
 }
 
@@ -119,11 +117,11 @@ SFML* loadSFMLInstance() {
         return NULL;
     }
 
-    std::cout << BLUE << "SFML instance loaded" << RESET << std::endl;
+    std::cout << BLUE << "SFML instance creation method imported" << RESET << std::endl;
 
     func = dlsym(dl_handle, funcName.c_str());
     if (!func) {
-        std::cerr << RED << "Error: Failed to get function pointer." << RESET << std::endl;
+        std::cerr << RED << "Error: Failed to get method pointer." << RESET << std::endl;
         dlclose(dl_handle);
         return NULL;
     }
@@ -137,8 +135,7 @@ SFML* loadSFMLInstance() {
         return NULL;
     }
 
-    std::cout << BLUE << "SFML instance initialized" << RESET << std::endl;
+    std::cout << BLUE << "SFML instance initialized" << RESET << std::endl << std::endl;
 
-    dlclose(dl_handle);
     return instance;
 }

@@ -6,7 +6,7 @@
 
 #include "Library.hpp"
 
-class GL {
+class GL : public Library {
     public:
         GL();
         ~GL();

@@ -7,7 +7,7 @@
 
 #include "Library.hpp"
 
-class SDL {
+class SDL : public Library {
 
     public:
         SDL();

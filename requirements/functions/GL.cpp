@@ -7,7 +7,7 @@ extern "C" {
 }
 
 
-GL::GL(void) {
+GL::GL(void) : Library() {
 
     if (!glfwInit()) {
         std::cerr << "Error: Could not initialize GLFW" << std::endl;

@@ -7,7 +7,7 @@ extern "C" {
 }
 
 
-SFML::SFML(void) {
+SFML::SFML(void) : Library() {
     this->running = false;
 }
 
