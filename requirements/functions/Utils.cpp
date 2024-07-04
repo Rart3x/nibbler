@@ -21,6 +21,23 @@ void check_args_validity(int ac, char **av) {
 }
 
 
+Library* loadRandomInstance() {
+    srand(time(NULL));
+    int random = rand() % 3;
+
+    switch (random) {
+        case 0:
+            return loadGLInstance();
+        case 1:
+            return loadSDLInstance();
+        case 2:
+            return loadSFMLInstance();
+        default:
+            return NULL;
+    }
+}
+
+
 GL * loadGLInstance() {
     const std::string funcName = "createGLInstance";
 

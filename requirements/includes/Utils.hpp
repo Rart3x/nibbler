@@ -19,6 +19,7 @@
 void check_args_validity(int ac, char **av);
 bool isNumeric(const std::string &str);
 
-GL*     loadGLInstance();
-SDL*    loadSDLInstance();
-SFML*   loadSFMLInstance();
+Library*    loadRandomInstance();
+GL*         loadGLInstance();
+SDL*        loadSDLInstance();
+SFML*       loadSFMLInstance();

@@ -2,38 +2,22 @@
 
 int main(int ac, char **av) {
 
-    Library* GLinstance = loadGLInstance();
-    Library* SDLinstance = loadSDLInstance();
-    Library* SFMLinstance = loadSFMLInstance();
+    Library* instance = loadRandomInstance();
 
-    if (!GLinstance) {
-        std::cerr << RED << "Error: Could not load GL instance" << RESET << std::endl;
-        return EXIT_FAILURE;
-    }
-
-    if (!SDLinstance) {
-        std::cerr << RED << "Error: Could not load SDL instance" << RESET << std::endl;
-        return EXIT_FAILURE;
-    }
-
-    if (!SFMLinstance) {
-        std::cerr << RED << "Error: Could not load SFML instance" << RESET << std::endl;
+    if (!instance) {
+        std::cerr << RED << "Error: Could not load library instance" << RESET << std::endl;
         return EXIT_FAILURE;
     }
 
     try {
         check_args_validity(ac, av);
-        GLinstance->display();
-        SDLinstance->display();
-        SFMLinstance->display();
+        instance->display();
     }
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
 
-    delete GLinstance;
-    delete SDLinstance;
-    delete SFMLinstance;
+    delete instance;
 
     return EXIT_SUCCESS;
 }
