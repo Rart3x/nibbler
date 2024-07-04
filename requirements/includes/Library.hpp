@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 class Library {
 
     public:
@@ -10,10 +12,15 @@ class Library {
         virtual void display() = 0;
         virtual void input() = 0;
 
-        virtual unsigned int getLibCode() const = 0;
+        virtual size_t getLibCode() const = 0;
+
+        virtual void setWindowSize(int h, int w) = 0;
     
     private:
         bool running;
-        unsigned int libCode;
-
+        
+        int height;
+        int width;
+    
+        size_t libCode;
 };

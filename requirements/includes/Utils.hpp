@@ -5,6 +5,7 @@
 #include <dlfcn.h>
 
 #include "Instance.hpp"
+
 #include "GL.hpp"
 #include "SDL.hpp"
 #include "SFML.hpp"
@@ -17,13 +18,13 @@
 #define SDL_PATH "./requirements/libs/SDL.so"
 #define SFML_PATH "./requirements/libs/SFML.so"
 
+#define GLCODE      0
+#define SDLCODE     1
+#define SFMLCODE    2
+
 class Instance;
 
 bool        isNumeric(const std::string &str);
 
 void        check_args_validity(int ac, char **av);
-void        libraryLoop(Instance instance);
-
-GL*         loadGLInstance();
-SDL*        loadSDLInstance();
-SFML*       loadSFMLInstance();
+void        libraryLoop(int h, int w, Instance instance);

@@ -2,7 +2,9 @@
 
 #include <iostream>
 
-#include "Library.hpp"
+#include "GL.hpp"
+#include "SDL.hpp"
+#include "SFML.hpp"
 #include "Utils.hpp"
 
 class Utils;
@@ -12,9 +14,14 @@ class Instance {
         Instance();
         ~Instance();
 
-        size_t getActualLib() const;
+        GL*     loadGLInstance();
+        SDL*    loadSDLInstance();
+        SFML*   loadSFMLInstance();
 
-        void setActualLib(size_t i);
+        size_t  getActualLib() const;
+
+        void    setActualLib(size_t i);
+        void    setWindowSize(size_t h, size_t w);
 
         Library* operator[](size_t i);
     private:

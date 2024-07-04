@@ -17,11 +17,17 @@ class SDL : public Library {
         void display(void);
         void input(void);
 
-        unsigned int getLibCode(void) const;
+        size_t getLibCode(void) const;
+
+        void setWindowSize(int h, int w);
 
     private:
         bool running;
-        unsigned int libCode;
+
+        int height;
+        int width;
+
+        size_t libCode;
 
         SDL_Window* win;
 };

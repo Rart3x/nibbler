@@ -6,7 +6,7 @@ int main(int ac, char **av) {
 
     try {
         check_args_validity(ac, av);
-        libraryLoop(instance);
+        libraryLoop(atoi(av[1]), atoi(av[2]), instance);
     }
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
