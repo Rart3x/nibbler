@@ -13,6 +13,7 @@ class SDL : public Library {
         SDL();
         ~SDL();
 
+        void closeWindow(void);
         void display(void);
         void input(void);
 

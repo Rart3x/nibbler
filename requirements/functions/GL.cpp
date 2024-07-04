@@ -24,6 +24,14 @@ GL::~GL() {
 }
 
 
+void GL::closeWindow() {
+    if (this->win) {
+        glfwDestroyWindow(this->win);
+        this->win = NULL;
+    }
+}
+
+
 void GL::display() {
 
     this->win = glfwCreateWindow(1000, 1000, "Nibbler OpenGL", NULL, NULL);
@@ -48,10 +56,10 @@ void GL::input() {
         this->libCode = 404;
         this->running = false;
     } else if (glfwGetKey(this->win, GLFW_KEY_2) == GLFW_PRESS) {
-        this->libCode = 2;
+        this->libCode = 1;
         this->running = false;
     } else if (glfwGetKey(this->win, GLFW_KEY_3) == GLFW_PRESS) {
-        this->libCode = 3;
+        this->libCode = 2;
         this->running = false;
     } else if (glfwGetKey(this->win, GLFW_KEY_W) || glfwGetKey(this->win, GLFW_KEY_UP)) {
         return;

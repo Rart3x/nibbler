@@ -11,6 +11,7 @@ class SFML : public Library {
         SFML();
         ~SFML();
 
+        void closeWindow(void);    
         void display(void);
         void input(void);
 

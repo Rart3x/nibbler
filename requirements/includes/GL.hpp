@@ -11,6 +11,7 @@ class GL : public Library {
         GL();
         ~GL();
 
+        void closeWindow(void);
         void display(void);
         void input(void);
 

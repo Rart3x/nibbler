@@ -17,6 +17,15 @@ SFML::~SFML() {
 }
 
 
+void SFML::closeWindow() {
+    if (this->win) {
+        this->win->close();
+        this->win = NULL;
+    }
+}
+
+
+
 void SFML::display() {
 
     this->win = new sf::RenderWindow(sf::VideoMode(1000, 1000), "Nibbler SFML");
@@ -50,10 +59,10 @@ void SFML::input() {
                     this->libCode = 404;
                     this->running = false;
                 } else if (event.key.code == sf::Keyboard::Num1) {
-                    this->libCode = 1;
+                    this->libCode = 0;
                     this->running = false;
                 } else if (event.key.code == sf::Keyboard::Num2) {
-                    this->libCode = 2;
+                    this->libCode = 1;
                     this->running = false;
                 } else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
                     return;

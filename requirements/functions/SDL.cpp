@@ -25,6 +25,14 @@ SDL::~SDL() {
 }
 
 
+void SDL::closeWindow() {
+    if (this->win) {
+        SDL_DestroyWindow(this->win);
+        this->win = NULL;
+    }
+}
+
+
 void SDL::display() {
 
     this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, 0);
@@ -61,12 +69,12 @@ void SDL::input() {
                 break;
 
             case SDL_SCANCODE_1:
-                this->libCode = 1;
+                this->libCode = 0;
                 this->running = false;
                 break;
 
             case SDL_SCANCODE_3:
-                this->libCode = 3;
+                this->libCode = 2;
                 this->running = false;
                 break;
 

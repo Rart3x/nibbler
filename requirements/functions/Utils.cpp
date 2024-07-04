@@ -21,19 +21,29 @@ void check_args_validity(int ac, char **av) {
 }
 
 
-Library* loadRandomInstance() {
-    srand(time(NULL));
-    int random = rand() % 3;
+void libraryLoop(Instance instance) {
+    instance[instance.getActualLib()]->display();
 
-    switch (random) {
-        case 0:
-            return loadGLInstance();
-        case 1:
-            return loadSDLInstance();
-        case 2:
-            return loadSFMLInstance();
-        default:
-            return NULL;
+    while (instance[instance.getActualLib()]->getLibCode() != 404) {
+        switch (instance[instance.getActualLib()]->getLibCode()) {
+            case 0:
+                instance[instance.getActualLib()]->closeWindow();
+                instance.setActualLib(0);
+                instance[0]->display();
+                break;
+            case 1:
+                instance[instance.getActualLib()]->closeWindow();
+                instance.setActualLib(1);
+                instance[1]->display();
+                break;
+            case 2:
+                instance[instance.getActualLib()]->closeWindow();
+                instance.setActualLib(2);
+                instance[2]->display();
+                break;
+            default:
+                break;
+        }
     }
 }
 
