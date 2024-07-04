@@ -14,8 +14,11 @@ class SFML : public Library {
         void display(void);
         void input(void);
 
+        unsigned int getLibCode(void) const;
+
     private:
         bool running;
+        unsigned int libCode;
 
         sf::RenderWindow* win;
 };

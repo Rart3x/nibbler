@@ -1,4 +1,4 @@
 #include "../includes/Library.hpp"
 
-Library::Library() {}
+Library::Library() : running(false), libCode(0) {}
 Library::~Library() {}

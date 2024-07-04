@@ -41,12 +41,26 @@ void SFML::input() {
         switch (event.type) {
 
             case sf::Event::Closed:
+                this->libCode = 404;
                 this->running = false;
                 break;
 
             case sf::Event::KeyPressed:
                 if (event.key.code == sf::Keyboard::Escape) {
+                    this->libCode = 404;
                     this->running = false;
+                } else if (event.key.code == sf::Keyboard::Num1) {
+                    this->libCode = 1;
+                    this->running = false;
+                } else if (event.key.code == sf::Keyboard::Num2) {
+                    this->libCode = 2;
+                    this->running = false;
+                } else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
+                    return;
+                } else if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left) {
+                    return;
+                } else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
+                    return;
                 }
                 break;
 
@@ -54,4 +68,8 @@ void SFML::input() {
                 break;
         }
     }
+}
+
+unsigned int SFML::getLibCode(void) const {
+    return this->libCode;
 }

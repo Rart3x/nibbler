@@ -16,8 +16,11 @@ class SDL : public Library {
         void display(void);
         void input(void);
 
+        unsigned int getLibCode(void) const;
+
     private:
         bool running;
+        unsigned int libCode;
 
         SDL_Window* win;
 };

@@ -15,6 +15,7 @@ SDL::SDL(void) : Library() {
     }
 
     this->running = false;
+    this->libCode = 0;
 }
 
 
@@ -55,14 +56,18 @@ void SDL::input() {
             switch (event.key.keysym.scancode) {
 
             case SDL_SCANCODE_ESCAPE:
+                this->libCode = 404;
                 this->running = false;
                 break;
 
             case SDL_SCANCODE_1:
+                this->libCode = 1;
+                this->running = false;
                 break;
-            case SDL_SCANCODE_2:
-                break;
+
             case SDL_SCANCODE_3:
+                this->libCode = 3;
+                this->running = false;
                 break;
 
             case SDL_SCANCODE_W:
@@ -86,4 +91,8 @@ void SDL::input() {
             }
         }
     }
+}
+
+unsigned int SDL::getLibCode() const {
+    return this->libCode;
 }
