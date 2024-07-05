@@ -13,6 +13,7 @@ class GL : public Library {
 
         void closeWindow(void);
         void display(void);
+        void displayMenu(void);
         void input(void);
 
         size_t getLibCode(void) const;

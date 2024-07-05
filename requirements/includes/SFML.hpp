@@ -13,6 +13,8 @@ class SFML : public Library {
 
         void closeWindow(void);    
         void display(void);
+        void displayMenu(void);
+        void drawText(std::string text, float x, float y, sf::Color color, float fontSize);
         void input(void);
 
         size_t getLibCode(void) const;

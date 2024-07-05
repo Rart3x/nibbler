@@ -27,7 +27,7 @@ void SFML::closeWindow() {
 
 void SFML::display() {
 
-    this->win = new sf::RenderWindow(sf::VideoMode(this->height, this->width), "Nibbler SFML");
+    this->win = new sf::RenderWindow(sf::VideoMode(1000, 1000), "Nibbler SFML");
     if (!this->win) {
         std::cerr << "Error: Could not create SFML window" << std::endl;
         exit(EXIT_FAILURE);
@@ -37,8 +37,42 @@ void SFML::display() {
 
     while (this->running) {
         this->input();
+        this->displayMenu();
         this->win->display();
     }
+}
+
+
+void SFML::displayMenu() {
+    int totalHeight = 40 * 3;
+    int windowHeight = this->win->getSize().y;
+    int windowWidth = this->win->getSize().x;
+
+    int startY = (windowHeight / 2) - (totalHeight / 2);
+    int startX = (windowWidth / 2) - (totalHeight / 2);
+
+    this->drawText("Start", startX, startY, sf::Color::White, 24);
+    this->drawText("Options", startX, startY + 40, sf::Color::White, 24);
+    this->drawText("Quit", startX, startY + 80, sf::Color::White, 24);
+}
+
+
+void SFML::drawText(std::string text, float x, float y, sf::Color color, float fontSize) {
+    sf::Font font;
+    sf::Text buttonText;
+
+    if (!font.loadFromFile("./requirements/ressources/arial.ttf")) {
+        std::cerr << "Error: Could not load font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    buttonText.setFont(font);
+    buttonText.setString(text);
+    buttonText.setCharacterSize(fontSize);
+    buttonText.setFillColor(color);
+    buttonText.setPosition(x, y);
+
+    this->win->draw(buttonText);
 }
 
 

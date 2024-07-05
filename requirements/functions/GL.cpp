@@ -34,7 +34,7 @@ void GL::closeWindow() {
 
 void GL::display() {
 
-    this->win = glfwCreateWindow(this->height, this->width, "Nibbler OpenGL", NULL, NULL);
+    this->win = glfwCreateWindow(1000, 1000, "Nibbler OpenGL", NULL, NULL);
     if (!this->win) {
         std::cerr << "Error: Could not create GLFW window" << std::endl;
         exit(EXIT_FAILURE);
@@ -49,6 +49,11 @@ void GL::display() {
         glfwPollEvents();
     }
 }
+
+
+void GL::displayMenu() {
+}
+
 
 
 void GL::input() {
