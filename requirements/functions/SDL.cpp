@@ -105,7 +105,7 @@ size_t SDL::getLibCode() const {
     return this->libCode;
 }
 
-void SDL::setWindowSize(int h, int w) {
+void SDL::setAreaSize(int h, int w) {
     this->height = h;
     this->width = w;
 }

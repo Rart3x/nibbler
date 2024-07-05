@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#define SQUARE 5
+
 class Library {
 
     public:
@@ -14,7 +16,7 @@ class Library {
 
         virtual size_t getLibCode() const = 0;
 
-        virtual void setWindowSize(int h, int w) = 0;
+        virtual void setAreaSize(int h, int w) = 0;
     
     private:
         bool running;

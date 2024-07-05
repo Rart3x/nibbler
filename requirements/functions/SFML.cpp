@@ -82,7 +82,7 @@ size_t SFML::getLibCode(void) const {
     return this->libCode;
 }
 
-void SFML::setWindowSize(int h, int w) {
+void SFML::setAreaSize(int h, int w) {
     this->height = h;
     this->width = w;
 }

@@ -77,7 +77,7 @@ size_t GL::getLibCode(void) const {
     return this->libCode;
 }
 
-void GL::setWindowSize(int h, int w) {
+void GL::setAreaSize(int h, int w) {
     this->height = h;
     this->width = w;
 }

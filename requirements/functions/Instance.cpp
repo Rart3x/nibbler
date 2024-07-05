@@ -142,9 +142,9 @@ void Instance::setActualLib(size_t i) {
 }
 
 
-void Instance::setWindowSize(size_t w, size_t h) {
+void Instance::setAreaSize(size_t w, size_t h) {
     for (size_t i = 0; i < 3; i++)
-        this->libs[i]->setWindowSize(w, h);
+        this->libs[i]->setAreaSize(w, h);
 }
 
 

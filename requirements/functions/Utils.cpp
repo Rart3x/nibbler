@@ -22,7 +22,7 @@ void check_args_validity(int ac, char **av) {
 
 
 void libraryLoop(int w, int h, Instance instance) {
-    instance.setWindowSize(w, h);
+    instance.setAreaSize(w, h);
     instance[GLCODE]->display();
 
     while (instance[instance.getActualLib()]->getLibCode() != 404) {

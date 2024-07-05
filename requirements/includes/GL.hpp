@@ -17,7 +17,7 @@ class GL : public Library {
 
         size_t getLibCode(void) const;
 
-        void setWindowSize(int h, int w);
+        void setAreaSize(int h, int w);
 
     private:
         bool running;
