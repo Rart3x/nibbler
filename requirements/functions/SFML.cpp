@@ -124,7 +124,7 @@ void SFML::drawTitle(std::string text, sf::Color color) {
     sf::Font font;
     sf::Text title;
 
-    if (!font.loadFromFile("./requirements/ressources/arial.ttf")) {
+    if (!font.loadFromFile("./requirements/ressources/science.ttf")) {
         std::cerr << "Error: Could not load font" << std::endl;
         this->libCode = 404;
         this->running = false;
