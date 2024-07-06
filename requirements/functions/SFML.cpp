@@ -103,7 +103,7 @@ void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size
     sf::Font font;
     sf::Text buttonText;
 
-    if (!font.loadFromFile("./requirements/ressources/arial.ttf")) {
+    if (!font.loadFromFile(ARIAL)) {
         std::cerr << "Error: Could not load font" << std::endl;
         this->libCode = 404;
         this->running = false;
@@ -124,7 +124,7 @@ void SFML::drawTitle(std::string text, sf::Color color) {
     sf::Font font;
     sf::Text title;
 
-    if (!font.loadFromFile("./requirements/ressources/science.ttf")) {
+    if (!font.loadFromFile(SCIENCE)) {
         std::cerr << "Error: Could not load font" << std::endl;
         this->libCode = 404;
         this->running = false;
@@ -144,7 +144,6 @@ void SFML::drawTitle(std::string text, sf::Color color) {
 
     this->win->draw(title);
 }
-
 
 
 void SFML::input() {
@@ -197,7 +196,6 @@ void SFML::input() {
 
             case sf::Event::Resized:
                 this->setWinSize(event.size.height, event.size.width);
-                this->win->clear();
                 break;
 
             default:

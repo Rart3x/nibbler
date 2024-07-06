@@ -19,10 +19,7 @@ SDL::SDL(void) : Library() {
 }
 
 
-SDL::~SDL() {
-    SDL_DestroyWindow(this->win);
-    SDL_Quit();
-}
+SDL::~SDL() {}
 
 
 void SDL::closeWindow() {

@@ -1,0 +1,45 @@
+[34mLoading GL instance...[0m
+[34mGL instance creation method imported[0m
+[34mGL instance created[0m
+[34mGL instance initialized[0m
+
+[34mLoading SDL instance...[0m
+[34mSDL instance creation method imported[0m
+[34mSDL instance created[0m
+[34mSDL instance initialized[0m
+
+[34mLoading SFML instance...[0m
+[34mSFML instance creation method imported[0m
+[34mSFML instance created[0m
+[34mSFML instance initialized[0m
+
+[34mLoading GL instance...[0m
+[34mGL instance creation method imported[0m
+[34mGL instance created[0m
+[34mGL instance initialized[0m
+
+[34mLoading SDL instance...[0m
+[34mSDL instance creation method imported[0m
+[34mSDL instance created[0m
+[34mSDL instance initialized[0m
+
+[34mLoading SFML instance...[0m
+[34mSFML instance creation method imported[0m
+[34mSFML instance created[0m
+[34mSFML instance initialized[0m
+
+[34mLoading GL instance...[0m
+[34mGL instance creation method imported[0m
+[34mGL instance created[0m
+[34mGL instance initialized[0m
+
+[34mLoading SDL instance...[0m
+[34mSDL instance creation method imported[0m
+[34mSDL instance created[0m
+[34mSDL instance initialized[0m
+
+[34mLoading SFML instance...[0m
+[34mSFML instance creation method imported[0m
+[34mSFML instance created[0m
+[34mSFML instance initialized[0m
+

@@ -7,6 +7,9 @@
 #define WIDTH   500
 #define HEIGHT  500
 
+#define ARIAL   "./requirements/ressources/fonts/arial.ttf"
+#define SCIENCE "./requirements/ressources/fonts/science.ttf"
+
 class Library {
 
     public:
