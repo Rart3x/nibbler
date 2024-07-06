@@ -4,7 +4,7 @@
 
 #include "GL.hpp"
 #include "SDL.hpp"
-#include "SFML.hpp"
+//#include "SFML.hpp"
 #include "Utils.hpp"
 
 class Utils;
@@ -16,7 +16,7 @@ class Instance {
 
         GL*     loadGLInstance();
         SDL*    loadSDLInstance();
-        SFML*   loadSFMLInstance();
+        //SFML*   loadSFMLInstance();
 
         size_t  getActualLib() const;
 

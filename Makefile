@@ -19,14 +19,14 @@ DIRDUP = mkdir -p $(@D)
 
 GL_LIB = $(LIB_DIR)/GL.so
 SDL_LIB = $(LIB_DIR)/SDL.so
-SFML_LIB = $(LIB_DIR)/SFML.so
+#SFML_LIB = $(LIB_DIR)/SFML.so
 
 
 all: $(NAME) $(GL_LIB) $(SDL_LIB) $(SFML_LIB)
 
 $(NAME): $(OBJS) $(MAIN_OBJ)
 	@printf "\033[0;32mCompilation successful.\033[0m\n"
-	@$(CC) $(OBJS) $(MAIN_OBJ) -lSDL2 -lglfw -lsfml-audio -lsfml-graphics -lsfml-system -lsfml-window -o $(NAME)
+	@$(CC) $(OBJS) $(MAIN_OBJ) -lSDL2 -lglfw -o $(NAME)
 
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
