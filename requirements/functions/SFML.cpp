@@ -8,7 +8,11 @@ extern "C" {
 
 
 SFML::SFML(void) : Library() {
+    this->mode = 0;
     this->running = false;
+    this->selectedButton = 0;
+    this->winH = HEIGHT;
+    this->winW = WIDTH;
 }
 
 
@@ -27,7 +31,7 @@ void SFML::closeWindow() {
 
 void SFML::display() {
 
-    this->win = new sf::RenderWindow(sf::VideoMode(1000, 1000), "Nibbler SFML");
+    this->win = new sf::RenderWindow(sf::VideoMode(this->winW, this->winH), "Nibbler SFML");
     if (!this->win) {
         std::cerr << "Error: Could not create SFML window" << std::endl;
         exit(EXIT_FAILURE);
@@ -36,28 +40,61 @@ void SFML::display() {
     this->running = true;
 
     while (this->running) {
+        this->win->clear();
         this->input();
-        this->displayMenu();
+        if (this->mode == 0)
+            this->displayMenu();
+        else
+            this->displayGame();
         this->win->display();
     }
 }
 
 
-void SFML::displayMenu() {
-    int totalHeight = 40 * 3;
-    int windowHeight = this->win->getSize().y;
-    int windowWidth = this->win->getSize().x;
+void SFML::displayGame() {
+    sf::Vector2f startButtonSize(200, 50);
 
-    int startY = (windowHeight / 2) - (totalHeight / 2);
-    int startX = (windowWidth / 2) - (totalHeight / 2);
+    int totalButtonHeight = startButtonSize.y;
 
-    this->drawText("Start", startX, startY, sf::Color::White, 24);
-    this->drawText("Options", startX, startY + 40, sf::Color::White, 24);
-    this->drawText("Quit", startX, startY + 80, sf::Color::White, 24);
+    int startY = (this->winH - totalButtonHeight) / 2;
+    int startX = (this->winW - startButtonSize.x) / 2;
+
+    sf::Vector2f startButtonPos(startX, startY);
+
+    this->drawButton("Game", startButtonPos, startButtonSize, sf::Color::White);
 }
 
 
-void SFML::drawText(std::string text, float x, float y, sf::Color color, float fontSize) {
+void SFML::displayMenu() {
+    sf::Vector2f startButtonSize(200, 50);
+    sf::Vector2f quitButtonSize(200, 50);
+
+    int totalButtonHeight = startButtonSize.y + quitButtonSize.y;
+
+    int startY = (this->winH - totalButtonHeight) / 2;
+    int startX = (this->winW - startButtonSize.x) / 2;
+
+    sf::Vector2f startButtonPos(startX, startY);
+    sf::Vector2f quitButtonPos(startX, startY + startButtonSize.y + HEIGHT / 20);
+
+    if (this->selectedButton == 0)
+        this->drawButton("Start", startButtonPos, startButtonSize, sf::Color::Yellow);
+    else
+        this->drawButton("Start", startButtonPos, startButtonSize, sf::Color::White);
+
+    if (this->selectedButton == 1) {
+        this->drawButton("Quit", quitButtonPos, quitButtonSize, sf::Color::Yellow);
+    } else {
+        this->drawButton("Quit", quitButtonPos, quitButtonSize, sf::Color::White);
+    }
+}
+
+
+void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color color) {
+    sf::RectangleShape rectangle(size);
+    rectangle.setFillColor(color);
+    rectangle.setPosition(position);
+
     sf::Font font;
     sf::Text buttonText;
 
@@ -68,10 +105,11 @@ void SFML::drawText(std::string text, float x, float y, sf::Color color, float f
 
     buttonText.setFont(font);
     buttonText.setString(text);
-    buttonText.setCharacterSize(fontSize);
-    buttonText.setFillColor(color);
-    buttonText.setPosition(x, y);
+    buttonText.setCharacterSize(24);
+    buttonText.setFillColor(sf::Color::Black);
+    buttonText.setPosition(position.x + 10, position.y + 5);
 
+    this->win->draw(rectangle);
     this->win->draw(buttonText);
 }
 
@@ -91,6 +129,13 @@ void SFML::input() {
                 if (event.key.code == sf::Keyboard::Escape) {
                     this->libCode = 404;
                     this->running = false;
+                } else if (event.key.code == sf::Keyboard::Return) {
+                    if (this->selectedButton == 0) {
+                        this->mode = 1;
+                    } else {
+                        this->libCode = 404;
+                        this->running = false;
+                    }
                 } else if (event.key.code == sf::Keyboard::Num1) {
                     this->libCode = 0;
                     this->running = false;
@@ -98,12 +143,19 @@ void SFML::input() {
                     this->libCode = 1;
                     this->running = false;
                 } else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
-                    return;
+                    if (this->selectedButton == 1)
+                        this->selectedButton = 0;
                 } else if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left) {
                     return;
                 } else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
-                    return;
+                    if (this->selectedButton == 0)
+                        this->selectedButton = 1;
                 }
+                break;
+
+            case sf::Event::Resized:
+                this->setWinSize(event.size.height, event.size.width);
+                this->win->clear();
                 break;
 
             default:
@@ -112,6 +164,7 @@ void SFML::input() {
     }
 }
 
+
 size_t SFML::getLibCode(void) const {
     return this->libCode;
 }
@@ -119,4 +172,9 @@ size_t SFML::getLibCode(void) const {
 void SFML::setAreaSize(int h, int w) {
     this->height = h;
     this->width = w;
+}
+
+void SFML::setWinSize(int h, int w) {
+    this->winH = h;
+    this->winW = w;
 }

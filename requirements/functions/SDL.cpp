@@ -35,7 +35,7 @@ void SDL::closeWindow() {
 
 void SDL::display() {
 
-    this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, 0);
+    this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
     if (!this->win) {
         std::cerr << "Error: Could not create SDL window" << std::endl;
         exit(EXIT_FAILURE);
@@ -108,4 +108,9 @@ size_t SDL::getLibCode() const {
 void SDL::setAreaSize(int h, int w) {
     this->height = h;
     this->width = w;
+}
+
+void SDL::setWinSize(int h, int w) {
+    this->winH = h;
+    this->winW = w;
 }

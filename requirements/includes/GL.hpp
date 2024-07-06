@@ -12,19 +12,25 @@ class GL : public Library {
         ~GL();
 
         void closeWindow(void);
+
         void display(void);
         void displayMenu(void);
+
         void input(void);
 
         size_t getLibCode(void) const;
 
         void setAreaSize(int h, int w);
+        void setWinSize(int h, int w);
 
     private:
         bool running;
 
         int height;
         int width;
+
+        int winH;
+        int winW;
 
         size_t libCode;
 

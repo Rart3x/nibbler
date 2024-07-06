@@ -2,7 +2,10 @@
 
 #include <iostream>
 
-#define SQUARE 5
+#define SQUARE  5
+
+#define WIDTH   500
+#define HEIGHT  500
 
 class Library {
 
@@ -17,12 +20,16 @@ class Library {
         virtual size_t getLibCode() const = 0;
 
         virtual void setAreaSize(int h, int w) = 0;
+        virtual void setWinSize(int h, int w) = 0;
     
     private:
         bool running;
         
         int height;
         int width;
+
+        int winH;
+        int winW;
     
         size_t libCode;
 };

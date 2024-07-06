@@ -34,7 +34,7 @@ void GL::closeWindow() {
 
 void GL::display() {
 
-    this->win = glfwCreateWindow(1000, 1000, "Nibbler OpenGL", NULL, NULL);
+    this->win = glfwCreateWindow(WIDTH, HEIGHT, "Nibbler OpenGL", NULL, NULL);
     if (!this->win) {
         std::cerr << "Error: Could not create GLFW window" << std::endl;
         exit(EXIT_FAILURE);
@@ -53,7 +53,6 @@ void GL::display() {
 
 void GL::displayMenu() {
 }
-
 
 
 void GL::input() {
@@ -85,4 +84,9 @@ size_t GL::getLibCode(void) const {
 void GL::setAreaSize(int h, int w) {
     this->height = h;
     this->width = w;
+}
+
+void GL::setWinSize(int h, int w) {
+    this->winH = h;
+    this->winW = w;
 }

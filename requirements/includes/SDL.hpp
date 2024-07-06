@@ -20,12 +20,16 @@ class SDL : public Library {
         size_t getLibCode(void) const;
 
         void setAreaSize(int h, int w);
+        void setWinSize(int h, int w);
 
     private:
         bool running;
 
         int height;
         int width;
+
+        int winH;
+        int winW;
 
         size_t libCode;
 
