@@ -18,7 +18,8 @@ class SFML : public Library {
         void displayMenu(void);
 
         void drawButton(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color color);
-        
+        void drawTitle(std::string text, sf::Color color);
+    
         void input(void);
 
         size_t getLibCode(void) const;

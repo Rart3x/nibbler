@@ -34,7 +34,8 @@ void SFML::display() {
     this->win = new sf::RenderWindow(sf::VideoMode(this->winW, this->winH), "Nibbler SFML");
     if (!this->win) {
         std::cerr << "Error: Could not create SFML window" << std::endl;
-        exit(EXIT_FAILURE);
+        this->libCode = 404;
+        this->running = false;
     }
 
     this->running = true;
@@ -42,10 +43,12 @@ void SFML::display() {
     while (this->running) {
         this->win->clear();
         this->input();
+
         if (this->mode == 0)
             this->displayMenu();
         else
             this->displayGame();
+        
         this->win->display();
     }
 }
@@ -61,6 +64,7 @@ void SFML::displayGame() {
 
     sf::Vector2f startButtonPos(startX, startY);
 
+    this->drawTitle("Nibbler", sf::Color::White);
     this->drawButton("Game", startButtonPos, startButtonSize, sf::Color::White);
 }
 
@@ -77,16 +81,17 @@ void SFML::displayMenu() {
     sf::Vector2f startButtonPos(startX, startY);
     sf::Vector2f quitButtonPos(startX, startY + startButtonSize.y + HEIGHT / 20);
 
+    this->drawTitle("Nibbler", sf::Color::White);
+
     if (this->selectedButton == 0)
-        this->drawButton("Start", startButtonPos, startButtonSize, sf::Color::Yellow);
+        this->drawButton("Start", startButtonPos, startButtonSize, sf::Color::Cyan);
     else
         this->drawButton("Start", startButtonPos, startButtonSize, sf::Color::White);
 
-    if (this->selectedButton == 1) {
-        this->drawButton("Quit", quitButtonPos, quitButtonSize, sf::Color::Yellow);
-    } else {
+    if (this->selectedButton == 1)
+        this->drawButton("Quit", quitButtonPos, quitButtonSize, sf::Color::Cyan);
+    else
         this->drawButton("Quit", quitButtonPos, quitButtonSize, sf::Color::White);
-    }
 }
 
 
@@ -100,7 +105,8 @@ void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size
 
     if (!font.loadFromFile("./requirements/ressources/arial.ttf")) {
         std::cerr << "Error: Could not load font" << std::endl;
-        exit(EXIT_FAILURE);
+        this->libCode = 404;
+        this->running = false;
     }
 
     buttonText.setFont(font);
@@ -112,6 +118,33 @@ void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size
     this->win->draw(rectangle);
     this->win->draw(buttonText);
 }
+
+
+void SFML::drawTitle(std::string text, sf::Color color) {
+    sf::Font font;
+    sf::Text title;
+
+    if (!font.loadFromFile("./requirements/ressources/arial.ttf")) {
+        std::cerr << "Error: Could not load font" << std::endl;
+        this->libCode = 404;
+        this->running = false;
+    }
+
+    title.setFont(font);
+    title.setString(text);
+    title.setCharacterSize(48);
+    title.setFillColor(color);
+
+    sf::Vector2f localPosition;
+
+    localPosition.x = this->winW / 2.0f - title.getGlobalBounds().width / 2.0f;
+    localPosition.y = 10;
+
+    title.setPosition(localPosition);
+
+    this->win->draw(title);
+}
+
 
 
 void SFML::input() {
@@ -142,12 +175,21 @@ void SFML::input() {
                 } else if (event.key.code == sf::Keyboard::Num2) {
                     this->libCode = 1;
                     this->running = false;
-                } else if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
+                } else if (event.key.code == sf::Keyboard::W) {
+                    return;
+                } else if (event.key.code == sf::Keyboard::A) {
+                    return;
+                } else if (event.key.code == sf::Keyboard::S) {
+                    return;
+                }
+                else if (event.key.code == sf::Keyboard::D) {
+                    return;
+                }
+
+                if (event.key.code == sf::Keyboard::Up) {
                     if (this->selectedButton == 1)
                         this->selectedButton = 0;
-                } else if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left) {
-                    return;
-                } else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
+                } else if (event.key.code == sf::Keyboard::Down) {
                     if (this->selectedButton == 0)
                         this->selectedButton = 1;
                 }
