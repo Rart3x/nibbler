@@ -3,7 +3,7 @@
 Instance::Instance() : actualLib(0) {
     this->libs[0] = this->loadGLInstance();
     this->libs[1] = this->loadSDLInstance();
-    //this->libs[2] = this->loadSFMLInstance();
+    this->libs[2] = this->loadSFMLInstance();
 }
 
 Instance::~Instance() {}
@@ -89,44 +89,44 @@ SDL* Instance::loadSDLInstance() {
 }
 
 
-// SFML* Instance::loadSFMLInstance() {
-//     const std::string funcName = "createSFMLInstance";
+ SFML* Instance::loadSFMLInstance() {
+     const std::string funcName = "createSFMLInstance";
 
-//     void* dl_handle;
-//     void* func;
+     void* dl_handle;
+     void* func;
 
-//     SFML* instance;
+     SFML* instance;
 
-//     std::cout << BLUE << "Loading SFML instance..." << RESET << std::endl;
+     std::cout << BLUE << "Loading SFML instance..." << RESET << std::endl;
 
-//     dl_handle = dlopen(SFML_PATH, RTLD_LAZY | RTLD_LOCAL);
-//     if (!dl_handle) {
-//         std::cerr << RED << "Error: Failed to load SFML instance." << RESET << std::endl;
-//         return NULL;
-//     }
+     dl_handle = dlopen(SFML_PATH, RTLD_LAZY | RTLD_LOCAL);
+     if (!dl_handle) {
+         std::cerr << RED << "Error: Failed to load SFML instance." << RESET << std::endl;
+         return NULL;
+     }
 
-//     std::cout << BLUE << "SFML instance creation method imported" << RESET << std::endl;
+     std::cout << BLUE << "SFML instance creation method imported" << RESET << std::endl;
 
-//     func = dlsym(dl_handle, funcName.c_str());
-//     if (!func) {
-//         std::cerr << RED << "Error: Failed to get method pointer." << RESET << std::endl;
-//         dlclose(dl_handle);
-//         return NULL;
-//     }
+     func = dlsym(dl_handle, funcName.c_str());
+     if (!func) {
+         std::cerr << RED << "Error: Failed to get method pointer." << RESET << std::endl;
+         dlclose(dl_handle);
+         return NULL;
+     }
 
-//     std::cout << BLUE << "SFML instance created" << RESET << std::endl;
+     std::cout << BLUE << "SFML instance created" << RESET << std::endl;
 
-//     instance = reinterpret_cast<SFML * (*)(void)>(func)();
-//     if (!instance) {
-//         std::cerr << RED << "Error: Failed to initialize SFML instance." << RESET << std::endl;
-//         dlclose(dl_handle);
-//         return NULL;
-//     }
+     instance = reinterpret_cast<SFML * (*)(void)>(func)();
+     if (!instance) {
+         std::cerr << RED << "Error: Failed to initialize SFML instance." << RESET << std::endl;
+         dlclose(dl_handle);
+         return NULL;
+     }
 
-//     std::cout << BLUE << "SFML instance initialized" << RESET << std::endl << std::endl;
+     std::cout << BLUE << "SFML instance initialized" << RESET << std::endl << std::endl;
 
-//     return instance;
-// }
+     return instance;
+ }
 
 
 size_t Instance::getActualLib() const {
@@ -143,7 +143,7 @@ void Instance::setActualLib(size_t i) {
 
 
 void Instance::setAreaSize(size_t w, size_t h) {
-    for (size_t i = 0; i < 2; i++)
+    for (size_t i = 0; i < 3; i++)
         this->libs[i]->setAreaSize(w, h);
 }
 

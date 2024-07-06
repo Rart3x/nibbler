@@ -8,7 +8,7 @@
 
 #include "GL.hpp"
 #include "SDL.hpp"
-//#include "SFML.hpp"
+#include "SFML.hpp"
 
 #define BLUE    "\033[34m"
 #define RED     "\033[31m"
