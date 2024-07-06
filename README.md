@@ -1,6 +1,6 @@
 <ins>Usage</ins>:
 
-make
+make \
 ./Nibbler [0-10] [0-10]
 
 <ins>Dependencies</ins>:
