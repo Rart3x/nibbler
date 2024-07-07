@@ -58,6 +58,8 @@ void SDL::display() {
 
 
 void SDL::displayMenu() {
+    this->drawTitle();
+
     SDL_Rect startButton;
     SDL_Rect quitButton;
 
@@ -90,6 +92,49 @@ void SDL::displayMenu() {
     SDL_RenderFillRect(this->renderer, &quitButton);
 
     SDL_RenderPresent(this->renderer);
+}
+
+
+void SDL::drawTitle() {
+
+    if (TTF_Init() == -1) {
+        SDL_Log("Impossible d'initialiser SDL_ttf : %s", TTF_GetError());
+        return;
+    }
+
+    TTF_Font* font = TTF_OpenFont(SCIENCE, 48);
+    if (!font) {
+        SDL_Log("Impossible de charger la police : %s", TTF_GetError());
+        return;
+    }
+
+    SDL_Surface* surface = TTF_RenderText_Solid(font, "Nibbler", {255, 255, 255, 255});
+    if (!surface) {
+        SDL_Log("Impossible de rendre le texte : %s", SDL_GetError());
+        TTF_CloseFont(font);
+        return;
+    }
+
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(this->renderer, surface);
+    if (!texture) {
+        SDL_Log("Impossible de créer la texture : %s", SDL_GetError());
+        SDL_FreeSurface(surface);
+        TTF_CloseFont(font);
+        return;
+    }
+
+    SDL_FreeSurface(surface);
+
+    int textWidth, textHeight;
+    SDL_QueryTexture(texture, NULL, NULL, &textWidth, &textHeight);
+    int titleX = (this->winW - textWidth) / 2;
+    int titleY = 20;
+
+    SDL_Rect dstrect = {titleX, titleY, textWidth, textHeight};
+    SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
+
+    SDL_DestroyTexture(texture);
+    TTF_CloseFont(font);
 }
 
 

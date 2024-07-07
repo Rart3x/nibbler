@@ -23,7 +23,7 @@ class SDL : public Library {
         void display(void);
         void displayMenu(void);
 
-        void drawButton(const SDL_Rect& button, const SDL_Color& fillColor, const SDL_Color& textColor, const char* buttonText);
+        void drawTitle(void);
 
         void input(void);
 
