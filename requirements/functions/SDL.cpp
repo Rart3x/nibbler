@@ -14,6 +14,8 @@ SDL::SDL(void) : Library() {
         exit(EXIT_FAILURE);
     }
 
+    TTF_Init();
+
     this->running = false;
     this->libCode = 0;
     this->selectedButton = 0;
@@ -41,14 +43,12 @@ void SDL::display() {
     this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
     if (!this->win) {
         std::cerr << "Error: Could not create SDL window" << std::endl;
-        exit(EXIT_FAILURE);
+        this->libCode = 404;
+        return;
     }
-
-    TTF_Init();
 
     this->renderer = SDL_CreateRenderer(this->win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->running = true;
-
 
     while (this->running) {
         this->input();
@@ -101,10 +101,10 @@ void SDL::drawText(const std::string& text, const SDL_Rect& pos, const SDL_Color
     SDL_Texture* texture = SDL_CreateTextureFromSurface(this->renderer, surface);
     SDL_Rect dstrect = pos;
 
-    SDL_FreeSurface(surface);
     SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
 
     SDL_DestroyTexture(texture);
+    SDL_FreeSurface(surface);
     TTF_CloseFont(font);
 }
 
@@ -113,8 +113,6 @@ void SDL::drawTitle() {
     TTF_Font* font = TTF_OpenFont(SCIENCE, 48);
     SDL_Surface* surface = TTF_RenderText_Solid(font, "Nibbler", {WHITE});
     SDL_Texture* texture = SDL_CreateTextureFromSurface(this->renderer, surface);
-
-    SDL_FreeSurface(surface);
 
     int textWidth, textHeight;
     SDL_QueryTexture(texture, NULL, NULL, &textWidth, &textHeight);
@@ -126,6 +124,7 @@ void SDL::drawTitle() {
     SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
 
     SDL_DestroyTexture(texture);
+    SDL_FreeSurface(surface);
     TTF_CloseFont(font);
 }
 

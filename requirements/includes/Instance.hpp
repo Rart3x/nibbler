@@ -25,7 +25,7 @@ class Instance {
 
         Library* operator[](size_t i);
     private:
-        size_t actualLib;
+        size_t      actualLib;
 
-        Library* libs[3];
+        Library*    libs[3];
 };

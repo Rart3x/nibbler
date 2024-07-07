@@ -11,36 +11,36 @@ class SFML : public Library {
         SFML();
         ~SFML();
 
-        void closeWindow(void);    
+        void    closeWindow(void);    
 
-        void display(void);
-        void displayGame(void);
-        void displayMenu(void);
+        void    display(void);
+        void    displayGame(void);
+        void    displayMenu(void);
 
-        void drawButton(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color color);
-        void drawTitle(std::string text, sf::Color color);
+        void    drawButton(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color color);
+        void    drawTitle(std::string text, sf::Color color);
     
-        void input(void);
+        void    input(void);
 
-        size_t getLibCode(void) const;
+        size_t  getLibCode(void) const;
 
-        void setAreaSize(int h, int w);
-        void setWinSize(int h, int w);
+        void    setAreaSize(int h, int w);
+        void    setWinSize(int h, int w);
 
     private:
-        bool running;
+        bool    running;
 
-        int height;
-        int width;
+        int     height;
+        int     width;
 
-        int winH;
-        int winW;
+        int     winH;
+        int     winW;
 
-        int selectedButton;
+        int     selectedButton;
 
-        int mode;
+        int     mode;
 
-        size_t libCode;
+        size_t  libCode;
 
         sf::RenderWindow* win;
 };

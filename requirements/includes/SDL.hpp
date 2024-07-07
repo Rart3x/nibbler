@@ -18,33 +18,34 @@ class SDL : public Library {
         SDL();
         ~SDL();
 
-        void closeWindow(void);
+        void    closeWindow(void);
 
-        void display(void);
-        void displayMenu(void);
+        void    display(void);
+        void    displayGame(void);
+        void    displayMenu(void);
 
-        void drawText(const std::string& text, const SDL_Rect& pos, const SDL_Color& color);
-        void drawTitle(void);
+        void    drawText(const std::string& text, const SDL_Rect& pos, const SDL_Color& color);
+        void    drawTitle(void);
 
-        void input(void);
+        void    input(void);
 
-        size_t getLibCode(void) const;
+        size_t  getLibCode(void) const;
 
-        void setAreaSize(int h, int w);
-        void setWinSize(int h, int w);
+        void    setAreaSize(int h, int w);
+        void    setWinSize(int h, int w);
 
     private:
-        bool running;
+        bool    running;
 
-        int height;
-        int width;
+        int     height;
+        int     width;
 
-        int winH;
-        int winW;
+        int     winH;
+        int     winW;
 
-        int selectedButton;
+        int     selectedButton;
 
-        size_t libCode;
+        size_t  libCode;
 
         SDL_Renderer*   renderer;
         SDL_Window*     win;
