@@ -60,9 +60,7 @@ void SDL::display() {
 
 
 void SDL::displayMenu() {
-    this->drawTitle();
-
-    SDL_Color textColor = {BLACK};
+    SDL_Color black = {BLACK};
     SDL_Rect startButton, quitButton;
 
     startButton.w = quitButton.w = 200;
@@ -90,8 +88,9 @@ void SDL::displayMenu() {
     
     SDL_RenderFillRect(this->renderer, &quitButton);
 
-    this->drawText("Start", startButton, textColor);
-    this->drawText("Quit", quitButton, textColor);
+    this->drawTitle();
+    this->drawText("Start", startButton, black);
+    this->drawText("Quit", quitButton, black);
 
     SDL_RenderPresent(this->renderer);
 }
@@ -123,6 +122,7 @@ void SDL::drawTitle() {
 
     int textWidth, textHeight;
     SDL_QueryTexture(texture, NULL, NULL, &textWidth, &textHeight);
+
     int titleX = (this->winW - textWidth) / 2;
     int titleY = 20;
 
