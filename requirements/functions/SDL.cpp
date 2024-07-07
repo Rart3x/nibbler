@@ -23,10 +23,8 @@ SDL::SDL(void) : Library() {
 
 
 SDL::~SDL() {
-    if (this->win)
-        SDL_DestroyWindow(this->win);
-    if (this->renderer)
-        SDL_DestroyRenderer(this->renderer);
+    if (TTF_WasInit())
+        TTF_Quit();
 }
 
 
@@ -50,6 +48,7 @@ void SDL::display() {
 
     this->renderer = SDL_CreateRenderer(this->win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->running = true;
+
 
     while (this->running) {
         this->input();
@@ -97,14 +96,12 @@ void SDL::displayMenu() {
 
 
 void SDL::drawText(const std::string& text, const SDL_Rect& pos, const SDL_Color& color) {
-
     TTF_Font* font = TTF_OpenFont(ARIAL, 24);
     SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(this->renderer, surface);
+    SDL_Rect dstrect = pos;
 
     SDL_FreeSurface(surface);
-
-    SDL_Rect dstrect = pos;
     SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
 
     SDL_DestroyTexture(texture);
@@ -113,9 +110,8 @@ void SDL::drawText(const std::string& text, const SDL_Rect& pos, const SDL_Color
 
 
 void SDL::drawTitle() {
-
     TTF_Font* font = TTF_OpenFont(SCIENCE, 48);
-    SDL_Surface* surface = TTF_RenderText_Solid(font, "Nibbler", {255, 255, 255, 255});
+    SDL_Surface* surface = TTF_RenderText_Solid(font, "Nibbler", {WHITE});
     SDL_Texture* texture = SDL_CreateTextureFromSurface(this->renderer, surface);
 
     SDL_FreeSurface(surface);

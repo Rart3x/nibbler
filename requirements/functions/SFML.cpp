@@ -16,9 +16,7 @@ SFML::SFML(void) : Library() {
 }
 
 
-SFML::~SFML() {
-    delete this->win;
-}
+SFML::~SFML() {}
 
 
 void SFML::closeWindow() {
