@@ -48,4 +48,5 @@ class SDL : public Library {
 
         SDL_Renderer*   renderer;
         SDL_Window*     win;
+        TTF_Font*       font;
 };
