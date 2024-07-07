@@ -23,6 +23,7 @@ class SDL : public Library {
         void display(void);
         void displayMenu(void);
 
+        void drawText(const std::string& text, const SDL_Rect& pos, const SDL_Color& color);
         void drawTitle(void);
 
         void input(void);

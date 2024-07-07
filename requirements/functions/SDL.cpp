@@ -91,8 +91,51 @@ void SDL::displayMenu() {
     
     SDL_RenderFillRect(this->renderer, &quitButton);
 
+    SDL_Color textColor = {BLACK};
+    this->drawText("Start", startButton, textColor);
+    this->drawText("Quit", quitButton, textColor);
+
     SDL_RenderPresent(this->renderer);
 }
+
+
+void SDL::drawText(const std::string& text, const SDL_Rect& pos, const SDL_Color& color) {
+
+    if (TTF_Init() == -1) {
+        SDL_Log("Impossible d'initialiser SDL_ttf : %s", TTF_GetError());
+        return;
+    }
+
+    TTF_Font* font = TTF_OpenFont(ARIAL, 24);
+    if (!font) {
+        SDL_Log("Impossible de charger la police : %s", TTF_GetError());
+        return;
+    }
+
+    SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
+    if (!surface) {
+        SDL_Log("Impossible de rendre le texte : %s", SDL_GetError());
+        TTF_CloseFont(font);
+        return;
+    }
+
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(this->renderer, surface);
+    if (!texture) {
+        SDL_Log("Impossible de créer la texture : %s", SDL_GetError());
+        SDL_FreeSurface(surface);
+        TTF_CloseFont(font);
+        return;
+    }
+
+    SDL_FreeSurface(surface);
+
+    SDL_Rect dstrect = pos;
+    SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
+
+    SDL_DestroyTexture(texture);
+    TTF_CloseFont(font);
+}
+
 
 
 void SDL::drawTitle() {
