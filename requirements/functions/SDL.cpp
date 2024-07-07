@@ -16,10 +16,18 @@ SDL::SDL(void) : Library() {
 
     this->running = false;
     this->libCode = 0;
+    this->selectedButton = 0;
+    this->winH = HEIGHT;
+    this->winW = WIDTH;
 }
 
 
-SDL::~SDL() {}
+SDL::~SDL() {
+    if (this->win)
+        SDL_DestroyWindow(this->win);
+    if (this->renderer)
+        SDL_DestroyRenderer(this->renderer);
+}
 
 
 void SDL::closeWindow() {
@@ -38,12 +46,50 @@ void SDL::display() {
         exit(EXIT_FAILURE);
     }
 
+    this->renderer = SDL_CreateRenderer(this->win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->running = true;
 
     while (this->running) {
         this->input();
+        this->displayMenu();
         SDL_Delay(16);
     }
+}
+
+
+void SDL::displayMenu() {
+    SDL_Rect startButton;
+    SDL_Rect quitButton;
+
+    startButton.w = 200;
+    startButton.h = 50;
+
+    quitButton.w = 200;
+    quitButton.h = 50;
+
+    int totalButtonHeight = startButton.h + quitButton.h;
+
+    startButton.y = (this->winH - totalButtonHeight) / 2;
+    quitButton.y = startButton.y + startButton.h + 10;
+    
+    startButton.x = (this->winW - startButton.w) / 2;
+    quitButton.x = startButton.x;
+
+    if (this->selectedButton == 0)
+        SDL_SetRenderDrawColor(this->renderer, CYAN);
+    else
+        SDL_SetRenderDrawColor(this->renderer, WHITE);
+
+    SDL_RenderFillRect(this->renderer, &startButton);
+
+    if (this->selectedButton == 1)
+        SDL_SetRenderDrawColor(this->renderer, CYAN);
+    else
+        SDL_SetRenderDrawColor(this->renderer, WHITE);
+    
+    SDL_RenderFillRect(this->renderer, &quitButton);
+
+    SDL_RenderPresent(this->renderer);
 }
 
 
@@ -65,6 +111,15 @@ void SDL::input() {
                 this->running = false;
                 break;
 
+            case SDL_SCANCODE_RETURN:
+                if (this->selectedButton == 0)
+                    break;
+                else {
+                    this->libCode = 404;
+                    this->running = false;
+                }
+                break;
+
             case SDL_SCANCODE_1:
                 this->libCode = 0;
                 this->running = false;
@@ -76,18 +131,27 @@ void SDL::input() {
                 break;
 
             case SDL_SCANCODE_W:
-            case SDL_SCANCODE_UP:
                 break;
 
             case SDL_SCANCODE_A:
-            case SDL_SCANCODE_LEFT:
                 break;
 
             case SDL_SCANCODE_S:
-            case SDL_SCANCODE_DOWN:
                 break;
 
             case SDL_SCANCODE_D:
+                break;
+
+            case SDL_SCANCODE_UP:
+                if (this->selectedButton == 1)
+                    this->selectedButton = 0;
+                break;
+            case SDL_SCANCODE_DOWN:
+                if (this->selectedButton == 0)
+                    this->selectedButton = 1;
+                break;
+            case SDL_SCANCODE_LEFT:
+                break;
             case SDL_SCANCODE_RIGHT:
                 break;
 

@@ -3,9 +3,14 @@
 #include <iostream>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_timer.h>
 
 #include "Library.hpp"
+
+#define CYAN 0, 255, 255, 255
+#define WHITE 255, 255, 255, 255
+#define BLACK 0, 0, 0, 255
 
 class SDL : public Library {
 
@@ -14,7 +19,12 @@ class SDL : public Library {
         ~SDL();
 
         void closeWindow(void);
+
         void display(void);
+        void displayMenu(void);
+
+        void drawButton(const SDL_Rect& button, const SDL_Color& fillColor, const SDL_Color& textColor, const char* buttonText);
+
         void input(void);
 
         size_t getLibCode(void) const;
@@ -31,7 +41,10 @@ class SDL : public Library {
         int winH;
         int winW;
 
+        int selectedButton;
+
         size_t libCode;
 
-        SDL_Window* win;
+        SDL_Renderer*   renderer;
+        SDL_Window*     win;
 };
