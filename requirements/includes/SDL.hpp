@@ -31,6 +31,8 @@ class SDL : public Library {
         size_t  getLibCode(void) const;
 
         void    setAreaSize(int h, int w);
+        void    setLibCode(int code);
+        void    setRunning();
         void    setWinSize(int h, int w);
 
     private:
@@ -44,7 +46,7 @@ class SDL : public Library {
 
         int     mode;
 
-        size_t  libCode;
+        int libCode;
 
         SDL_Renderer*   renderer;
         SDL_Window*     win;

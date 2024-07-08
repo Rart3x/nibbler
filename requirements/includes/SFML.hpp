@@ -26,6 +26,8 @@ class SFML : public Library {
         size_t  getLibCode(void) const;
 
         void    setAreaSize(int h, int w);
+        void    setLibCode(int code);
+        void    setRunning();
         void    setWinSize(int h, int w);
 
     private:
@@ -42,7 +44,7 @@ class SFML : public Library {
         int     mode;
         int     prevMode;
 
-        size_t  libCode;
+        int libCode;
 
         sf::RenderWindow* win;
 };

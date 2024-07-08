@@ -187,6 +187,14 @@ void SDL::setAreaSize(int h, int w) {
     this->width = w;
 }
 
+void SDL::setLibCode(int code) {
+    this->libCode = code;
+}
+
+void SDL::setRunning() {
+    this->running = true;
+}
+
 void SDL::setWinSize(int h, int w) {
     this->winH = h;
     this->winW = w;

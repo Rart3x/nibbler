@@ -90,6 +90,14 @@ void GL::setAreaSize(int h, int w) {
     this->width = w;
 }
 
+void GL::setLibCode(int code) {
+    this->libCode = code;
+}
+
+void GL::setRunning() {
+    this->running = true;
+}
+
 void GL::setWinSize(int h, int w) {
     this->winH = h;
     this->winW = w;

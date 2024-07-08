@@ -37,6 +37,8 @@ class Library {
         virtual size_t  getLibCode() const = 0;
 
         virtual void    setAreaSize(int h, int w) = 0;
+        virtual void    setLibCode(int code) = 0;
+        virtual void    setRunning() = 0;
         virtual void    setWinSize(int h, int w) = 0;
     
     private:
@@ -48,5 +50,5 @@ class Library {
         int     winH;
         int     winW;
     
-        size_t  libCode;
+        int     libCode;
 };

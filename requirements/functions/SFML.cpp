@@ -30,11 +30,8 @@ void SFML::closeWindow() {
 void SFML::display() {
 
     this->win = new sf::RenderWindow(sf::VideoMode(this->winW, this->winH), "Nibbler SFML");
-    if (!this->win) {
-        std::cerr << "Error: Could not create SFML window" << std::endl;
-        this->libCode = 404;
-        this->running = false;
-    }
+    // if (!errorQuitLib(this->win, "Error: Could not create SFML window", this))
+    //     return;
 
     this->running = true;
 
@@ -253,6 +250,14 @@ size_t SFML::getLibCode(void) const {
 void SFML::setAreaSize(int h, int w) {
     this->height = h;
     this->width = w;
+}
+
+void SFML::setLibCode(int code) {
+    this->libCode = code;
+}
+
+void SFML::setRunning() {
+    this->running = !this->running;
 }
 
 void SFML::setWinSize(int h, int w) {
