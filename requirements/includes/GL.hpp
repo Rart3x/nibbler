@@ -30,6 +30,9 @@ class GL : public Library {
         int     height;
         int     width;
 
+        int     mode;
+        int     prevMode;
+
         int     winH;
         int     winW;
 

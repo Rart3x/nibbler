@@ -52,12 +52,18 @@ void SDL::display() {
     while (this->running) {
         this->input();
 
-        if (this->mode == GAME)
+        if (this->mode == GAME) {
+            SDL_RenderClear(this->renderer);
             this->drawTitle();
+        }
         else if (this->mode == PAUSE) {
+            SDL_RenderClear(this->renderer);
             this->drawTitle();
             this->displayPause();
         }
+
+        SDL_RenderPresent(this->renderer);
+
         SDL_Delay(16);
     }
 }
@@ -78,9 +84,7 @@ void SDL::displayPause() {
 
     SDL_Rect dstrect = {titleX, titleY, textWidth, textHeight};
     
-    SDL_RenderClear(this->renderer);
     SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
-    SDL_RenderPresent(this->renderer);
 
     SDL_DestroyTexture(texture);
     SDL_FreeSurface(surface);
@@ -100,6 +104,7 @@ void SDL::drawTitle() {
     int titleY = 20;
 
     SDL_Rect dstrect = {titleX, titleY, textWidth, textHeight};
+    
     SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
 
     SDL_DestroyTexture(texture);

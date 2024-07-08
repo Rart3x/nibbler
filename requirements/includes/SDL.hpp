@@ -43,7 +43,6 @@ class SDL : public Library {
         int     winW;
 
         int     mode;
-        int     prevMode;
 
         size_t  libCode;
 
