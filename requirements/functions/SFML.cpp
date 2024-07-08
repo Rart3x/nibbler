@@ -20,7 +20,8 @@ SFML::~SFML() {}
 
 
 void SFML::closeWindow() {
-    if (this->win) {
+    if (this->win)
+    {
         this->win->close();
         this->win = NULL;
     }
@@ -176,8 +177,10 @@ void SFML::drawTitle(std::string text, sf::Color color) {
 void SFML::input() {
     sf::Event event;
 
-    while (this->win->pollEvent(event)) {
-        switch (event.type) {
+    while (this->win->pollEvent(event))
+    {
+        switch (event.type)
+        {
 
             case sf::Event::Closed:
                 this->libCode = 404;
@@ -185,48 +188,73 @@ void SFML::input() {
                 break;
 
             case sf::Event::KeyPressed:
-                if (event.key.code == sf::Keyboard::Escape) {
+                if (event.key.code == sf::Keyboard::Escape)
+                {
                     this->libCode = 404;
                     this->running = false;
-                } else if (event.key.code == sf::Keyboard::Return) {
-                    if (this->selectedButton == 0) {
+                }
+                else if (event.key.code == sf::Keyboard::Return)
+                {
+                    if (this->selectedButton == 0)
+                    {
                         this->mode = GAME;
                         this->prevMode = GAME;
-                    } else {
+                    }
+                    else
+                    {
                         this->libCode = 404;
                         this->running = false;
                     }
-                } else if (event.key.code == sf::Keyboard::Space) {
-                    if (this->mode == GAME) {
+                }
+                else if (event.key.code == sf::Keyboard::Space)
+                {
+                    if (this->mode == GAME)
+                    {
                         this->prevMode = this->mode;
                         this->mode = PAUSE;
-                    } else if (this->mode == PAUSE && this->prevMode == GAME)
+                    }
+                    else if (this->mode == PAUSE && this->prevMode == GAME)
                         this->mode = GAME;
-                } else if (event.key.code == sf::Keyboard::Num2) {
+                }
+                else if (event.key.code == sf::Keyboard::Num2)
+                {
                     if (this->mode == GAME || this->mode == PAUSE) {
                         this->libCode = 1;
                         this->running = false;
                     }
-                } else if (event.key.code == sf::Keyboard::Num3) {
-                    if (this->mode == GAME || this->mode == PAUSE) {
+                }
+                else if (event.key.code == sf::Keyboard::Num3)
+                {
+                    if (this->mode == GAME || this->mode == PAUSE)
+                    {
                         this->libCode = 2;
                         this->running = false;
                     }
-                } else if (event.key.code == sf::Keyboard::W) {
-                    return;
-                } else if (event.key.code == sf::Keyboard::A) {
-                    return;
-                } else if (event.key.code == sf::Keyboard::S) {
+                }
+                else if (event.key.code == sf::Keyboard::W)
+                {
                     return;
                 }
-                else if (event.key.code == sf::Keyboard::D) {
+                else if (event.key.code == sf::Keyboard::A)
+                {
+                    return;
+                }
+                else if (event.key.code == sf::Keyboard::S)
+                {
+                    return;
+                }
+                else if (event.key.code == sf::Keyboard::D)
+                {
                     return;
                 }
 
-                if (event.key.code == sf::Keyboard::Up) {
+                if (event.key.code == sf::Keyboard::Up)
+                {
                     if (this->selectedButton == 1)
                         this->selectedButton = 0;
-                } else if (event.key.code == sf::Keyboard::Down) {
+                }
+                else if (event.key.code == sf::Keyboard::Down)
+                {
                     if (this->selectedButton == 0)
                         this->selectedButton = 1;
                 }

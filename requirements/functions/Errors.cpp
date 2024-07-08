@@ -1,7 +1,8 @@
 #include "../includes/Errors.hpp"
 
 bool    error(void* obj, std::string text) {
-    if (!obj) {
+    if (!obj)
+    {
         std::cerr << text << std::endl;
         return false;
     }
@@ -9,7 +10,8 @@ bool    error(void* obj, std::string text) {
 }
 
 bool    errorQuitLib(void *obj, std::string text, Library *lib) {
-    if (!obj) {
+    if (!obj)
+    {
         printError(text);
         lib->setLibCode(404);
         lib->setRunning();

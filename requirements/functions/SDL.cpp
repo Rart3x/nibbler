@@ -9,7 +9,8 @@ extern "C" {
 
 SDL::SDL(void) : Library() {
     
-    if((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == -1)) {
+    if((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == -1))
+    {
         std::cerr << "Error: Could not initialize SDL" << std::endl;
         exit(EXIT_FAILURE);
     }
@@ -30,7 +31,8 @@ SDL::~SDL() {
 
 
 void SDL::closeWindow() {
-    if (this->win) {
+    if (this->win)
+    {
         SDL_DestroyWindow(this->win);
         this->win = NULL;
     }
@@ -40,7 +42,8 @@ void SDL::closeWindow() {
 void SDL::display() {
 
     this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
-    if (!this->win) {
+    if (!this->win)
+    {
         std::cerr << "Error: Could not create SDL window" << std::endl;
         this->libCode = 404;
         return;
@@ -49,14 +52,17 @@ void SDL::display() {
     this->renderer = SDL_CreateRenderer(this->win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->running = true;
 
-    while (this->running) {
+    while (this->running)
+    {
         this->input();
 
-        if (this->mode == GAME) {
+        if (this->mode == GAME)
+        {
             SDL_RenderClear(this->renderer);
             this->drawTitle();
         }
-        else if (this->mode == PAUSE) {
+        else if (this->mode == PAUSE)
+        {
             SDL_RenderClear(this->renderer);
             this->drawTitle();
             this->displayPause();
@@ -115,65 +121,66 @@ void SDL::drawTitle() {
 void SDL::input() {
     SDL_Event event;
  
-    while (SDL_PollEvent(&event)) {
-        switch (event.type) {
-
-        case SDL_QUIT:
-            this->running = false;
-            break;
-
-        case SDL_KEYDOWN:
-            switch (event.key.keysym.scancode) {
-
-            case SDL_SCANCODE_ESCAPE:
-                this->libCode = 404;
+    while (SDL_PollEvent(&event)) 
+    {
+        switch (event.type)
+        {
+            case SDL_QUIT:
                 this->running = false;
                 break;
 
-            case SDL_SCANCODE_RETURN:
-                break;
-            
-            case SDL_SCANCODE_SPACE:
-                if (this->mode == PAUSE)
-                    this->mode = GAME;
-                else if (this->mode == GAME)
-                    this->mode = PAUSE;
-                break;
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.scancode) 
+                {
+                    case SDL_SCANCODE_ESCAPE:
+                        this->libCode = 404;
+                        this->running = false;
+                        break;
 
-            case SDL_SCANCODE_1:
-                this->libCode = 0;
-                this->running = false;
-                break;
+                    case SDL_SCANCODE_RETURN:
+                        break;
+                    
+                    case SDL_SCANCODE_SPACE:
+                        if (this->mode == PAUSE)
+                            this->mode = GAME;
+                        else if (this->mode == GAME)
+                            this->mode = PAUSE;
+                        break;
 
-            case SDL_SCANCODE_3:
-                this->libCode = 2;
-                this->running = false;
-                break;
+                    case SDL_SCANCODE_1:
+                        this->libCode = 0;
+                        this->running = false;
+                        break;
 
-            case SDL_SCANCODE_W:
-                break;
+                    case SDL_SCANCODE_3:
+                        this->libCode = 2;
+                        this->running = false;
+                        break;
 
-            case SDL_SCANCODE_A:
-                break;
+                    case SDL_SCANCODE_W:
+                        break;
 
-            case SDL_SCANCODE_S:
-                break;
+                    case SDL_SCANCODE_A:
+                        break;
 
-            case SDL_SCANCODE_D:
-                break;
+                    case SDL_SCANCODE_S:
+                        break;
 
-            case SDL_SCANCODE_UP:
-                break;
-            case SDL_SCANCODE_DOWN:
-                break;
-            case SDL_SCANCODE_LEFT:
-                break;
-            case SDL_SCANCODE_RIGHT:
-                break;
+                    case SDL_SCANCODE_D:
+                        break;
 
-            default:
-                break;
-            }
+                    case SDL_SCANCODE_UP:
+                        break;
+                    case SDL_SCANCODE_DOWN:
+                        break;
+                    case SDL_SCANCODE_LEFT:
+                        break;
+                    case SDL_SCANCODE_RIGHT:
+                        break;
+
+                    default:
+                        break;
+                }
         }
     }
 }

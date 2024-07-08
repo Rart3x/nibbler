@@ -25,8 +25,10 @@ void libraryLoop(int w, int h, Instance instance) {
     instance.setAreaSize(w, h);
     instance[SFMLCODE]->display();
 
-    while (instance[instance.getActualLib()]->getLibCode() != 404) {
-        switch (instance[instance.getActualLib()]->getLibCode()) {
+    while (instance[instance.getActualLib()]->getLibCode() != 404)
+    {
+        switch (instance[instance.getActualLib()]->getLibCode())
+        {
             case GLCODE:
                 instance[instance.getActualLib()]->closeWindow();
                 instance.setActualLib(GLCODE);
