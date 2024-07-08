@@ -2,13 +2,15 @@
 
 #include <iostream>
 
+#include "Errors.hpp"
+
 #define SQUARE  5
 
 #define WIDTH   500
 #define HEIGHT  500
 
-#define ARIAL   "./requirements/ressources/fonts/arial.ttf"
-#define SCIENCE "./requirements/ressources/fonts/science.ttf"
+#define ARIAL   "./requirements/assets/fonts/arial.ttf"
+#define SCIENCE "./requirements/assets/fonts/science.ttf"
 
 class Library {
 

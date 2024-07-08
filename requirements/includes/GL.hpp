@@ -17,6 +17,8 @@ class GL : public Library {
         void    displayGame(void);
         void    displayMenu(void);
 
+        void    drawButton();
+
         void    input(void);
 
         size_t  getLibCode(void) const;

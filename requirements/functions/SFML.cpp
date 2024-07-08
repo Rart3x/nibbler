@@ -95,11 +95,11 @@ void SFML::displayMenu() {
 
 void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color color) {
     sf::RectangleShape rectangle(size);
-    rectangle.setFillColor(color);
-    rectangle.setPosition(position);
-
     sf::Font font;
     sf::Text buttonText;
+
+    rectangle.setFillColor(color);
+    rectangle.setPosition(position);
 
     if (!font.loadFromFile(ARIAL)) {
         std::cerr << "Error: Could not load font" << std::endl;

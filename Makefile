@@ -26,7 +26,7 @@ all: $(NAME) $(GL_LIB) $(SDL_LIB) $(SFML_LIB)
 
 $(NAME): $(OBJS) $(MAIN_OBJ)
 	@printf "\033[0;32mCompilation successful.\033[0m\n"
-	@$(CC) $(OBJS) $(MAIN_OBJ) -lSDL2 -lSDL2_ttf -lglfw -lsfml-audio -lsfml-graphics -lsfml-system -lsfml-window -o $(NAME)
+	@$(CC) $(OBJS) $(MAIN_OBJ) -lSDL2 -lSDL2_ttf -lGL -lglfw -lsfml-audio -lsfml-graphics -lsfml-system -lsfml-window -o $(NAME)
 
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp

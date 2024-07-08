@@ -8,12 +8,11 @@ extern "C" {
 
 
 GL::GL(void) : Library() {
-
     if (!glfwInit()) {
         std::cerr << "Error: Could not initialize GLFW" << std::endl;
         this->libCode = 404;
         return;    
-        }
+    }
 
     this->running = false;
 }
@@ -34,7 +33,6 @@ void GL::closeWindow() {
 
 
 void GL::display() {
-
     this->win = glfwCreateWindow(WIDTH, HEIGHT, "Nibbler OpenGL", NULL, NULL);
     if (!this->win) {
         std::cerr << "Error: Could not create GLFW window" << std::endl;
@@ -48,6 +46,7 @@ void GL::display() {
     while (this->running) {
         this->input();
         glfwSwapBuffers(this->win);
+        displayMenu();
         glfwPollEvents();
     }
 }
@@ -56,6 +55,11 @@ void GL::display() {
 void GL::displayMenu() {
 }
 
+
+
+void GL::drawButton() {
+    
+}
 
 void GL::input() {
     if (glfwGetKey(this->win, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
