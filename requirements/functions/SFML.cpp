@@ -111,7 +111,13 @@ void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size
     buttonText.setString(text);
     buttonText.setCharacterSize(24);
     buttonText.setFillColor(sf::Color::Black);
-    buttonText.setPosition(position.x + 10, position.y + 5);
+    
+    float textWidth = buttonText.getLocalBounds().width;
+    float textHeight = buttonText.getLocalBounds().height;
+    float centerX = position.x + size.x / 2;
+    float centerY = position.y + size.y / 2;
+
+    buttonText.setPosition(centerX - textWidth / 2, centerY - textHeight);
 
     this->win->draw(rectangle);
     this->win->draw(buttonText);
