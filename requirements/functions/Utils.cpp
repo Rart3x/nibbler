@@ -23,7 +23,7 @@ void check_args_validity(int ac, char **av) {
 
 void libraryLoop(int w, int h, Instance instance) {
     instance.setAreaSize(w, h);
-    instance[GLCODE]->display();
+    instance[SFMLCODE]->display();
 
     while (instance[instance.getActualLib()]->getLibCode() != 404) {
         switch (instance[instance.getActualLib()]->getLibCode()) {

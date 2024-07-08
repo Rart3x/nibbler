@@ -12,9 +12,9 @@ int main(int ac, char **av) {
         std::cerr << e.what() << std::endl;
     }
 
+    delete instance[SFMLCODE];
     delete instance[GLCODE];
     delete instance[SDLCODE];
-    delete instance[SFMLCODE];
 
     return EXIT_SUCCESS;
 }

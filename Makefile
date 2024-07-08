@@ -2,25 +2,22 @@ NAME = Nibbler
 
 LIB_DIR = requirements/libs
 SRC_DIR = requirements/functions
-
 OBJ_DIR = .objs
-
-SRCS := $(wildcard $(SRC_DIR)/*.cpp)
-OBJS := $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
-DEPS := $(OBJS:.o=.d)
-
-MAIN_SRC = requirements/main.cpp
-MAIN_OBJ = $(OBJ_DIR)/main.o
-
-CC = g++
-CPPFLAGS = -Wall -Wextra -Werror -MMD -MP -gdwarf-2
-
-DIRDUP = mkdir -p $(@D)
 
 GL_LIB = $(LIB_DIR)/GL.so
 SDL_LIB = $(LIB_DIR)/SDL.so
 SFML_LIB = $(LIB_DIR)/SFML.so
 
+CC = g++
+CPPFLAGS = -Wall -Wextra -Werror -MMD -MP -gdwarf-2
+DIRDUP = mkdir -p $(@D)
+
+MAIN_SRC = requirements/main.cpp
+MAIN_OBJ = $(OBJ_DIR)/main.o
+
+SRCS := $(wildcard $(SRC_DIR)/*.cpp)
+OBJS := $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+DEPS := $(OBJS:.o=.d)
 
 all: $(NAME) $(GL_LIB) $(SDL_LIB) $(SFML_LIB)
 

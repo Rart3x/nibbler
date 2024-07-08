@@ -17,7 +17,6 @@ SDL::SDL(void) : Library() {
     TTF_Init();
 
     this->running = false;
-    this->libCode = 0;
     this->selectedButton = 0;
     this->winH = HEIGHT;
     this->winW = WIDTH;
@@ -52,60 +51,8 @@ void SDL::display() {
 
     while (this->running) {
         this->input();
-        this->displayMenu();
         SDL_Delay(16);
     }
-}
-
-
-void SDL::displayMenu() {
-    SDL_Color black = {BLACK};
-    SDL_Rect startButton, quitButton;
-
-    startButton.w = quitButton.w = 200;
-    startButton.h = quitButton.h = 50;
-
-    int totalButtonHeight = startButton.h + quitButton.h;
-
-    startButton.y = (this->winH - totalButtonHeight) / 2;
-    quitButton.y = startButton.y + startButton.h + 10;
-    
-    startButton.x = (this->winW - startButton.w) / 2;
-    quitButton.x = startButton.x;
-
-    if (this->selectedButton == 0)
-        SDL_SetRenderDrawColor(this->renderer, CYAN);
-    else
-        SDL_SetRenderDrawColor(this->renderer, WHITE);
-
-    SDL_RenderFillRect(this->renderer, &startButton);
-
-    if (this->selectedButton == 1)
-        SDL_SetRenderDrawColor(this->renderer, CYAN);
-    else
-        SDL_SetRenderDrawColor(this->renderer, WHITE);
-    
-    SDL_RenderFillRect(this->renderer, &quitButton);
-
-    this->drawTitle();
-    this->drawText("Start", startButton, black);
-    this->drawText("Quit", quitButton, black);
-
-    SDL_RenderPresent(this->renderer);
-}
-
-
-void SDL::drawText(const std::string& text, const SDL_Rect& pos, const SDL_Color& color) {
-    TTF_Font* font = TTF_OpenFont(ARIAL, 24);
-    SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(this->renderer, surface);
-    SDL_Rect dstrect = pos;
-
-    SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
-
-    SDL_DestroyTexture(texture);
-    SDL_FreeSurface(surface);
-    TTF_CloseFont(font);
 }
 
 

@@ -12,6 +12,18 @@
 #define ARIAL   "./requirements/assets/fonts/arial.ttf"
 #define SCIENCE "./requirements/assets/fonts/science.ttf"
 
+#define GL_PATH "./requirements/libs/GL.so"
+#define SDL_PATH "./requirements/libs/SDL.so"
+#define SFML_PATH "./requirements/libs/SFML.so"
+
+#define SFMLCODE    0
+#define SDLCODE     1
+#define GLCODE      2
+
+#define MENU        0
+#define GAME        1
+#define PAUSE       2
+
 class Library {
 
     public:

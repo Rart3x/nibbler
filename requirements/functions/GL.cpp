@@ -13,13 +13,14 @@ GL::GL(void) : Library() {
         this->libCode = 404;
         return;    
     }
-
+    this->win = NULL;
     this->running = false;
 }
 
 
 GL::~GL() {
-    glfwDestroyWindow(this->win);
+    if (this->win)
+        glfwDestroyWindow(this->win);
     glfwTerminate();
 }
 
@@ -41,35 +42,26 @@ void GL::display() {
     }
 
     glfwMakeContextCurrent(this->win);
+    
     this->running = true;
 
     while (this->running) {
         this->input();
         glfwSwapBuffers(this->win);
-        displayMenu();
         glfwPollEvents();
     }
 }
 
 
-void GL::displayMenu() {
-}
-
-
-
-void GL::drawButton() {
-    
-}
-
 void GL::input() {
     if (glfwGetKey(this->win, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         this->libCode = 404;
         this->running = false;
+    } else if (glfwGetKey(this->win, GLFW_KEY_1) == GLFW_PRESS) {
+        this->libCode = 0;
+        this->running = false;
     } else if (glfwGetKey(this->win, GLFW_KEY_2) == GLFW_PRESS) {
         this->libCode = 1;
-        this->running = false;
-    } else if (glfwGetKey(this->win, GLFW_KEY_3) == GLFW_PRESS) {
-        this->libCode = 2;
         this->running = false;
     } else if (glfwGetKey(this->win, GLFW_KEY_W) || glfwGetKey(this->win, GLFW_KEY_UP)) {
         return;

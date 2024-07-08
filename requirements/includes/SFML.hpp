@@ -16,6 +16,7 @@ class SFML : public Library {
         void    display(void);
         void    displayGame(void);
         void    displayMenu(void);
+        void    displayPause(void);
 
         void    drawButton(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color color);
         void    drawTitle(std::string text, sf::Color color);
@@ -39,6 +40,7 @@ class SFML : public Library {
         int     selectedButton;
 
         int     mode;
+        int     prevMode;
 
         size_t  libCode;
 

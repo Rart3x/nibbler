@@ -44,8 +44,10 @@ void SFML::display() {
 
         if (this->mode == 0)
             this->displayMenu();
-        else
+        else if (this->mode == 1)
             this->displayGame();
+        else if (this->mode == 2)
+            this->displayPause();
         
         this->win->display();
     }
@@ -93,6 +95,31 @@ void SFML::displayMenu() {
 }
 
 
+void SFML::displayPause() {
+    sf::Font font;
+    if (!font.loadFromFile(ARIAL))
+        return;
+
+    sf::Text pauseText;
+    pauseText.setFont(font);
+    pauseText.setString("Pause");
+    pauseText.setCharacterSize(72);
+    pauseText.setFillColor(sf::Color::White);
+
+    int windowWidth = this->win->getSize().x;
+    int windowHeight = this->win->getSize().y;
+
+    float textWidth = pauseText.getLocalBounds().width;
+    float textHeight = pauseText.getLocalBounds().height;
+    float centerX = windowWidth / 2.0f - textWidth / 2.0f;
+    float centerY = windowHeight / 2.0f - textHeight / 2.0f;
+
+    pauseText.setPosition(centerX, centerY);
+    this->drawTitle("Nibbler", sf::Color::White);
+    this->win->draw(pauseText);
+}
+
+
 void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color color) {
     sf::RectangleShape rectangle(size);
     sf::Font font;
@@ -111,7 +138,7 @@ void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size
     buttonText.setString(text);
     buttonText.setCharacterSize(24);
     buttonText.setFillColor(sf::Color::Black);
-    
+
     float textWidth = buttonText.getLocalBounds().width;
     float textHeight = buttonText.getLocalBounds().height;
     float centerX = position.x + size.x / 2;
@@ -127,6 +154,7 @@ void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size
 void SFML::drawTitle(std::string text, sf::Color color) {
     sf::Font font;
     sf::Text title;
+    sf::Vector2f localPosition;
 
     if (!font.loadFromFile(SCIENCE)) {
         std::cerr << "Error: Could not load font" << std::endl;
@@ -138,8 +166,6 @@ void SFML::drawTitle(std::string text, sf::Color color) {
     title.setString(text);
     title.setCharacterSize(48);
     title.setFillColor(color);
-
-    sf::Vector2f localPosition;
 
     localPosition.x = this->winW / 2.0f - title.getGlobalBounds().width / 2.0f;
     localPosition.y = 10;
@@ -167,16 +193,23 @@ void SFML::input() {
                     this->running = false;
                 } else if (event.key.code == sf::Keyboard::Return) {
                     if (this->selectedButton == 0) {
-                        this->mode = 1;
+                        this->mode = GAME;
+                        this->prevMode = GAME;
                     } else {
                         this->libCode = 404;
                         this->running = false;
                     }
-                } else if (event.key.code == sf::Keyboard::Num1) {
-                    this->libCode = 0;
-                    this->running = false;
+                } else if (event.key.code == sf::Keyboard::Space) {
+                    if (this->mode == GAME) {
+                        this->prevMode = this->mode;
+                        this->mode = PAUSE;
+                    } else if (this->mode == PAUSE && this->prevMode == GAME)
+                        this->mode = GAME;
                 } else if (event.key.code == sf::Keyboard::Num2) {
                     this->libCode = 1;
+                    this->running = false;
+                } else if (event.key.code == sf::Keyboard::Num3) {
+                    this->libCode = 2;
                     this->running = false;
                 } else if (event.key.code == sf::Keyboard::W) {
                     return;

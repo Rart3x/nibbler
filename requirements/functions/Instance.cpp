@@ -1,9 +1,9 @@
 #include "../includes/Instance.hpp"
 
 Instance::Instance() : actualLib(0) {
-    this->libs[0] = this->loadGLInstance();
+    this->libs[0] = this->loadSFMLInstance();
     this->libs[1] = this->loadSDLInstance();
-    this->libs[2] = this->loadSFMLInstance();
+    this->libs[2] = this->loadGLInstance();
 }
 
 Instance::~Instance() {}
