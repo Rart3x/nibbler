@@ -15,6 +15,7 @@ class GL : public Library {
 
         void    display(void);
         void    displayGame(void);
+        void    displayPause(void);
 
         void    input(void);
 

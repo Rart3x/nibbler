@@ -206,11 +206,15 @@ void SFML::input() {
                     } else if (this->mode == PAUSE && this->prevMode == GAME)
                         this->mode = GAME;
                 } else if (event.key.code == sf::Keyboard::Num2) {
-                    this->libCode = 1;
-                    this->running = false;
+                    if (this->mode == GAME || this->mode == PAUSE) {
+                        this->libCode = 1;
+                        this->running = false;
+                    }
                 } else if (event.key.code == sf::Keyboard::Num3) {
-                    this->libCode = 2;
-                    this->running = false;
+                    if (this->mode == GAME || this->mode == PAUSE) {
+                        this->libCode = 2;
+                        this->running = false;
+                    }
                 } else if (event.key.code == sf::Keyboard::W) {
                     return;
                 } else if (event.key.code == sf::Keyboard::A) {

@@ -16,8 +16,8 @@ SDL::SDL(void) : Library() {
 
     TTF_Init();
 
+    this->mode = PAUSE;
     this->running = false;
-    this->selectedButton = 0;
     this->winH = HEIGHT;
     this->winW = WIDTH;
 }
@@ -51,8 +51,40 @@ void SDL::display() {
 
     while (this->running) {
         this->input();
+
+        if (this->mode == GAME)
+            this->drawTitle();
+        else if (this->mode == PAUSE) {
+            this->drawTitle();
+            this->displayPause();
+        }
         SDL_Delay(16);
     }
+}
+
+
+void SDL::displayPause() {
+    TTF_Font* font = TTF_OpenFont(ARIAL, 72);
+    SDL_Surface* surface = TTF_RenderText_Solid(font, "Pause", {WHITE});
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(this->renderer, surface);
+
+    int textWidth, textHeight;
+    SDL_QueryTexture(texture, NULL, NULL, &textWidth, &textHeight);
+
+    int centerX = this->winW / 2;
+    int centerY = this->winH / 2;
+    int titleX = centerX - textWidth / 2;
+    int titleY = centerY - textHeight / 2;
+
+    SDL_Rect dstrect = {titleX, titleY, textWidth, textHeight};
+    
+    SDL_RenderClear(this->renderer);
+    SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
+    SDL_RenderPresent(this->renderer);
+
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(surface);
+    TTF_CloseFont(font);
 }
 
 
@@ -95,12 +127,13 @@ void SDL::input() {
                 break;
 
             case SDL_SCANCODE_RETURN:
-                if (this->selectedButton == 0)
-                    break;
-                else {
-                    this->libCode = 404;
-                    this->running = false;
-                }
+                break;
+            
+            case SDL_SCANCODE_SPACE:
+                if (this->mode == PAUSE)
+                    this->mode = GAME;
+                else if (this->mode == GAME)
+                    this->mode = PAUSE;
                 break;
 
             case SDL_SCANCODE_1:
@@ -126,12 +159,8 @@ void SDL::input() {
                 break;
 
             case SDL_SCANCODE_UP:
-                if (this->selectedButton == 1)
-                    this->selectedButton = 0;
                 break;
             case SDL_SCANCODE_DOWN:
-                if (this->selectedButton == 0)
-                    this->selectedButton = 1;
                 break;
             case SDL_SCANCODE_LEFT:
                 break;

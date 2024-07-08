@@ -22,6 +22,7 @@ class SDL : public Library {
 
         void    display(void);
         void    displayGame(void);
+        void    displayPause(void);
 
         void    drawTitle(void);
 
@@ -41,7 +42,8 @@ class SDL : public Library {
         int     winH;
         int     winW;
 
-        int     selectedButton;
+        int     mode;
+        int     prevMode;
 
         size_t  libCode;
 
