@@ -13,6 +13,7 @@ GL::GL(void) : Library() {
         this->libCode = 404;
         return;    
     }
+    this->mode = 0;
     this->win = NULL;
     this->running = false;
 }
@@ -54,22 +55,27 @@ void GL::display() {
 
 
 void GL::input() {
-    if (glfwGetKey(this->win, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+    if (glfwGetKey(this->win, GLFW_KEY_ESCAPE)) {
         this->libCode = 404;
         this->running = false;
-    } else if (glfwGetKey(this->win, GLFW_KEY_1) == GLFW_PRESS) {
+    } else if (glfwGetKey(this->win, GLFW_KEY_1)) {
         this->libCode = 0;
         this->running = false;
-    } else if (glfwGetKey(this->win, GLFW_KEY_2) == GLFW_PRESS) {
+    } else if (glfwGetKey(this->win, GLFW_KEY_2)) {
         this->libCode = 1;
         this->running = false;
-    } else if (glfwGetKey(this->win, GLFW_KEY_W) || glfwGetKey(this->win, GLFW_KEY_UP)) {
+    } else if (glfwGetKey(this->win, GLFW_KEY_SPACE)) {
+        if (this->mode == 0)
+            this->mode = 1;
+        else if (this->mode == 1)
+            this->mode = 2;
+    } else if (glfwGetKey(this->win, GLFW_KEY_W)) {
         return;
-    } else if (glfwGetKey(this->win, GLFW_KEY_A) || glfwGetKey(this->win, GLFW_KEY_LEFT)) {
+    } else if (glfwGetKey(this->win, GLFW_KEY_A)) {
         return;
-    } else if (glfwGetKey(this->win, GLFW_KEY_S) || glfwGetKey(this->win, GLFW_KEY_DOWN)) {
+    } else if (glfwGetKey(this->win, GLFW_KEY_S)) {
         return;
-    } else if (glfwGetKey(this->win, GLFW_KEY_D) || glfwGetKey(this->win, GLFW_KEY_RIGHT)) {
+    } else if (glfwGetKey(this->win, GLFW_KEY_D)) {
         return;
     }
 }

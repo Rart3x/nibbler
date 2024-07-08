@@ -31,7 +31,6 @@ class GL : public Library {
         int     width;
 
         int     mode;
-        int     prevMode;
 
         int     winH;
         int     winW;
