@@ -10,11 +10,7 @@ Instance::Instance() : actualLib(0) {
     this->libs[GLCODE] = this->loadGLInstance();
 }
 
-Instance::~Instance() {
-    for (size_t i = 0; i < 3; i++)
-        if (this->libs[i])
-            delete this->libs[i];
-}
+Instance::~Instance() {}
 
 
 GL * Instance::loadGLInstance() {

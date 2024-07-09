@@ -11,5 +11,13 @@ int main(int ac, char **av) {
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
+
+    if (instance[SFMLCODE]) 
+        delete instance[SFMLCODE];
+    if (instance[GLCODE])
+        delete instance[GLCODE];
+    if (instance[SDLCODE])
+        delete instance[SDLCODE];
+
     return EXIT_SUCCESS;
 }
