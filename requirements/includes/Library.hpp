@@ -23,6 +23,7 @@
 #define MENU        0
 #define GAME        1
 #define PAUSE       2
+#define QUIT        404
 
 class Library {
 

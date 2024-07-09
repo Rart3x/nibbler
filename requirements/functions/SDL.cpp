@@ -16,6 +16,7 @@ SDL::SDL(void) : Library() {
 
     this->mode = PAUSE;
     this->running = false;
+    this->win = NULL;
     this->winH = HEIGHT;
     this->winW = WIDTH;
 }
@@ -38,6 +39,8 @@ void SDL::closeWindow() {
 
 void SDL::display() {
 
+    if (this->win)
+        this->closeWindow();
     this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
     if (!errorQuitLibWithObj(this->win, "Error: Could not create SDL window", this))
         return;
@@ -138,7 +141,7 @@ void SDL::input() {
                 switch (event.key.keysym.scancode) 
                 {
                     case SDL_SCANCODE_ESCAPE:
-                        this->libCode = 404;
+                        this->libCode = QUIT;
                         this->running = false;
                         break;
 

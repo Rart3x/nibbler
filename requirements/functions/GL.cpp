@@ -11,8 +11,8 @@ GL::GL(void) : Library() {
     if (!errorQuitLibWithBool(glfwInit(), "Error: Could not initialize GLFW", this))
         return;
     this->mode = 0;
-    this->win = NULL;
     this->running = false;
+    this->win = NULL;
 }
 
 
@@ -33,6 +33,8 @@ void GL::closeWindow() {
 
 
 void GL::display() {
+    if (this->win)
+        this->closeWindow();
     this->win = glfwCreateWindow(WIDTH, HEIGHT, "Nibbler OpenGL", NULL, NULL);
     if (!errorQuitLibWithObj(this->win, "Error: Could not create GLFW window", this))
         return;
@@ -53,7 +55,7 @@ void GL::display() {
 void GL::input() {
     if (glfwGetKey(this->win, GLFW_KEY_ESCAPE))
     {
-        this->libCode = 404;
+        this->libCode = QUIT;
         this->running = false;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_1))

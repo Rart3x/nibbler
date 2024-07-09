@@ -11,25 +11,31 @@ SFML::SFML(void) : Library() {
     this->mode = 0;
     this->running = false;
     this->selectedButton = 0;
+    this->win = NULL;
     this->winH = HEIGHT;
     this->winW = WIDTH;
 }
 
 
-SFML::~SFML() {}
+SFML::~SFML() {
+    if (this->win)
+        delete this->win;
+}
 
 
 void SFML::closeWindow() {
     if (this->win)
     {
         this->win->close();
+        delete this->win;
         this->win = NULL;
     }
 }
 
 
 void SFML::display() {
-
+    if (this->win)
+        this->closeWindow();
     this->win = new sf::RenderWindow(sf::VideoMode(this->winW, this->winH), "Nibbler SFML");
     if (!errorQuitLibWithObj(this->win, "Error: Could not create SFML window", this))
         return;
@@ -176,16 +182,15 @@ void SFML::input() {
     {
         switch (event.type)
         {
-
             case sf::Event::Closed:
-                this->libCode = 404;
+                this->libCode = QUIT;
                 this->running = false;
                 break;
 
             case sf::Event::KeyPressed:
                 if (event.key.code == sf::Keyboard::Escape)
                 {
-                    this->libCode = 404;
+                    this->libCode = QUIT;
                     this->running = false;
                 }
                 else if (event.key.code == sf::Keyboard::Return)
@@ -197,7 +202,7 @@ void SFML::input() {
                     }
                     else
                     {
-                        this->libCode = 404;
+                        this->libCode = QUIT;
                         this->running = false;
                     }
                 }
@@ -242,8 +247,7 @@ void SFML::input() {
                 {
                     return;
                 }
-
-                if (event.key.code == sf::Keyboard::Up)
+                else if (event.key.code == sf::Keyboard::Up)
                 {
                     if (this->selectedButton == 1)
                         this->selectedButton = 0;

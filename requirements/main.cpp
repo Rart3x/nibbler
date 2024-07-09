@@ -12,12 +12,12 @@ int main(int ac, char **av) {
         std::cerr << e.what() << std::endl;
     }
 
-    if (instance[SFMLCODE]) 
+    if (instance[SFMLCODE])
         delete instance[SFMLCODE];
+    if (instance[SDLCODE]) 
+        delete instance[SDLCODE];
     if (instance[GLCODE])
         delete instance[GLCODE];
-    if (instance[SDLCODE])
-        delete instance[SDLCODE];
 
     return EXIT_SUCCESS;
 }
