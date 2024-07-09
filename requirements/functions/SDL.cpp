@@ -10,7 +10,7 @@ extern "C" {
 SDL::SDL(void) : Library() {
     if (!errorQuitLibWithint(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO), "Error: Could not initialize SDL", this))
         return;
-    if (!errorQuitLibWithint(TTF_Init(), "Error: Could not initialize SDL", this))
+    if (!errorQuitLibWithint(TTF_Init(), "Error: Could not initialize SDL TTF", this))
         return;
 
     this->mode = PAUSE;
@@ -190,6 +190,12 @@ void SDL::input() {
         }
     }
 }
+
+
+void SDL::playSong(const std::string& song) {
+    (void)song;
+}
+
 
 size_t SDL::getLibCode() const {
     return this->libCode;

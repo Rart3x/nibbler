@@ -40,7 +40,7 @@ void SFML::display() {
     if (!errorQuitLibWithObj(this->win, "Error: Could not create SFML window", this))
         return;
 
-    this->playSong(POKESONG);
+    this->playSong(POKEROADSONG);
     this->running = true;
 
     while (this->running) {
@@ -221,6 +221,7 @@ void SFML::input() {
                 {
                     if (this->mode == GAME || this->mode == PAUSE)
                     {
+                        this->music.stop();
                         this->libCode = 1;
                         this->running = false;
                     }
@@ -229,6 +230,7 @@ void SFML::input() {
                 {
                     if (this->mode == GAME || this->mode == PAUSE)
                     {
+                        this->music.stop();
                         this->libCode = 2;
                         this->running = false;
                     }

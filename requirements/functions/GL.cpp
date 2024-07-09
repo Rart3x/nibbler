@@ -10,6 +10,7 @@ extern "C" {
 GL::GL(void) : Library() {
     if (!errorQuitLibWithBool(glfwInit(), "Error: Could not initialize GLFW", this))
         return;
+
     this->mode = 0;
     this->running = false;
     this->win = NULL;
@@ -91,6 +92,11 @@ void GL::input() {
     {
         return;
     }
+}
+
+
+void GL::playSong(const std::string& song) {
+    (void)song;
 }
 
 

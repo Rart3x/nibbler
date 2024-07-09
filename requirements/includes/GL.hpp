@@ -19,6 +19,8 @@ class GL : public Library {
 
         void    input(void);
 
+        void    playSong(const std::string& song);
+
         size_t  getLibCode(void) const;
 
         void    setAreaSize(int h, int w);
