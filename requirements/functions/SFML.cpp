@@ -31,8 +31,8 @@ void SFML::closeWindow() {
 void SFML::display() {
 
     this->win = new sf::RenderWindow(sf::VideoMode(this->winW, this->winH), "Nibbler SFML");
-    // if (!errorQuitLib(this->win, "Error: Could not create SFML window", this))
-    //     return;
+    if (!errorQuitLibWithObj(this->win, "Error: Could not create SFML window", this))
+        return;
 
     this->running = true;
 
@@ -95,10 +95,11 @@ void SFML::displayMenu() {
 
 void SFML::displayPause() {
     sf::Font font;
-    if (!font.loadFromFile(ARIAL))
+    sf::Text pauseText;
+
+    if (!errorQuitLibWithBool(font.loadFromFile(ARIAL), "Error: Could not load font", this))
         return;
 
-    sf::Text pauseText;
     pauseText.setFont(font);
     pauseText.setString("Pause");
     pauseText.setCharacterSize(72);
@@ -126,11 +127,8 @@ void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size
     rectangle.setFillColor(color);
     rectangle.setPosition(position);
 
-    if (!font.loadFromFile(ARIAL)) {
-        std::cerr << "Error: Could not load font" << std::endl;
-        this->libCode = 404;
-        this->running = false;
-    }
+    if (!errorQuitLibWithBool(font.loadFromFile(ARIAL), "Error: Could not load font", this))
+        return;
 
     buttonText.setFont(font);
     buttonText.setString(text);
@@ -154,11 +152,8 @@ void SFML::drawTitle(std::string text, sf::Color color) {
     sf::Text title;
     sf::Vector2f localPosition;
 
-    if (!font.loadFromFile(SCIENCE)) {
-        std::cerr << "Error: Could not load font" << std::endl;
-        this->libCode = 404;
-        this->running = false;
-    }
+    if (!errorQuitLibWithBool(font.loadFromFile(SCIENCE), "Error: Could not load font", this))
+            return;
 
     title.setFont(font);
     title.setString(text);

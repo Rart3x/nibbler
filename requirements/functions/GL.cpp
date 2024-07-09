@@ -8,12 +8,8 @@ extern "C" {
 
 
 GL::GL(void) : Library() {
-    if (!glfwInit())
-    {
-        std::cerr << "Error: Could not initialize GLFW" << std::endl;
-        this->libCode = 404;
-        return;    
-    }
+    if (!errorQuitLibWithBool(glfwInit(), "Error: Could not initialize GLFW", this))
+        return;
     this->mode = 0;
     this->win = NULL;
     this->running = false;
@@ -38,12 +34,8 @@ void GL::closeWindow() {
 
 void GL::display() {
     this->win = glfwCreateWindow(WIDTH, HEIGHT, "Nibbler OpenGL", NULL, NULL);
-    if (!this->win)
-    {
-        std::cerr << "Error: Could not create GLFW window" << std::endl;
-        this->libCode = 404;
+    if (!errorQuitLibWithObj(this->win, "Error: Could not create GLFW window", this))
         return;
-    }
 
     glfwMakeContextCurrent(this->win);
     

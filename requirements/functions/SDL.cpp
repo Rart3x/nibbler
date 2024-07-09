@@ -9,13 +9,10 @@ extern "C" {
 
 SDL::SDL(void) : Library() {
     
-    if((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == -1))
-    {
-        std::cerr << "Error: Could not initialize SDL" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
-    TTF_Init();
+    if (!errorQuitLibWithint(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO), "Error: Could not initialize SDL", this))
+        return;
+    if (!errorQuitLibWithint(TTF_Init(), "Error: Could not initialize SDL", this))
+        return;
 
     this->mode = PAUSE;
     this->running = false;
@@ -42,12 +39,8 @@ void SDL::closeWindow() {
 void SDL::display() {
 
     this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
-    if (!this->win)
-    {
-        std::cerr << "Error: Could not create SDL window" << std::endl;
-        this->libCode = 404;
+    if (!errorQuitLibWithObj(this->win, "Error: Could not create SDL window", this))
         return;
-    }
 
     this->renderer = SDL_CreateRenderer(this->win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     this->running = true;
@@ -76,8 +69,14 @@ void SDL::display() {
 
 void SDL::displayPause() {
     TTF_Font* font = TTF_OpenFont(ARIAL, 72);
+    if (!errorQuitLibWithObj(font, "Error: Could not load font", this))
+        return;
     SDL_Surface* surface = TTF_RenderText_Solid(font, "Pause", {WHITE});
+    if (!errorQuitLibWithObj(surface, "Error: Could not create surface", this))
+        return;
     SDL_Texture* texture = SDL_CreateTextureFromSurface(this->renderer, surface);
+    if (!errorQuitLibWithObj(texture, "Error: Could not create texture", this))
+        return;
 
     int textWidth, textHeight;
     SDL_QueryTexture(texture, NULL, NULL, &textWidth, &textHeight);
@@ -99,8 +98,14 @@ void SDL::displayPause() {
 
 void SDL::drawTitle() {
     TTF_Font* font = TTF_OpenFont(SCIENCE, 48);
+    if (!errorQuitLibWithObj(font, "Error: Could not load font", this))
+        return;
     SDL_Surface* surface = TTF_RenderText_Solid(font, "Nibbler", {WHITE});
+    if (!errorQuitLibWithObj(surface, "Error: Could not create surface", this))
+        return;
     SDL_Texture* texture = SDL_CreateTextureFromSurface(this->renderer, surface);
+    if (!errorQuitLibWithObj(texture, "Error: Could not create texture", this))
+        return;
 
     int textWidth, textHeight;
     SDL_QueryTexture(texture, NULL, NULL, &textWidth, &textHeight);

@@ -36,6 +36,10 @@ $(MAIN_OBJ): $(MAIN_SRC)
 	@$(CC) $(CPPFLAGS) -c -o $@ $<
 
 
+$(OBJ_DIR)/Errors.o: $(SRC_DIR)/Errors.cpp
+	@$(DIRDUP)
+	@$(CC) $(CPPFLAGS) -shared -fPIC -c -o $@ $<
+
 $(OBJ_DIR)/Library.o: $(SRC_DIR)/Library.cpp
 	@$(DIRDUP)
 	@$(CC) $(CPPFLAGS) -shared -fPIC -c -o $@ $<
@@ -53,15 +57,15 @@ $(OBJ_DIR)/SFML.o: $(SRC_DIR)/SFML.cpp
 	@$(CC) $(CPPFLAGS) -shared -fPIC -c -o $@ $<
 
 
-$(GL_LIB): $(OBJ_DIR)/GL.o $(OBJ_DIR)/Library.o
+$(GL_LIB): $(OBJ_DIR)/GL.o $(OBJ_DIR)/Library.o $(OBJ_DIR)/Errors.o
 	@mkdir -p $(dir $@)
 	@$(CC) -shared -o $@ $^
 
-$(SDL_LIB): $(OBJ_DIR)/SDL.o $(OBJ_DIR)/Library.o
+$(SDL_LIB): $(OBJ_DIR)/SDL.o $(OBJ_DIR)/Library.o $(OBJ_DIR)/Errors.o
 	@mkdir -p $(dir $@)
 	@$(CC) -shared -o $@ $^
 
-$(SFML_LIB): $(OBJ_DIR)/SFML.o $(OBJ_DIR)/Library.o
+$(SFML_LIB): $(OBJ_DIR)/SFML.o $(OBJ_DIR)/Library.o $(OBJ_DIR)/Errors.o
 	@mkdir -p $(dir $@)
 	@$(CC) -shared -o $@ $^
 
