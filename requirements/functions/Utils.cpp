@@ -8,6 +8,25 @@ bool isNumeric(const std::string& str) {
 }
 
 
+void ifNullLibraryDelete(Instance instance) {
+    if (!instance[SFMLCODE])
+        exit(EXIT_FAILURE);
+    
+    if (!instance[SDLCODE])
+    {
+        delete instance[SFMLCODE];
+        exit(EXIT_FAILURE);
+    }
+    
+    if (!instance[GLCODE])
+    {
+        delete instance[SFMLCODE];
+        delete instance[SDLCODE];
+        exit(EXIT_FAILURE);
+    }
+}
+
+
 void check_args_validity(int ac, char **av) {
 
     if (ac != 3)

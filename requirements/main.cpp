@@ -1,9 +1,9 @@
 #include "includes/Utils.hpp"
 
 int main(int ac, char **av) {
-
     Instance instance;
-
+    ifNullLibraryDelete(instance);
+    
     try {
         check_args_validity(ac, av);
         libraryLoop(atoi(av[1]), atoi(av[2]), instance);
@@ -11,10 +11,5 @@ int main(int ac, char **av) {
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
-
-    delete instance[SFMLCODE];
-    delete instance[GLCODE];
-    delete instance[SDLCODE];
-
     return EXIT_SUCCESS;
 }

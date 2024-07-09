@@ -1,12 +1,20 @@
 #include "../includes/Instance.hpp"
 
 Instance::Instance() : actualLib(0) {
-    this->libs[0] = this->loadSFMLInstance();
-    this->libs[1] = this->loadSDLInstance();
-    this->libs[2] = this->loadGLInstance();
+    this->libs[SFMLCODE] = NULL;
+    this->libs[SDLCODE] = NULL;
+    this->libs[GLCODE] = NULL;
+
+    this->libs[SFMLCODE] = this->loadSFMLInstance();
+    this->libs[SDLCODE] = this->loadSDLInstance();
+    this->libs[GLCODE] = this->loadGLInstance();
 }
 
-Instance::~Instance() {}
+Instance::~Instance() {
+    for (size_t i = 0; i < 3; i++)
+        if (this->libs[i])
+            delete this->libs[i];
+}
 
 
 GL * Instance::loadGLInstance() {
@@ -15,7 +23,7 @@ GL * Instance::loadGLInstance() {
     void* dl_handle;
     void* func;
 
-    GL* instance;
+    GL* instance = NULL;
 
     std::cout << BLUE << "Loading GL instance..." << RESET << std::endl;
 
@@ -47,7 +55,7 @@ SDL* Instance::loadSDLInstance() {
     void* dl_handle;
     void* func;
 
-    SDL* instance;
+    SDL* instance = NULL;
 
     std::cout << BLUE << "Loading SDL instance..." << RESET << std::endl;
 
@@ -79,7 +87,7 @@ SFML* Instance::loadSFMLInstance() {
     void* dl_handle;
     void* func;
 
-    SFML* instance;
+    SFML* instance = NULL;
 
     std::cout << BLUE << "Loading SFML instance..." << RESET << std::endl;
 
