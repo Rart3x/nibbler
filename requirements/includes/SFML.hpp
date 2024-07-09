@@ -24,7 +24,7 @@ class SFML : public Library {
     
         void    input(void);
 
-        void    playSong(const std::string& song);
+        void    playSong(const std::string& song, bool loop = false);
 
         size_t  getLibCode(void) const;
 

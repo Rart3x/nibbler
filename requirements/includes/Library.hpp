@@ -25,6 +25,7 @@
 #define PAUSE       2
 #define QUIT        404
 
+#define BUTTONSONG      "./requirements/assets/audios/button.ogg"
 #define POKESONG        "./requirements/assets/audios/pokemon.ogg"
 #define POKEROADSONG    "./requirements/assets/audios/pokemon_road.ogg"
 
