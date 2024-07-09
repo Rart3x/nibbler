@@ -74,8 +74,8 @@ void SFML::displayGame() {
 
 
 void SFML::displayMenu() {
-    sf::Vector2f startButtonSize(200, 50);
     sf::Vector2f quitButtonSize(200, 50);
+    sf::Vector2f startButtonSize(200, 50);
 
     int totalButtonHeight = startButtonSize.y + quitButtonSize.y;
 
@@ -126,9 +126,9 @@ void SFML::displayPause() {
 
 
 void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color color) {
-    sf::RectangleShape rectangle(size);
-    sf::Font font;
-    sf::Text buttonText;
+    sf::Font            font;
+    sf::RectangleShape  rectangle(size);
+    sf::Text            buttonText;
 
     rectangle.setFillColor(color);
     rectangle.setPosition(position);
@@ -154,12 +154,12 @@ void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size
 
 
 void SFML::drawTitle(std::string text, sf::Color color) {
-    sf::Font font;
-    sf::Text title;
-    sf::Vector2f localPosition;
+    sf::Font        font;
+    sf::Vector2f    localPosition;
+    sf::Text        title;
 
     if (!errorQuitLibWithBool(font.loadFromFile(SCIENCE), "Error: Could not load font", this))
-            return;
+        return;
 
     title.setFont(font);
     title.setString(text);
@@ -218,7 +218,8 @@ void SFML::input() {
                 }
                 else if (event.key.code == sf::Keyboard::Num2)
                 {
-                    if (this->mode == GAME || this->mode == PAUSE) {
+                    if (this->mode == GAME || this->mode == PAUSE)
+                    {
                         this->libCode = 1;
                         this->running = false;
                     }

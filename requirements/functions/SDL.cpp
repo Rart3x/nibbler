@@ -8,7 +8,6 @@ extern "C" {
 
 
 SDL::SDL(void) : Library() {
-    
     if (!errorQuitLibWithint(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO), "Error: Could not initialize SDL", this))
         return;
     if (!errorQuitLibWithint(TTF_Init(), "Error: Could not initialize SDL", this))
@@ -38,7 +37,6 @@ void SDL::closeWindow() {
 
 
 void SDL::display() {
-
     if (this->win)
         this->closeWindow();
     this->win = SDL_CreateWindow("Nibbler SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
@@ -71,6 +69,8 @@ void SDL::display() {
 
 
 void SDL::displayPause() {
+    int textWidth, textHeight;
+
     TTF_Font* font = TTF_OpenFont(ARIAL, 72);
     if (!errorQuitLibWithObj(font, "Error: Could not load font", this))
         return;
@@ -81,7 +81,6 @@ void SDL::displayPause() {
     if (!errorQuitLibWithObj(texture, "Error: Could not create texture", this))
         return;
 
-    int textWidth, textHeight;
     SDL_QueryTexture(texture, NULL, NULL, &textWidth, &textHeight);
 
     int centerX = this->winW / 2;
@@ -92,7 +91,6 @@ void SDL::displayPause() {
     SDL_Rect dstrect = {titleX, titleY, textWidth, textHeight};
     
     SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
-
     SDL_DestroyTexture(texture);
     SDL_FreeSurface(surface);
     TTF_CloseFont(font);
@@ -100,6 +98,8 @@ void SDL::displayPause() {
 
 
 void SDL::drawTitle() {
+    int textWidth, textHeight;
+
     TTF_Font* font = TTF_OpenFont(SCIENCE, 48);
     if (!errorQuitLibWithObj(font, "Error: Could not load font", this))
         return;
@@ -110,7 +110,6 @@ void SDL::drawTitle() {
     if (!errorQuitLibWithObj(texture, "Error: Could not create texture", this))
         return;
 
-    int textWidth, textHeight;
     SDL_QueryTexture(texture, NULL, NULL, &textWidth, &textHeight);
 
     int titleX = (this->winW - textWidth) / 2;
@@ -119,7 +118,6 @@ void SDL::drawTitle() {
     SDL_Rect dstrect = {titleX, titleY, textWidth, textHeight};
     
     SDL_RenderCopy(this->renderer, texture, NULL, &dstrect);
-
     SDL_DestroyTexture(texture);
     SDL_FreeSurface(surface);
     TTF_CloseFont(font);
