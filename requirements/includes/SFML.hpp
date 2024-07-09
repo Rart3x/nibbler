@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "Library.hpp"
@@ -22,6 +23,8 @@ class SFML : public Library {
         void    drawTitle(std::string text, sf::Color color);
     
         void    input(void);
+
+        void    playSong(const std::string& song);
 
         size_t  getLibCode(void) const;
 
@@ -44,7 +47,8 @@ class SFML : public Library {
         int     mode;
         int     prevMode;
 
-        int libCode;
+        int     libCode;
 
-        sf::RenderWindow* win;
+        sf::Music           music;
+        sf::RenderWindow*   win;
 };

@@ -40,6 +40,7 @@ void SFML::display() {
     if (!errorQuitLibWithObj(this->win, "Error: Could not create SFML window", this))
         return;
 
+    this->playSong(POKESONG);
     this->running = true;
 
     while (this->running) {
@@ -268,6 +269,16 @@ void SFML::input() {
                 break;
         }
     }
+}
+
+
+void SFML::playSong(const std::string& song) {
+    if (!errorQuitLibWithBool(this->music.openFromFile(song), "Error: Could not load song", this))
+        return;
+
+    this->music.setLoop(true);
+    this->music.setVolume(50);
+    this->music.play();
 }
 
 
