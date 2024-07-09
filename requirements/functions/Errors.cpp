@@ -1,9 +1,11 @@
 #include "../includes/Errors.hpp"
 
-bool    error(void* obj, std::string text) {
+bool    error(void* obj, std::string text, void* toDelete, int (*deleteFunc)(void *)) {
     if (!obj)
     {
         printError(text);
+        if (toDelete && deleteFunc)
+            deleteFunc(toDelete);
         return false;
     }
     return true;

@@ -20,28 +20,20 @@ GL * Instance::loadGLInstance() {
     std::cout << BLUE << "Loading GL instance..." << RESET << std::endl;
 
     dl_handle = dlopen(GL_PATH, RTLD_LAZY | RTLD_LOCAL);
-    if (!dl_handle) {
-        std::cerr << RED << "Error: Failed to load GL instance." << RESET << std::endl;
+    if (!error(dl_handle, "Error: Failed to load GL instance."))
         return NULL;
-    }
 
     std::cout << BLUE << "GL instance creation method imported" << RESET << std::endl;
 
     func = dlsym(dl_handle, funcName.c_str());
-    if (!func) {
-        std::cerr << RED << "Error: Failed to get method pointer." << RESET << std::endl;
-        dlclose(dl_handle);
+    if (!error(func, "Error: Failed to get method pointer.", dl_handle, dlclose))
         return NULL;
-    }
 
     std::cout << BLUE << "GL instance created" << RESET << std::endl;
 
     instance = reinterpret_cast<GL * (*)(void)>(func)();
-    if (!instance) {
-        std::cerr << RED << "Error: Failed to initialize GL instance." << RESET << std::endl;
-        dlclose(dl_handle);
+    if (!error(instance, "Error: Failed to initialize GL instance.", dl_handle, dlclose))
         return NULL;
-    }
 
     std::cout << BLUE << "GL instance initialized" << RESET << std::endl << std::endl;
 
@@ -60,28 +52,20 @@ SDL* Instance::loadSDLInstance() {
     std::cout << BLUE << "Loading SDL instance..." << RESET << std::endl;
 
     dl_handle = dlopen(SDL_PATH, RTLD_LAZY | RTLD_LOCAL);
-    if (!dl_handle) {
-        std::cerr << RED << "Error: Failed to load SDL instance." << RESET << std::endl;
+    if (!error(dl_handle, "Error: Failed to load SDL instance."))
         return NULL;
-    }
 
     std::cout << BLUE << "SDL instance creation method imported" << RESET << std::endl;
 
     func = dlsym(dl_handle, funcName.c_str());
-    if (!func) {
-        std::cerr << RED << "Error: Failed to get method pointer." << RESET << std::endl;
-        dlclose(dl_handle);
+    if (!error(func, "Error: Failed to get method pointer.", dl_handle, dlclose))
         return NULL;
-    }
 
     std::cout << BLUE << "SDL instance created" << RESET << std::endl;
 
     instance = reinterpret_cast<SDL * (*)(void)>(func)();
-    if (!instance) {
-        std::cerr << RED << "Error: Failed to initialize SDL instance." << RESET << std::endl;
-        dlclose(dl_handle);
+    if (!error(instance, "Error: Failed to initialize SDL instance.", dl_handle, dlclose))
         return NULL;
-    }
 
     std::cout << BLUE << "SDL instance initialized" << RESET << std::endl << std::endl;
 
@@ -100,28 +84,20 @@ SFML* Instance::loadSFMLInstance() {
     std::cout << BLUE << "Loading SFML instance..." << RESET << std::endl;
 
     dl_handle = dlopen(SFML_PATH, RTLD_LAZY | RTLD_LOCAL);
-    if (!dl_handle) {
-        std::cerr << RED << "Error: Failed to load SFML instance." << RESET << std::endl;
+    if (!error(dl_handle, "Error: Failed to load SFML instance."))
         return NULL;
-    }
 
     std::cout << BLUE << "SFML instance creation method imported" << RESET << std::endl;
 
     func = dlsym(dl_handle, funcName.c_str());
-    if (!func) {
-        std::cerr << RED << "Error: Failed to get method pointer." << RESET << std::endl;
-        dlclose(dl_handle);
+    if (!error(func, "Error: Failed to get method pointer.", dl_handle, dlclose))
         return NULL;
-    }
 
     std::cout << BLUE << "SFML instance created" << RESET << std::endl;
 
     instance = reinterpret_cast<SFML * (*)(void)>(func)();
-    if (!instance) {
-        std::cerr << RED << "Error: Failed to initialize SFML instance." << RESET << std::endl;
-        dlclose(dl_handle);
+    if (!error(instance, "Error: Failed to initialize SFML instance.", dl_handle, dlclose))
         return NULL;
-    }
 
     std::cout << BLUE << "SFML instance initialized" << RESET << std::endl << std::endl;
 
