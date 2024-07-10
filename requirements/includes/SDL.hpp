@@ -8,9 +8,6 @@
 
 #include "Library.hpp"
 
-#define CYAN 0, 255, 255, 255
-#define WHITE 255, 255, 255, 255
-#define BLACK 0, 0, 0, 255
 
 class SDL : public Library {
 
