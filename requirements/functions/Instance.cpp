@@ -12,6 +12,23 @@ Instance::Instance() : actualLib(0) {
     this->libs[GLCODE] = this->loadGLInstance();
 }
 
+
+Instance::Instance(const Instance &original) {
+    *this = original;
+}
+
+
+Instance& Instance::operator=(const Instance &original) {
+    if (this != &original)
+    {
+        this->actualLib = original.actualLib;
+        this->audio = original.audio;
+        for (size_t i = 0; i < 3; i++)
+            this->libs[i] = original.libs[i];
+    }
+    return *this;
+}
+
 Instance::~Instance() {}
 
 

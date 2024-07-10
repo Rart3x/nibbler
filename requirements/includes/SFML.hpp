@@ -10,6 +10,8 @@
 class SFML : public Library {
     public:
         SFML();
+        SFML(const SFML &other);
+        SFML& operator=(const SFML &other);
         ~SFML();
 
         void    closeWindow(void);    

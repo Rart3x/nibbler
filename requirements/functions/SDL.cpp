@@ -17,6 +17,30 @@ SDL::SDL(void) : Library() {
 }
 
 
+SDL::SDL(const SDL &original) {
+    *this = original;
+}
+
+
+SDL& SDL::operator=(const SDL& original) {
+    if (this != &original)
+    {
+        this->height = original.height;
+        this->width = original.width;
+        this->libCode = original.libCode;
+        this->mode = original.mode;
+        this->prevMode = original.prevMode;
+        this->running = original.running;
+        this->winH = original.winH;
+        this->winW = original.winW;
+        this->win = original.win;
+        this->renderer = original.renderer;
+        this->font = original.font;
+    }
+    return *this;
+}
+
+
 SDL::~SDL() {
     if (TTF_WasInit())
         TTF_Quit();

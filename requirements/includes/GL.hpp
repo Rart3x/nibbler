@@ -9,6 +9,8 @@
 class GL : public Library {
     public:
         GL();
+        GL(const GL &original);
+        GL& operator=(const GL &original);
         ~GL();
 
         void    closeWindow(void);

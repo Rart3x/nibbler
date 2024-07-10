@@ -15,6 +15,28 @@ GL::GL(void) : Library() {
 }
 
 
+GL::GL(const GL &original) {
+    *this = original;
+}
+
+
+GL& GL::operator=(const GL &original) {
+    if (this != &original)
+    {
+        this->height = original.height;
+        this->width = original.width;
+        this->libCode = original.libCode;
+        this->mode = original.mode;
+        this->prevMode = original.prevMode;
+        this->running = original.running;
+        this->winH = original.winH;
+        this->winW = original.winW;
+        this->win = original.win;
+    }
+    return *this;
+}
+
+
 GL::~GL() {
     if (this->win)
         glfwDestroyWindow(this->win);

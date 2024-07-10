@@ -13,6 +13,8 @@ class SDL : public Library {
 
     public:
         SDL();
+        SDL(const SDL &other);
+        SDL& operator=(const SDL &other);
         ~SDL();
 
         void    closeWindow(void);

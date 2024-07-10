@@ -13,6 +13,29 @@ SFML::SFML(void) : Library() {
 }
 
 
+SFML::SFML(const SFML &original) {
+    *this = original;
+}
+
+
+SFML &SFML::operator=(const SFML &original) {
+    if (this != &original)
+    {
+        this->height = original.height;
+        this->width = original.width;
+        this->libCode = original.libCode;
+        this->mode = original.mode;
+        this->prevMode = original.prevMode;
+        this->running = original.running;
+        this->selectedButton = original.selectedButton;
+        this->winH = original.winH;
+        this->winW = original.winW;
+        this->win = original.win;
+    }
+    return *this;
+}
+
+
 SFML::~SFML() {
     if (this->win)
         delete this->win;
@@ -248,14 +271,14 @@ void SFML::input() {
                 }
                 else if (event.key.code == sf::Keyboard::Up)
                 {
-                    if (this->selectedButton == 1)
+                    if (this->mode == MENU && this->selectedButton == 1)
                     {
                         this->selectedButton = 0;
                     }
                 }
                 else if (event.key.code == sf::Keyboard::Down)
                 {
-                    if (this->selectedButton == 0)
+                    if (this->mode == MENU && this->selectedButton == 0)
                     {
                         this->selectedButton = 1;
                     }

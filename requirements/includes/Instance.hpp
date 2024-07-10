@@ -13,6 +13,8 @@ class Utils;
 class Instance {
     public:
         Instance();
+        Instance(const Instance &original);
+        Instance& operator=(const Instance &original);
         ~Instance();
 
         Audio*  loadAudioInstance();
