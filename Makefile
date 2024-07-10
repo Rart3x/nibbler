@@ -4,6 +4,7 @@ LIB_DIR = requirements/libs
 SRC_DIR = requirements/functions
 OBJ_DIR = .objs
 
+AUDIO_LIB = $(LIB_DIR)/Audio.so
 GL_LIB = $(LIB_DIR)/GL.so
 SDL_LIB = $(LIB_DIR)/SDL.so
 SFML_LIB = $(LIB_DIR)/SFML.so
@@ -19,7 +20,7 @@ SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS := $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
-all: $(NAME) $(GL_LIB) $(SDL_LIB) $(SFML_LIB)
+all: $(NAME) $(AUDIO_LIB) $(GL_LIB) $(SDL_LIB) $(SFML_LIB) 
 
 $(NAME): $(OBJS) $(MAIN_OBJ)
 	@printf "\033[0;32mCompilation successful.\033[0m\n"
@@ -35,6 +36,10 @@ $(MAIN_OBJ): $(MAIN_SRC)
 	@$(DIRDUP)
 	@$(CC) $(CPPFLAGS) -c -o $@ $<
 
+
+$(OBJ_DIR)/Audio.o: $(SRC_DIR)/Audio.cpp
+	@$(DIRDUP)
+	@$(CC) $(CPPFLAGS) -shared -fPIC -c -o $@ $<
 
 $(OBJ_DIR)/Errors.o: $(SRC_DIR)/Errors.cpp
 	@$(DIRDUP)
@@ -56,6 +61,10 @@ $(OBJ_DIR)/SFML.o: $(SRC_DIR)/SFML.cpp
 	@$(DIRDUP)
 	@$(CC) $(CPPFLAGS) -shared -fPIC -c -o $@ $<
 
+
+$(AUDIO_LIB): $(OBJ_DIR)/Audio.o
+	@mkdir -p $(dir $@)
+	@$(CC) -shared -o $@ $^
 
 $(GL_LIB): $(OBJ_DIR)/GL.o $(OBJ_DIR)/Library.o $(OBJ_DIR)/Errors.o
 	@mkdir -p $(dir $@)

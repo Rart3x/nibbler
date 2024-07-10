@@ -37,7 +37,6 @@ void SFML::display() {
     if (!errorQuitLibWithObj(this->win, "Error: Could not create SFML window", this))
         return;
 
-    // this->playSong(POKEROADSONG, true);
     this->running = true;
 
     while (this->running) {
@@ -253,8 +252,6 @@ void SFML::input() {
                     if (this->selectedButton == 1)
                     {
                         this->selectedButton = 0;
-                        if (this->mode == MENU)
-                            playSong(BUTTONSONG);
                     }
                 }
                 else if (event.key.code == sf::Keyboard::Down)
@@ -262,8 +259,6 @@ void SFML::input() {
                     if (this->selectedButton == 0)
                     {
                         this->selectedButton = 1;
-                        if (this->mode == MENU)
-                            playSong(BUTTONSONG);
                     }
                 }
                 break;
@@ -276,17 +271,6 @@ void SFML::input() {
                 break;
         }
     }
-}
-
-
-void SFML::playSong(const std::string& song, bool loop) {
-    if (!errorQuitLibWithBool(this->music.openFromFile(song), "Error: Could not load song", this))
-        return;
-
-    if (loop)
-        this->music.setLoop(true);
-    this->music.setVolume(50);
-    this->music.play();
 }
 
 

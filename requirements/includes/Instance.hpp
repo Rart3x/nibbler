@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "Audio.hpp"
 #include "GL.hpp"
 #include "SDL.hpp"
 #include "SFML.hpp"
@@ -14,6 +15,7 @@ class Instance {
         Instance();
         ~Instance();
 
+        Audio*  loadAudioInstance();
         GL*     loadGLInstance();
         SDL*    loadSDLInstance();
         SFML*   loadSFMLInstance();
@@ -27,5 +29,6 @@ class Instance {
     private:
         size_t      actualLib;
 
+        Audio*      audio;
         Library*    libs[3];
 };

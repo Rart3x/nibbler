@@ -1,10 +1,12 @@
 #include "../includes/Instance.hpp"
 
 Instance::Instance() : actualLib(0) {
+    this->audio = NULL;
     this->libs[SFMLCODE] = NULL;
     this->libs[SDLCODE] = NULL;
     this->libs[GLCODE] = NULL;
 
+    this->audio = this->loadAudioInstance();
     this->libs[SFMLCODE] = this->loadSFMLInstance();
     this->libs[SDLCODE] = this->loadSDLInstance();
     this->libs[GLCODE] = this->loadGLInstance();
@@ -13,7 +15,39 @@ Instance::Instance() : actualLib(0) {
 Instance::~Instance() {}
 
 
-GL * Instance::loadGLInstance() {
+Audio* Instance::loadAudioInstance() {
+    const std::string funcName = "createAudioInstance";
+
+    void* dl_handle;
+    void* func;
+
+    Audio* instance = NULL;
+
+    std::cout << BLUE << "Loading Audio instance..." << RESET << std::endl;
+
+    dl_handle = dlopen(AUDIO_PATH, RTLD_LAZY | RTLD_LOCAL);
+    if (!error(dl_handle, "Error: Failed to load Audio instance."))
+        return NULL;
+
+    std::cout << BLUE << "Audio instance creation method imported" << RESET << std::endl;
+
+    func = dlsym(dl_handle, funcName.c_str());
+    if (!error(func, "Error: Failed to get method pointer.", dl_handle, dlclose))
+        return NULL;
+
+    std::cout << BLUE << "Audio instance created" << RESET << std::endl;
+
+    instance = reinterpret_cast<Audio * (*)(void)>(func)();
+    if (!error(instance, "Error: Failed to initialize Audio instance.", dl_handle, dlclose))
+        return NULL;
+
+    std::cout << BLUE << "Audio instance initialized" << RESET << std::endl << std::endl;
+
+    return instance;
+}
+
+
+GL* Instance::loadGLInstance() {
     const std::string funcName = "createGLInstance";
 
     void* dl_handle;
