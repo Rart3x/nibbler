@@ -46,14 +46,14 @@ class Library {
         virtual void    setRunning() = 0;
         virtual void    setWinSize(int h, int w) = 0;
     
-    private:
+    protected:
         bool    running;
+        
+        int     libCode;
         
         int     height;
         int     width;
 
         int     winH;
         int     winW;
-    
-        int     libCode;
 };

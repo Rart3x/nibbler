@@ -38,17 +38,7 @@ class SDL : public Library {
         void    setWinSize(int h, int w);
 
     private:
-        bool    running;
-
-        int     height;
-        int     width;
-
-        int     winH;
-        int     winW;
-
         int     mode;
-
-        int libCode;
 
         SDL_Renderer*   renderer;
         SDL_Window*     win;

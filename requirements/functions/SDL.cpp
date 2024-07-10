@@ -14,10 +14,7 @@ SDL::SDL(void) : Library() {
         return;
 
     this->mode = PAUSE;
-    this->running = false;
     this->win = NULL;
-    this->winH = HEIGHT;
-    this->winW = WIDTH;
 }
 
 

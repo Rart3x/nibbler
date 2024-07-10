@@ -12,7 +12,6 @@ GL::GL(void) : Library() {
         return;
 
     this->mode = 0;
-    this->running = false;
     this->win = NULL;
 }
 

@@ -9,11 +9,8 @@ extern "C" {
 
 SFML::SFML(void) : Library() {
     this->mode = 0;
-    this->running = false;
     this->selectedButton = 0;
     this->win = NULL;
-    this->winH = HEIGHT;
-    this->winW = WIDTH;
 }
 
 

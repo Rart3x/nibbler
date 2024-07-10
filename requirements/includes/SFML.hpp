@@ -34,20 +34,10 @@ class SFML : public Library {
         void    setWinSize(int h, int w);
 
     private:
-        bool    running;
-
-        int     height;
-        int     width;
-
-        int     winH;
-        int     winW;
-
         int     selectedButton;
 
         int     mode;
         int     prevMode;
-
-        int     libCode;
 
         sf::Music           music;
         sf::RenderWindow*   win;

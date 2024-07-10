@@ -29,17 +29,7 @@ class GL : public Library {
         void    setWinSize(int h, int w);
 
     private:
-        bool    running;
-
-        int     height;
-        int     width;
-
         int     mode;
-
-        int     winH;
-        int     winW;
-
-        int libCode;
 
         GLFWwindow* win;
 };
