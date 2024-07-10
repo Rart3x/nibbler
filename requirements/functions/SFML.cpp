@@ -55,7 +55,7 @@ void SFML::closeWindow() {
 void SFML::display() {
     if (this->win)
         this->closeWindow();
-    this->win = new sf::RenderWindow(sf::VideoMode(this->winW, this->winH), "Nibbler SFML");
+    this->win = new sf::RenderWindow(sf::VideoMode(this->winW, this->winH), "Nibbler SFML", sf::Style::Close);
     if (!errorQuitLibWithObj(this->win, "Error: Could not create SFML window", this))
         return;
 
