@@ -28,16 +28,12 @@ class SFML : public Library {
 
         void    setAreaSize(int h, int w);
         void    setLibCode(int code);
+        void    setMode(int code);
         void    setRunning();
         void    setWinSize(int h, int w);
 
     private:
         int     selectedButton;
-
-        int     mode;
-        int     prevMode;
-
-        std::string keyPressed;
 
         sf::Music           music;
         sf::RenderWindow*   win;

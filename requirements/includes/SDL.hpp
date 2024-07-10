@@ -25,18 +25,15 @@ class SDL : public Library {
 
         void    input(void);
 
-        void    playSong(const std::string& song);
-
         size_t  getLibCode(void) const;
 
         void    setAreaSize(int h, int w);
         void    setLibCode(int code);
+        void    setMode(int code);
         void    setRunning();
         void    setWinSize(int h, int w);
 
     private:
-        int     mode;
-
         SDL_Renderer*   renderer;
         SDL_Window*     win;
         TTF_Font*       font;

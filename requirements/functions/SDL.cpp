@@ -13,7 +13,6 @@ SDL::SDL(void) : Library() {
     if (!errorQuitLibWithint(TTF_Init(), "Error: Could not initialize SDL TTF", this))
         return;
 
-    this->mode = PAUSE;
     this->win = NULL;
 }
 
@@ -189,11 +188,6 @@ void SDL::input() {
 }
 
 
-void SDL::playSong(const std::string& song) {
-    (void)song;
-}
-
-
 size_t SDL::getLibCode() const {
     return this->libCode;
 }
@@ -205,6 +199,10 @@ void SDL::setAreaSize(int h, int w) {
 
 void SDL::setLibCode(int code) {
     this->libCode = code;
+}
+
+void SDL::setMode(int code) {
+    this->mode = code;
 }
 
 void SDL::setRunning() {

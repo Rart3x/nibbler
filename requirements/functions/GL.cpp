@@ -11,7 +11,6 @@ GL::GL(void) : Library() {
     if (!errorQuitLibWithBool(glfwInit(), "Error: Could not initialize GLFW", this))
         return;
 
-    this->mode = 0;
     this->win = NULL;
 }
 
@@ -94,11 +93,6 @@ void GL::input() {
 }
 
 
-void GL::playSong(const std::string& song) {
-    (void)song;
-}
-
-
 size_t GL::getLibCode(void) const {
     return this->libCode;
 }
@@ -110,6 +104,10 @@ void GL::setAreaSize(int h, int w) {
 
 void GL::setLibCode(int code) {
     this->libCode = code;
+}
+
+void GL::setMode(int code) {
+    this->mode = code;
 }
 
 void GL::setRunning() {

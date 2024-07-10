@@ -8,7 +8,6 @@ extern "C" {
 
 
 SFML::SFML(void) : Library() {
-    this->mode = 0;
     this->selectedButton = 0;
     this->win = NULL;
 }
@@ -285,6 +284,10 @@ void SFML::setAreaSize(int h, int w) {
 
 void SFML::setLibCode(int code) {
     this->libCode = code;
+}
+
+void SFML::setMode(int code) {
+    this->mode = code;
 }
 
 void SFML::setRunning() {

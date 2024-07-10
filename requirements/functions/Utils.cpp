@@ -20,12 +20,14 @@ void ifNullLibraryDelete(Instance instance) {
     
     if (!instance[SDLCODE])
     {
+        delete instance.getAudio();
         delete instance[SFMLCODE];
         exit(EXIT_FAILURE);
     }
     
     if (!instance[GLCODE])
     {
+        delete instance.getAudio();
         delete instance[SFMLCODE];
         delete instance[SDLCODE];
         exit(EXIT_FAILURE);
@@ -47,33 +49,14 @@ void check_args_validity(int ac, char **av) {
 
 void libraryLoop(int w, int h, Instance instance) {
     instance.setAreaSize(w, h);
-    // instance[AUDIOCODE]->playSong(POKEROADSONG);
-    instance[SFMLCODE]->display();
+    instance[AUDIOCODE]->playSong(POKEROADSONG);
+    instance[instance.getActualLib()]->display();
 
     while (instance[instance.getActualLib()]->getLibCode() != QUIT)
     {
-        switch (instance[instance.getActualLib()]->getLibCode())
-        {
-            case GLCODE:
-                instance[instance.getActualLib()]->closeWindow();
-                instance.setActualLib(GLCODE);
-                instance[GLCODE]->display();
-                break;
-            
-            case SDLCODE:
-                instance[instance.getActualLib()]->closeWindow();
-                instance.setActualLib(SDLCODE);
-                instance[SDLCODE]->display();
-                break;
-            
-            case SFMLCODE:
-                instance[instance.getActualLib()]->closeWindow();
-                instance.setActualLib(SFMLCODE);
-                instance[SFMLCODE]->display();
-                break;
-            
-            default:
-                break;
-        }
+        instance[instance.getActualLib()]->closeWindow();
+        instance.setActualLib(instance[instance.getActualLib()]->getLibCode());
+        instance[instance.getActualLib()]->setMode(PAUSE);
+        instance[instance.getActualLib()]->display();
     }
 }

@@ -19,6 +19,7 @@ class Library {
 
         virtual void    setAreaSize(int h, int w) = 0;
         virtual void    setLibCode(int code) = 0;
+        virtual void    setMode(int code) = 0;
         virtual void    setRunning() = 0;
         virtual void    setWinSize(int h, int w) = 0;
     
@@ -27,9 +28,14 @@ class Library {
         
         int     libCode;
         
+        int     mode;
+        int     prevMode;
+
         int     height;
         int     width;
 
         int     winH;
         int     winW;
+
+        std::string key;
 };
