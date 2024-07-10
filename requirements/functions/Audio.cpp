@@ -8,7 +8,7 @@ extern "C" {
 
 
 Audio::Audio() {
-    this->music.setVolume(50);
+    this->music.setVolume(15);
 }
 
 

@@ -164,7 +164,6 @@ size_t Instance::getActualLib() const {
     return this->actualLib;
 }
 
-
 Audio* Instance::getAudio() const {
     return this->audio;
 }
@@ -177,7 +176,6 @@ void Instance::setActualLib(size_t i) {
     this->actualLib = i;
 }
 
-
 void Instance::setAreaSize(size_t w, size_t h) {
     for (size_t i = 0; i < 3; i++)
         this->libs[i]->setAreaSize(w, h);
@@ -186,6 +184,7 @@ void Instance::setAreaSize(size_t w, size_t h) {
 Audio* Instance::operator[](const std::string &str) {
     if (str == "AUDIO")
         return this->audio;
+
     return this->audio;
 }
 
