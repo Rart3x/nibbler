@@ -9,8 +9,14 @@ bool isNumeric(const std::string& str) {
 
 
 void ifNullLibraryDelete(Instance instance) {
-    if (!instance[SFMLCODE])
+    if (!instance.getAudio())
         exit(EXIT_FAILURE);
+
+    if (!instance[SFMLCODE])
+    {
+        delete instance.getAudio();
+        exit(EXIT_FAILURE);
+    }
     
     if (!instance[SDLCODE])
     {

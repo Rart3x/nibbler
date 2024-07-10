@@ -39,6 +39,7 @@ void Audio::playSong(const std::string& song) {
         std::cerr << RED << "Error: Could not open file " << song << RESET << std::endl;
         return;
     }
+    this->music.setLoop(true);
     this->music.play();
 }
 

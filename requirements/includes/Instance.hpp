@@ -21,6 +21,7 @@ class Instance {
         SFML*   loadSFMLInstance();
 
         size_t  getActualLib() const;
+        Audio * getAudio() const;
 
         void    setActualLib(size_t i);
         void    setAreaSize(size_t h, size_t w);

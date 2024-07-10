@@ -18,6 +18,8 @@ int main(int ac, char **av) {
         delete instance[SDLCODE];
     if (instance[GLCODE])
         delete instance[GLCODE];
+    if (instance.getAudio())
+        delete instance.getAudio();
 
     return EXIT_SUCCESS;
 }

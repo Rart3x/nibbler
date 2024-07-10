@@ -148,6 +148,11 @@ size_t Instance::getActualLib() const {
 }
 
 
+Audio* Instance::getAudio() const {
+    return this->audio;
+}
+
+
 void Instance::setActualLib(size_t i) {
     if (i > 2)
         throw std::runtime_error("Error: invalid index");
@@ -165,6 +170,5 @@ void Instance::setAreaSize(size_t w, size_t h) {
 Library* Instance::operator[](size_t i) {
     if (i > 2)
         throw std::runtime_error("Error: invalid index");
-
     return this->libs[i];
 }
