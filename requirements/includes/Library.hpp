@@ -1,9 +1,11 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 
 #include "Defines.hpp"
 #include "Errors.hpp"
+
 
 class Library {
 
@@ -38,4 +40,5 @@ class Library {
         int     winW;
 
         std::string key;
+        std::vector<std::string> map;
 };

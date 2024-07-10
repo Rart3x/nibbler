@@ -52,7 +52,7 @@ void check_args_validity(int ac, char **av) {
 
 void libraryLoop(int w, int h, Instance instance) {
     instance.setAreaSize(w, h);
-    instance[AUDIOCODE]->playSong(POKEROADSONG);
+    // instance[AUDIOCODE]->playSong(POKEROADSONG);
     instance[instance.getActualLib()]->display();
 
     while (instance[instance.getActualLib()]->getLibCode() != QUIT)

@@ -172,6 +172,10 @@ void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size
 }
 
 
+void SFML::drawArea() {
+}
+
+
 void SFML::drawTitle(std::string text, sf::Color color) {
     sf::Font        font;
     sf::Vector2f    localPosition;
