@@ -44,6 +44,9 @@ void check_args_validity(int ac, char **av) {
 
     if (!isNumeric(width) || !isNumeric(height))
         throw std::runtime_error(RED "Error: numeric arguments required" RESET);
+
+    if (std::stoi(width) > MAX_W || std::stoi(height) > MAX_H)
+        throw std::runtime_error(RED "Error: invalid area size" RESET);
 }
 
 

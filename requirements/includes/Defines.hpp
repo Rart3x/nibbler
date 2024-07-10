@@ -30,6 +30,9 @@
 #define SQUARE  20
 #define WIDTH   500
 #define HEIGHT  500
+
+#define MAX_W  (WIDTH / SQUARE)
+#define MAX_H  (HEIGHT / SQUARE)
 //--------------------Songs--------------------//
 #define BUTTONSONG      "./requirements/assets/audios/button.ogg"
 #define POKESONG        "./requirements/assets/audios/pokemon.ogg"
