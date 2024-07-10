@@ -16,8 +16,8 @@
 #define SFMLCODE    0
 #define SDLCODE     1
 #define GLCODE      2
-#define AUDIOCODE   3
-//--------------------Modes codes--------------------//
+#define AUDIOCODE  "3"
+//--------------------Modes--------------------//
 #define MENU        0
 #define GAME        1
 #define PAUSE       2
@@ -27,7 +27,7 @@
 #define WHITE   255, 255, 255, 255
 #define BLACK   0, 0, 0, 255
 //--------------------Sizes--------------------//
-#define SQUARE  5
+#define SQUARE  20
 #define WIDTH   500
 #define HEIGHT  500
 //--------------------Songs--------------------//

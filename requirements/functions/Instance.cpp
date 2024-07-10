@@ -166,6 +166,11 @@ void Instance::setAreaSize(size_t w, size_t h) {
         this->libs[i]->setAreaSize(w, h);
 }
 
+Audio* Instance::operator[](const std::string &str) {
+    if (str == "AUDIO")
+        return this->audio;
+    return this->audio;
+}
 
 Library* Instance::operator[](size_t i) {
     if (i > 2)

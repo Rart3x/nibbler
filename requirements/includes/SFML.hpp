@@ -37,6 +37,8 @@ class SFML : public Library {
         int     mode;
         int     prevMode;
 
+        std::string keyPressed;
+
         sf::Music           music;
         sf::RenderWindow*   win;
 };

@@ -26,7 +26,8 @@ class Instance {
         void    setActualLib(size_t i);
         void    setAreaSize(size_t h, size_t w);
 
-        Library* operator[](size_t i);
+        Audio*      operator[](const std::string &str);
+        Library*    operator[](size_t i);
     private:
         size_t      actualLib;
 
