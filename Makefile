@@ -21,7 +21,7 @@ OBJS := $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
 all: sfml $(NAME) $(AUDIO_LIB) $(GL_LIB) $(SDL_LIB) $(SFML_LIB) 
-dev: $(NAME) $(GL_LIB) $(SDL_LIB) $(SFML_LIB)
+dev: $(NAME) $(AUDIO_LIB) $(GL_LIB) $(SDL_LIB) $(SFML_LIB) 
 
 sfml:
 	@chmod 777 requirements/scripts/sfml.sh
