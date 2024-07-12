@@ -22,7 +22,14 @@ SDL_LIB = $(LIB_DIR)/SDL.so
 SFML_LIB = $(LIB_DIR)/SFML.so
 
 
-all: $(NAME) $(GL_LIB) $(SDL_LIB) $(SFML_LIB)
+all: sfml $(NAME) $(GL_LIB) $(SDL_LIB) $(SFML_LIB)
+
+dev: $(NAME) $(GL_LIB) $(SDL_LIB) $(SFML_LIB)
+
+sfml:
+	@chmod 777 requirements/scripts/sfml.sh
+	@printf "\033[0;32mInstalling SFML...\033[0m\n"
+	@./requirements/scripts/sfml.sh
 
 $(NAME): $(OBJS) $(MAIN_OBJ)
 	@printf "\033[0;32mCompilation successful.\033[0m\n"
@@ -72,6 +79,7 @@ $(SFML_LIB): $(OBJ_DIR)/SFML.o $(OBJ_DIR)/Library.o
 
 clean:
 	@rm -rf $(OBJ_DIR) $(LIB_DIR)
+	@rm -rf SFML/
 	@printf "\033[0;32mCleanup successful.\033[0m\n"
 
 fclean: clean
