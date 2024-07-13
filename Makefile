@@ -96,5 +96,6 @@ fclean: clean
 	@printf "\033[0;32mFull cleanup successful.\033[0m\n"
 
 re: fclean all
+rev: fclean dev
 
 .PHONY: all clean fclean re

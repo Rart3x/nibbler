@@ -15,7 +15,7 @@ bool    errorQuitLibWithBool(bool boolean, std::string text, Library *lib) {
     if (!boolean)
     {
         printError(text);
-        lib->setLibCode(QUIT);
+        lib->setKeyCode(QUIT);
         lib->setRunning();
         
         return false;
@@ -27,7 +27,7 @@ bool    errorQuitLibWithint(int i, std::string text, Library *lib) {
     if (i == -1)
     {
         printError(text);
-        lib->setLibCode(QUIT);
+        lib->setKeyCode(QUIT);
         lib->setRunning();
         
         return false;
@@ -39,7 +39,7 @@ bool    errorQuitLibWithObj(void *obj, std::string text, Library *lib) {
     if (!obj)
     {
         printError(text);
-        lib->setLibCode(QUIT);
+        lib->setKeyCode(QUIT);
         lib->setRunning();
         
         return false;

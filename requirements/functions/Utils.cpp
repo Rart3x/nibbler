@@ -50,16 +50,46 @@ void check_args_validity(int ac, char **av) {
 }
 
 
+void input(Instance *instance, Library* library) {
+    switch(library->getKeyCode()) {
+        case QUIT:
+            library->closeWindow();
+            library->setRunning();
+            break;
+
+        case 0:
+            library->closeWindow();
+            library->setRunning();
+            instance->setActualLib(0);
+            break;
+
+        case 1:
+            library->closeWindow();
+            library->setRunning();
+            instance->setActualLib(1);
+            break;
+
+        case 2:
+            library->closeWindow();
+            library->setRunning();
+            instance->setActualLib(2);
+            break;
+
+        default:
+            break;
+    }
+}
+
+
 void libraryLoop(int w, int h, Instance instance) {
     instance.setAreaSize(w, h);
-    // instance[AUDIOCODE]->playSong(POKEROADSONG);
+    instance[AUDIOCODE]->playSong(POKEROADSONG);
     instance[instance.getActualLib()]->display();
 
-    while (instance[instance.getActualLib()]->getLibCode() != QUIT)
+    while (instance[instance.getActualLib()]->getKeyCode() != QUIT)
     {
-        instance[instance.getActualLib()]->closeWindow();
-        instance.setActualLib(instance[instance.getActualLib()]->getLibCode());
-        instance[instance.getActualLib()]->setMode(PAUSE);
+        // instance[instance.getActualLib()]->update();
+        input(&instance, instance[instance.getActualLib()]);
         instance[instance.getActualLib()]->display();
     }
 }

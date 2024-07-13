@@ -25,7 +25,7 @@ GL& GL::operator=(const GL &original) {
     {
         this->height = original.height;
         this->width = original.width;
-        this->libCode = original.libCode;
+        this->keyCode = original.keyCode;
         this->mode = original.mode;
         this->prevMode = original.prevMode;
         this->running = original.running;
@@ -76,17 +76,17 @@ void GL::display() {
 void GL::input() {
     if (glfwGetKey(this->win, GLFW_KEY_ESCAPE))
     {
-        this->libCode = QUIT;
+        this->keyCode = QUIT;
         this->running = false;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_1))
     {
-        this->libCode = 0;
+        this->keyCode = 0;
         this->running = false;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_2))
     {
-        this->libCode = 1;
+        this->keyCode = 1;
         this->running = false;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_SPACE))
@@ -114,29 +114,6 @@ void GL::input() {
     }
 }
 
-
-size_t GL::getLibCode(void) const {
-    return this->libCode;
-}
-
-void GL::setAreaSize(int h, int w) {
-    this->height = h;
-    this->width = w;
-}
-
-void GL::setLibCode(int code) {
-    this->libCode = code;
-}
-
-void GL::setMode(int code) {
-    this->mode = code;
-}
-
-void GL::setRunning() {
-    this->running = true;
-}
-
-void GL::setWinSize(int h, int w) {
-    this->winH = h;
-    this->winW = w;
+void GL::update() {
+    return;
 }

@@ -6,24 +6,22 @@ extern "C" {
     }
 }
 
-
 SFML::SFML(void) : Library() {
     this->selectedButton = 0;
-    this->win = NULL;
-}
 
+
+}
 
 SFML::SFML(const SFML &original) {
     *this = original;
 }
-
 
 SFML &SFML::operator=(const SFML &original) {
     if (this != &original)
     {
         this->height = original.height;
         this->width = original.width;
-        this->libCode = original.libCode;
+        this->keyCode = original.keyCode;
         this->mode = original.mode;
         this->prevMode = original.prevMode;
         this->running = original.running;
@@ -35,12 +33,10 @@ SFML &SFML::operator=(const SFML &original) {
     return *this;
 }
 
-
 SFML::~SFML() {
     if (this->win)
         delete this->win;
 }
-
 
 void SFML::closeWindow() {
     if (this->win)
@@ -50,7 +46,6 @@ void SFML::closeWindow() {
         this->win = NULL;
     }
 }
-
 
 void SFML::display() {
     if (this->win)
@@ -76,7 +71,6 @@ void SFML::display() {
     }
 }
 
-
 void SFML::displayGame() {
     sf::Vector2f startButtonSize(200, 50);
 
@@ -90,7 +84,6 @@ void SFML::displayGame() {
     this->drawTitle("Nibbler", sf::Color::White);
     this->drawButton("Game", startButtonPos, startButtonSize, sf::Color::White);
 }
-
 
 void SFML::displayMenu() {
     sf::Vector2f quitButtonSize(200, 50);
@@ -117,7 +110,6 @@ void SFML::displayMenu() {
         this->drawButton("Quit", quitButtonPos, quitButtonSize, sf::Color::White);
 }
 
-
 void SFML::displayPause() {
     sf::Font font;
     sf::Text pauseText;
@@ -142,7 +134,6 @@ void SFML::displayPause() {
     this->drawTitle("Nibbler", sf::Color::White);
     this->win->draw(pauseText);
 }
-
 
 void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color color) {
     sf::Font            font;
@@ -171,10 +162,8 @@ void SFML::drawButton(std::string text, sf::Vector2f position, sf::Vector2f size
     this->win->draw(buttonText);
 }
 
-
 void SFML::drawArea() {
 }
-
 
 void SFML::drawTitle(std::string text, sf::Color color) {
     sf::Font        font;
@@ -197,7 +186,6 @@ void SFML::drawTitle(std::string text, sf::Color color) {
     this->win->draw(title);
 }
 
-
 void SFML::input() {
     sf::Event event;
 
@@ -206,14 +194,14 @@ void SFML::input() {
         switch (event.type)
         {
             case sf::Event::Closed:
-                this->libCode = QUIT;
+                this->keyCode = QUIT;
                 this->running = false;
                 break;
 
             case sf::Event::KeyPressed:
                 if (event.key.code == sf::Keyboard::Escape)
                 {
-                    this->libCode = QUIT;
+                    this->keyCode = QUIT;
                     this->running = false;
                 }
                 else if (event.key.code == sf::Keyboard::Return)
@@ -225,7 +213,7 @@ void SFML::input() {
                     }
                     else
                     {
-                        this->libCode = QUIT;
+                        this->keyCode = QUIT;
                         this->running = false;
                     }
                 }
@@ -243,8 +231,7 @@ void SFML::input() {
                 {
                     if (this->mode == GAME || this->mode == PAUSE)
                     {
-                        this->music.stop();
-                        this->libCode = 1;
+                        this->keyCode = 1;
                         this->running = false;
                     }
                 }
@@ -252,8 +239,7 @@ void SFML::input() {
                 {
                     if (this->mode == GAME || this->mode == PAUSE)
                     {
-                        this->music.stop();
-                        this->libCode = 2;
+                        this->keyCode = 2;
                         this->running = false;
                     }
                 }
@@ -300,28 +286,7 @@ void SFML::input() {
 }
 
 
-size_t SFML::getLibCode(void) const {
-    return this->libCode;
-}
-
-void SFML::setAreaSize(int h, int w) {
-    this->height = h;
-    this->width = w;
-}
-
-void SFML::setLibCode(int code) {
-    this->libCode = code;
-}
-
-void SFML::setMode(int code) {
-    this->mode = code;
-}
-
-void SFML::setRunning() {
-    this->running = !this->running;
-}
-
-void SFML::setWinSize(int h, int w) {
-    this->winH = h;
-    this->winW = w;
+void SFML::update(void) {
+    this->input();
+    this->display();
 }

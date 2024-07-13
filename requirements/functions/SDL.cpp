@@ -27,7 +27,7 @@ SDL& SDL::operator=(const SDL& original) {
     {
         this->height = original.height;
         this->width = original.width;
-        this->libCode = original.libCode;
+        this->keyCode = original.keyCode;
         this->mode = original.mode;
         this->prevMode = original.prevMode;
         this->running = original.running;
@@ -159,7 +159,7 @@ void SDL::input() {
                 switch (event.key.keysym.scancode) 
                 {
                     case SDL_SCANCODE_ESCAPE:
-                        this->libCode = QUIT;
+                        this->keyCode = QUIT;
                         this->running = false;
                         break;
 
@@ -174,12 +174,12 @@ void SDL::input() {
                         break;
 
                     case SDL_SCANCODE_1:
-                        this->libCode = 0;
+                        this->keyCode = 0;
                         this->running = false;
                         break;
 
                     case SDL_SCANCODE_3:
-                        this->libCode = 2;
+                        this->keyCode = 2;
                         this->running = false;
                         break;
 
@@ -211,29 +211,6 @@ void SDL::input() {
     }
 }
 
-
-size_t SDL::getLibCode() const {
-    return this->libCode;
-}
-
-void SDL::setAreaSize(int h, int w) {
-    this->height = h;
-    this->width = w;
-}
-
-void SDL::setLibCode(int code) {
-    this->libCode = code;
-}
-
-void SDL::setMode(int code) {
-    this->mode = code;
-}
-
-void SDL::setRunning() {
-    this->running = true;
-}
-
-void SDL::setWinSize(int h, int w) {
-    this->winH = h;
-    this->winW = w;
+void SDL::update() {
+    return;
 }
