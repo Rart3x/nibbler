@@ -12,11 +12,9 @@ Instance::Instance() : actualLib(0) {
     this->libs[GLCODE] = this->loadGLInstance();
 }
 
-
 Instance::Instance(const Instance &original) {
     *this = original;
 }
-
 
 Instance& Instance::operator=(const Instance &original) {
     if (this != &original)
@@ -63,7 +61,6 @@ Audio* Instance::loadAudioInstance() {
     return instance;
 }
 
-
 GL* Instance::loadGLInstance() {
     const std::string funcName = "createGLInstance";
 
@@ -95,7 +92,6 @@ GL* Instance::loadGLInstance() {
     return instance;
 }
 
-
 SDL* Instance::loadSDLInstance() {
     const std::string funcName = "createSDLInstance";
 
@@ -126,7 +122,6 @@ SDL* Instance::loadSDLInstance() {
 
     return instance;
 }
-
 
 SFML* Instance::loadSFMLInstance() {
     const std::string funcName = "createSFMLInstance";

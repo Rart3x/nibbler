@@ -23,12 +23,9 @@ class Library {
         virtual void    setAreaSize(int h, int w);
         virtual void    setKeyCode(int code);
         virtual void    setMode(int code);
-        virtual void    setRunning();
         virtual void    setWinSize(int h, int w);
     
     protected:
-        bool    running;
-
         int     keyCode;
         int     libCode;
         

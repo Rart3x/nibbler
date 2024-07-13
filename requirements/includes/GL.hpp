@@ -14,14 +14,14 @@ class GL : public Library {
         ~GL();
 
         void    closeWindow(void);
-
+        void    openWindow(void);
+        
         void    display(void);
-        void    displayGame(void);
-        void    displayPause(void);
-
         void    input(void);
         void    update(void);
 
     private:
+        bool        isWindowOpen;
+
         GLFWwindow* win;
 };

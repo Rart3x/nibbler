@@ -18,17 +18,15 @@ class SDL : public Library {
         ~SDL();
 
         void    closeWindow(void);
+        void    openWindow(void);
 
         void    display(void);
-        void    displayGame(void);
-        void    displayPause(void);
-
-        void    drawTitle(void);
-
         void    input(void);
         void    update(void);
 
     private:
+        bool            isWindowOpen;
+
         SDL_Renderer*   renderer;
         SDL_Window*     win;
         TTF_Font*       font;

@@ -10,15 +10,16 @@ extern "C" {
 GL::GL(void) : Library() {
     if (!errorQuitLibWithBool(glfwInit(), "Error: Could not initialize GLFW", this))
         return;
-
-    this->win = NULL;
+    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+    this->win = glfwCreateWindow(WIDTH, HEIGHT, "Nibbler OpenGL", NULL, NULL);
+    if (!errorQuitLibWithObj(this->win, "Error: Could not create GLFW window", this))
+        return;
+    this->isWindowOpen = false;
 }
-
 
 GL::GL(const GL &original) {
     *this = original;
 }
-
 
 GL& GL::operator=(const GL &original) {
     if (this != &original)
@@ -28,14 +29,12 @@ GL& GL::operator=(const GL &original) {
         this->keyCode = original.keyCode;
         this->mode = original.mode;
         this->prevMode = original.prevMode;
-        this->running = original.running;
         this->winH = original.winH;
         this->winW = original.winW;
         this->win = original.win;
     }
     return *this;
 }
-
 
 GL::~GL() {
     if (this->win)
@@ -47,54 +46,47 @@ GL::~GL() {
 void GL::closeWindow() {
     if (this->win)
     {
-        glfwDestroyWindow(this->win);
-        this->win = NULL;
+        std::cout << "Closing window" << std::endl;
+        glfwHideWindow(this->win);   
+        this->isWindowOpen = false;
     }
 }
 
+void GL::openWindow() {
+    if (this->win)
+    {
+        std::cout << "Opening window" << std::endl;
+        glfwShowWindow(this->win);
+        this->isWindowOpen = true;
+    }
+}
 
 void GL::display() {
-    if (this->win)
-        this->closeWindow();
-    this->win = glfwCreateWindow(WIDTH, HEIGHT, "Nibbler OpenGL", NULL, NULL);
-    if (!errorQuitLibWithObj(this->win, "Error: Could not create GLFW window", this))
-        return;
+    if (this->win && !this->isWindowOpen)
+        this->openWindow();
 
     glfwMakeContextCurrent(this->win);
-    
-    this->running = true;
-
-    while (this->running)
-    {
-        this->input();
-        glfwSwapBuffers(this->win);
-        glfwPollEvents();
-    }
+    glClear(GL_COLOR_BUFFER_BIT);
+    glfwSwapBuffers(this->win);
+    glfwPollEvents();
 }
-
 
 void GL::input() {
     if (glfwGetKey(this->win, GLFW_KEY_ESCAPE))
     {
         this->keyCode = QUIT;
-        this->running = false;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_1))
     {
-        this->keyCode = 0;
-        this->running = false;
+        this->keyCode = SFMLCODE;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_2))
     {
-        this->keyCode = 1;
-        this->running = false;
+        this->keyCode = SDLCODE;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_SPACE))
     {
-        if (this->mode == 0)
-            this->mode = 1;
-        else if (this->mode == 1)
-            this->mode = 2;
+        return;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_W))
     {
@@ -115,5 +107,6 @@ void GL::input() {
 }
 
 void GL::update() {
-    return;
+    this->input();
+    this->display();
 }

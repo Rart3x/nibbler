@@ -11,18 +11,15 @@ Audio::Audio() {
     this->music.setVolume(15);
 }
 
-
 Audio::~Audio() {
     if (this->music.getStatus() == sf::Music::Playing)
         this->music.stop();
 }
 
-
 Audio::Audio(const Audio& original) {
     if (this == &original)
         *this = original;
 }
-
 
 Audio& Audio::operator=(const Audio& original) {
     if (this == &original)
@@ -42,7 +39,6 @@ void Audio::playSong(const std::string& song) {
     this->music.setLoop(true);
     this->music.play();
 }
-
 
 void Audio::stopSong(void) {
     if (this->music.getStatus() == sf::Music::Playing)

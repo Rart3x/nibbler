@@ -98,4 +98,4 @@ fclean: clean
 re: fclean all
 rev: fclean dev
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re rev

@@ -7,7 +7,6 @@ bool isNumeric(const std::string& str) {
     return true;
 }
 
-
 void ifNullLibraryDelete(Instance instance) {
     if (!instance.getAudio())
         exit(EXIT_FAILURE);
@@ -34,7 +33,6 @@ void ifNullLibraryDelete(Instance instance) {
     }
 }
 
-
 void check_args_validity(int ac, char **av) {
     if (ac != 3)
         throw std::runtime_error(RED "Error: invalid number of arguments" RESET);
@@ -51,45 +49,36 @@ void check_args_validity(int ac, char **av) {
 
 
 void input(Instance *instance, Library* library) {
-    switch(library->getKeyCode()) {
-        case QUIT:
+    switch(library->getKeyCode())
+    {
+        case SFMLCODE:
+            instance->setActualLib(SFMLCODE);
             library->closeWindow();
-            library->setRunning();
             break;
 
-        case 0:
+        case SDLCODE:
+            instance->setActualLib(SDLCODE);
             library->closeWindow();
-            library->setRunning();
-            instance->setActualLib(0);
             break;
 
-        case 1:
+        case GLCODE:
+            instance->setActualLib(GLCODE);
             library->closeWindow();
-            library->setRunning();
-            instance->setActualLib(1);
-            break;
-
-        case 2:
-            library->closeWindow();
-            library->setRunning();
-            instance->setActualLib(2);
             break;
 
         default:
             break;
     }
+    library->setKeyCode(NONE);
 }
 
-
-void libraryLoop(int w, int h, Instance instance) {
-    instance.setAreaSize(w, h);
-    instance[AUDIOCODE]->playSong(POKEROADSONG);
+void libraryLoop(Instance instance) {
+    // instance[AUDIOCODE]->playSong(POKEROADSONG);
     instance[instance.getActualLib()]->display();
 
     while (instance[instance.getActualLib()]->getKeyCode() != QUIT)
     {
-        // instance[instance.getActualLib()]->update();
         input(&instance, instance[instance.getActualLib()]);
-        instance[instance.getActualLib()]->display();
+        instance[instance.getActualLib()]->update();
     }
 }

@@ -1,7 +1,8 @@
 #include "../includes/Library.hpp"
 
-Library::Library() : running(false), keyCode(0), mode(0), height(0), width(0), winH(HEIGHT), winW(WIDTH) {}
+Library::Library() : keyCode(NONE), mode(0), height(0), width(0), winH(HEIGHT), winW(WIDTH) {}
 Library::~Library() {}
+
 
 int Library::getKeyCode(void) const {
     return this->keyCode;
@@ -18,10 +19,6 @@ void Library::setKeyCode(int code) {
 
 void Library::setMode(int code) {
     this->mode = code;
-}
-
-void Library::setRunning() {
-    this->running = true;
 }
 
 void Library::setWinSize(int h, int w) {

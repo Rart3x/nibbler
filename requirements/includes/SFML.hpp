@@ -4,7 +4,7 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-
+    
 #include "Library.hpp"
 
 class SFML : public Library {
@@ -14,22 +14,17 @@ class SFML : public Library {
         SFML& operator=(const SFML &other);
         ~SFML();
 
-        void    closeWindow(void);    
+        void    closeWindow(void);
+        void    openWindow(void);
 
         void    display(void);
-        void    displayGame(void);
-        void    displayMenu(void);
-        void    displayPause(void);
-
-        void    drawButton(std::string text, sf::Vector2f position, sf::Vector2f size, sf::Color color);
-        void    drawArea(void);
-        void    drawTitle(std::string text, sf::Color color);
-    
         void    input(void);
         void    update(void);
 
+        void    drawArea(void);
+
     private:
-        int     selectedButton;
+        bool                isWindowOpen;
 
         sf::Music           music;
         sf::RenderWindow*   win;
