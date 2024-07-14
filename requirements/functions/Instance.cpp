@@ -5,7 +5,7 @@ Instance::Instance() {
     this->lib = NULL;
 
     this->audio = this->loadAudioInstance();
-    this->lib = this->loadGLInstance();
+    this->lib = this->loadNCInstance();
 }
 
 Instance::Instance(const Instance &original) {
@@ -153,11 +153,11 @@ void Instance::unloadAndLoad(size_t code) {
     if (code > 2)
         return;
 
-    if (this->lib)
-    {
-        delete this->lib;
-        this->lib = NULL;
-    }
+    // if (this->lib)
+    // {
+    //     delete this->lib;
+    //     this->lib = NULL;
+    // }
 
     switch(code)
     {

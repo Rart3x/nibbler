@@ -13,8 +13,8 @@ NC::NC(void) : Library() {
 	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 
-    this->win = newwin(1000, 1000, 0, 0);
-    refresh();
+    this->win = newwin(50, 50, 0, 0);
+    this->update();
 }
 
 NC::NC(const NC &original) {
@@ -37,11 +37,13 @@ NC& NC::operator=(const NC& original) {
 }
 
 NC::~NC() {
+    delwin(this->win);
     endwin();
 }
 
 
 void NC::display() {
+    wclear(this->win);
     wrefresh(this->win);
 }
 
