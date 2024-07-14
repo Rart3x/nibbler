@@ -153,11 +153,11 @@ void Instance::unloadAndLoad(size_t code) {
     if (code > 2)
         return;
 
-    // if (this->lib)
-    // {
-    //     delete this->lib;
-    //     this->lib = NULL;
-    // }
+    if (this->lib)
+    {
+        delete this->lib;
+        this->lib = NULL;
+    }
 
     switch(code)
     {

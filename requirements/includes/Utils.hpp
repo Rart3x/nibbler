@@ -19,4 +19,3 @@ bool        isNumeric(const std::string &str);
 void        check_args_validity(int ac, char **av);
 void        ifNullLibraryDelete(Instance instance);
 void        input(Instance *instance, int code);
-void        libraryLoop(Instance instance);

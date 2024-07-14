@@ -7,10 +7,17 @@ int main(int ac, char **av) {
     try {
         check_args_validity(ac, av);
         instance.setAreaSize(atoi(av[1]), atoi(av[2]));
-        libraryLoop(instance);
     }
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
+    }
+
+    // instance[AUDIOCODE]->playSong(POKEROADSONG);
+
+    while (instance[0]->getKeyCode() != QUIT)
+    {
+        input(&instance, instance[0]->getKeyCode());
+        instance[0]->update();
     }
 
     if (instance[AUDIOCODE])

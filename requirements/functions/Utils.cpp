@@ -52,14 +52,3 @@ void input(Instance *instance, int code) {
             break;
     }
 }
-
-void libraryLoop(Instance instance) {
-    // instance[AUDIOCODE]->playSong(POKEROADSONG);
-    instance.getLib()->display();
-
-    while (instance.getLib()->getKeyCode() != QUIT)
-    {
-        input(&instance, instance.getLib()->getKeyCode());
-        instance.getLib()->update();
-    }
-}
