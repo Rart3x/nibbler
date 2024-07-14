@@ -45,6 +45,9 @@ void GL::display() {
     glfwPollEvents();
 }
 
+void GL::drawMap() {
+}
+
 void GL::input() {
     if (glfwGetKey(this->win, GLFW_KEY_ESCAPE))
     {

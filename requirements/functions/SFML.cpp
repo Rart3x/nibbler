@@ -37,10 +37,11 @@ SFML::~SFML() {
 
 void SFML::display() {
     this->win->clear();
+    this->drawMap();
     this->win->display();
 }
 
-void SFML::drawArea() {
+void SFML::drawMap() {
 }
 
 void SFML::input() {

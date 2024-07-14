@@ -17,6 +17,8 @@ class GL : public Library {
         void    input(void);
         void    update(void);
 
+        void    drawMap(void);
+
     private:
         GLFWwindow* win;
 };

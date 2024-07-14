@@ -18,7 +18,7 @@ class SFML : public Library {
         void    input(void);
         void    update(void);
 
-        void    drawArea(void);
+        void    drawMap(void);
 
     private:
         sf::Music           music;
