@@ -12,11 +12,11 @@ int main(int ac, char **av) {
         std::cerr << e.what() << std::endl;
     }
 
-    // instance[AUDIOCODE]->playSong(POKEROADSONG);
+    instance[AUDIOCODE]->playSong(POKEROADSONG);
 
     while (instance[0]->getKeyCode() != QUIT)
     {
-        input(&instance, instance[0]->getKeyCode());
+        input(instance[AUDIOCODE], &instance, instance[0]->getKeyCode());
         instance[0]->update();
     }
 

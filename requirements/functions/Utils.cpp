@@ -33,19 +33,22 @@ void check_args_validity(int ac, char **av) {
 }
 
 
-void input(Instance *instance, int code) {
+void input(Audio* audio, Instance *instance, int code) {
     switch(code)
     {
         case SFMLCODE:
             instance->unloadAndLoad(SFMLCODE);
+            audio->playSong(POKEROADSONG);
             break;
 
         case NCCODE:
             instance->unloadAndLoad(NCCODE);
+            audio->playSong(POKEROADSONG);
             break;
 
         case GLCODE:
             instance->unloadAndLoad(GLCODE);
+            audio->playSong(POKEROADSONG);
             break;
 
         default:
