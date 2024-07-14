@@ -6,6 +6,8 @@ Instance::Instance() {
 
     this->audio = this->loadAudioInstance();
     this->lib = this->loadNCInstance();
+
+    ifNullLibraryDelete(*this);
 }
 
 Instance::Instance(const Instance &original) {

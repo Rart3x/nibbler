@@ -2,7 +2,6 @@
 
 int main(int ac, char **av) {
     Instance instance;
-    ifNullLibraryDelete(instance);
     
     try {
         check_args_validity(ac, av);
