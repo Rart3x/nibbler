@@ -7,7 +7,7 @@ extern "C" {
 }
 
 SFML::SFML(void) : Library() {
-    this->win = new sf::RenderWindow(sf::VideoMode(this->winW, this->winH), "Nibbler SFML", sf::Style::Close);
+    this->win = new sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "Nibbler SFML", sf::Style::Close);
     if (!errorQuitLibWithObj(this->win, "Error: Could not create SFML window", this))
         return;
 }
@@ -23,9 +23,6 @@ SFML &SFML::operator=(const SFML &original) {
         this->width = original.width;
         this->keyCode = original.keyCode;
         this->mode = original.mode;
-        this->prevMode = original.prevMode;
-        this->winH = original.winH;
-        this->winW = original.winW;
         this->win = original.win;
     }
     return *this;
@@ -40,8 +37,6 @@ SFML::~SFML() {
 
 void SFML::display() {
     this->win->clear();
-
-    this->drawArea();
     this->win->display();
 }
 
@@ -82,27 +77,19 @@ void SFML::input() {
                 }
                 else if (event.key.code == sf::Keyboard::W)
                 {
-                    return;
-                }
-                else if (event.key.code == sf::Keyboard::A)
-                {
-                    return;
+                    this->keyCode = UP;
                 }
                 else if (event.key.code == sf::Keyboard::S)
                 {
-                    return;
+                    this->keyCode = DOWN;
+                }
+                else if (event.key.code == sf::Keyboard::A)
+                {
+                    this->keyCode = LEFT;
                 }
                 else if (event.key.code == sf::Keyboard::D)
                 {
-                    return;
-                }
-                else if (event.key.code == sf::Keyboard::Up)
-                {
-                    return;
-                }
-                else if (event.key.code == sf::Keyboard::Down)
-                {
-                    return;
+                    this->keyCode = RIGHT;
                 }
                 break;
 

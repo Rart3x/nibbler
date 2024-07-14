@@ -3,7 +3,8 @@
 int main(int ac, char **av) {
     Instance instance;
     
-    try {
+    try
+    {
         check_args_validity(ac, av);
         instance.setAreaSize(atoi(av[1]), atoi(av[2]));
     }
@@ -15,7 +16,7 @@ int main(int ac, char **av) {
 
     while (instance[0]->getKeyCode() != QUIT)
     {
-        input(instance[AUDIOCODE], &instance, instance[0]->getKeyCode());
+        input(instance[AUDIOCODE], instance[0], &instance, instance[0]->getKeyCode());
         instance[0]->update();
     }
 

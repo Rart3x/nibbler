@@ -28,9 +28,6 @@ NC& NC::operator=(const NC& original) {
         this->width = original.width;
         this->keyCode = original.keyCode;
         this->mode = original.mode;
-        this->prevMode = original.prevMode;
-        this->winH = original.winH;
-        this->winW = original.winW;
         this->win = original.win;
     }
     return *this;
@@ -50,15 +47,36 @@ void NC::display() {
 void NC::input() {
     switch (getch())
 	{
+        case 27:
+			this->keyCode = QUIT;
+			break;
+
 		case '1':
 			this->keyCode = SFMLCODE;
 			break;
+
 		case '3':
 			this->keyCode = GLCODE;
 			break;
-		case 27:
-			this->keyCode = QUIT;
-			break;
+
+        case 'W':
+            this->keyCode = UP;
+            break;
+        
+        case 'S':
+            this->keyCode = DOWN;
+            break;
+        
+        case 'A':
+            this->keyCode = LEFT;
+            break;
+        
+        case 'D':
+            this->keyCode = RIGHT;
+            break;
+
+        default:
+            break;
 	}
 }
 

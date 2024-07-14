@@ -22,20 +22,15 @@ class Library {
         virtual void    setAreaSize(int h, int w);
         virtual void    setKeyCode(int code);
         virtual void    setMode(int code);
-        virtual void    setWinSize(int h, int w);
     
     protected:
         int     keyCode;
         int     libCode;
         
         int     mode;
-        int     prevMode;
 
         int     height;
         int     width;
-
-        int     winH;
-        int     winW;
 
         std::string key;
         std::vector<std::string> map;

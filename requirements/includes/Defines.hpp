@@ -7,6 +7,11 @@
 //--------------------Fonts--------------------//
 #define ARIAL   "./requirements/assets/fonts/arial.ttf"
 #define SCIENCE "./requirements/assets/fonts/science.ttf"
+//--------------------Keys--------------------//
+#define UP          65
+#define DOWN        66
+#define LEFT        67
+#define RIGHT       68
 //--------------------Librarys--------------------//
 #define AUDIO_PATH  "./requirements/libs/Audio.so"
 #define GL_PATH     "./requirements/libs/GL.so"

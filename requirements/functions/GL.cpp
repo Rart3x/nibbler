@@ -26,9 +26,6 @@ GL& GL::operator=(const GL &original) {
         this->width = original.width;
         this->keyCode = original.keyCode;
         this->mode = original.mode;
-        this->prevMode = original.prevMode;
-        this->winH = original.winH;
-        this->winW = original.winW;
         this->win = original.win;
     }
     return *this;
@@ -67,19 +64,19 @@ void GL::input() {
     }
     else if (glfwGetKey(this->win, GLFW_KEY_W))
     {
-        return;
-    }
-    else if (glfwGetKey(this->win, GLFW_KEY_A))
-    {
-        return;
+        this->keyCode = UP;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_S))
     {
-        return;
+        this->keyCode = DOWN;
+    }
+    else if (glfwGetKey(this->win, GLFW_KEY_A))
+    {
+        this->keyCode = LEFT;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_D))
     {
-        return;
+        this->keyCode = RIGHT;
     }
 }
 
