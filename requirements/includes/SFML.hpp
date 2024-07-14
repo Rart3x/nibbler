@@ -12,10 +12,7 @@ class SFML : public Library {
         SFML();
         SFML(const SFML &other);
         SFML& operator=(const SFML &other);
-        ~SFML();
-
-        void    closeWindow(void);
-        void    openWindow(void);
+        virtual ~SFML();
 
         void    display(void);
         void    input(void);
@@ -24,8 +21,6 @@ class SFML : public Library {
         void    drawArea(void);
 
     private:
-        bool                isWindowOpen;
-
         sf::Music           music;
         sf::RenderWindow*   win;
 };

@@ -10,11 +10,9 @@ extern "C" {
 GL::GL(void) : Library() {
     if (!errorQuitLibWithBool(glfwInit(), "Error: Could not initialize GLFW", this))
         return;
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
     this->win = glfwCreateWindow(WIDTH, HEIGHT, "Nibbler OpenGL", NULL, NULL);
     if (!errorQuitLibWithObj(this->win, "Error: Could not create GLFW window", this))
         return;
-    this->isWindowOpen = false;
 }
 
 GL::GL(const GL &original) {
@@ -43,28 +41,7 @@ GL::~GL() {
 }
 
 
-void GL::closeWindow() {
-    if (this->win)
-    {
-        std::cout << "Closing window" << std::endl;
-        glfwHideWindow(this->win);   
-        this->isWindowOpen = false;
-    }
-}
-
-void GL::openWindow() {
-    if (this->win)
-    {
-        std::cout << "Opening window" << std::endl;
-        glfwShowWindow(this->win);
-        this->isWindowOpen = true;
-    }
-}
-
 void GL::display() {
-    if (this->win && !this->isWindowOpen)
-        this->openWindow();
-
     glfwMakeContextCurrent(this->win);
     glClear(GL_COLOR_BUFFER_BIT);
     glfwSwapBuffers(this->win);
@@ -82,7 +59,7 @@ void GL::input() {
     }
     else if (glfwGetKey(this->win, GLFW_KEY_2))
     {
-        this->keyCode = SDLCODE;
+        this->keyCode = NCCODE;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_SPACE))
     {

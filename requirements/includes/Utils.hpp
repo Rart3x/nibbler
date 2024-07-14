@@ -9,7 +9,7 @@
 
 #include "Audio.hpp"
 #include "GL.hpp"
-#include "SDL.hpp"
+#include "NC.hpp"
 #include "SFML.hpp"
 
 class Instance;
@@ -18,5 +18,5 @@ bool        isNumeric(const std::string &str);
 
 void        check_args_validity(int ac, char **av);
 void        ifNullLibraryDelete(Instance instance);
-void        input(Instance *instance, Library* library);
+void        input(Instance *instance, int code);
 void        libraryLoop(Instance instance);

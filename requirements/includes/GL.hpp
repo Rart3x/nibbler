@@ -11,17 +11,12 @@ class GL : public Library {
         GL();
         GL(const GL &original);
         GL& operator=(const GL &original);
-        ~GL();
-
-        void    closeWindow(void);
-        void    openWindow(void);
+        virtual ~GL();
         
         void    display(void);
         void    input(void);
         void    update(void);
 
     private:
-        bool        isWindowOpen;
-
         GLFWwindow* win;
 };

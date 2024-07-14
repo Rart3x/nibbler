@@ -13,14 +13,10 @@ int main(int ac, char **av) {
         std::cerr << e.what() << std::endl;
     }
 
-    if (instance.getAudio())
-        delete instance.getAudio();
-    if (instance[SFMLCODE])
-        delete instance[SFMLCODE];
-    if (instance[SDLCODE]) 
-        delete instance[SDLCODE];
-    if (instance[GLCODE])
-        delete instance[GLCODE];
+    if (instance[AUDIOCODE])
+        delete instance[AUDIOCODE];
+    if (instance[0])
+        delete instance[0];
 
     return EXIT_SUCCESS;
 }

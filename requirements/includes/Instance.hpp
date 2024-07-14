@@ -4,7 +4,7 @@
 
 #include "Audio.hpp"
 #include "GL.hpp"
-#include "SDL.hpp"
+#include "NC.hpp"
 #include "SFML.hpp"
 #include "Utils.hpp"
 
@@ -19,20 +19,19 @@ class Instance {
 
         Audio*  loadAudioInstance();
         GL*     loadGLInstance();
-        SDL*    loadSDLInstance();
+        NC*    loadNCInstance();
         SFML*   loadSFMLInstance();
 
-        size_t  getActualLib() const;
-        Audio * getAudio() const;
+        void    unloadAndLoad(size_t code);
 
-        void    setActualLib(size_t i);
+        Audio*      getAudio() const;
+        Library*    getLib() const;
+
         void    setAreaSize(size_t h, size_t w);
 
         Audio*      operator[](const std::string &str);
         Library*    operator[](size_t i);
     private:
-        size_t      actualLib;
-
         Audio*      audio;
-        Library*    libs[3];
+        Library*    lib;
 };

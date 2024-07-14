@@ -13,7 +13,6 @@ class Library {
         Library();
         virtual ~Library();
 
-        virtual void    closeWindow() = 0;
         virtual void    display() = 0;
         virtual void    input() = 0;
         virtual void    update() = 0;

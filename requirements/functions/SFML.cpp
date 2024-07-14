@@ -10,7 +10,6 @@ SFML::SFML(void) : Library() {
     this->win = new sf::RenderWindow(sf::VideoMode(this->winW, this->winH), "Nibbler SFML", sf::Style::Close);
     if (!errorQuitLibWithObj(this->win, "Error: Could not create SFML window", this))
         return;
-    this->isWindowOpen = true;
 }
 
 SFML::SFML(const SFML &original) {
@@ -25,7 +24,6 @@ SFML &SFML::operator=(const SFML &original) {
         this->keyCode = original.keyCode;
         this->mode = original.mode;
         this->prevMode = original.prevMode;
-        this->isWindowOpen = original.isWindowOpen;
         this->winH = original.winH;
         this->winW = original.winW;
         this->win = original.win;
@@ -36,33 +34,14 @@ SFML &SFML::operator=(const SFML &original) {
 SFML::~SFML() {
     if (this->win)
     {
-        this->win->close();
-        
-    }
-}
-
-void SFML::closeWindow() {
-    if (this->win)
-    {
-        this->win->close();
-        this->isWindowOpen = false;
-    }
-}
-
-void SFML::openWindow() {
-    if (this->win)
-    {
-        this->win->create(sf::VideoMode(this->winW, this->winH), "Nibbler SFML", sf::Style::Close);
-        this->isWindowOpen = true;
+        delete this->win;
     }
 }
 
 void SFML::display() {
     this->win->clear();
 
-    if (this->win && !this->isWindowOpen)
-        this->openWindow();
-
+    this->drawArea();
     this->win->display();
 }
 
@@ -95,7 +74,7 @@ void SFML::input() {
                 }
                 else if (event.key.code == sf::Keyboard::Num2)
                 {
-                    this->keyCode = SDLCODE;
+                    this->keyCode = NCCODE;
                 }
                 else if (event.key.code == sf::Keyboard::Num3)
                 {

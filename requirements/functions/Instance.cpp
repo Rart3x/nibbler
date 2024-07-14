@@ -1,15 +1,11 @@
 #include "../includes/Instance.hpp"
 
-Instance::Instance() : actualLib(0) {
+Instance::Instance() {
     this->audio = NULL;
-    this->libs[SFMLCODE] = NULL;
-    this->libs[SDLCODE] = NULL;
-    this->libs[GLCODE] = NULL;
+    this->lib = NULL;
 
     this->audio = this->loadAudioInstance();
-    this->libs[SFMLCODE] = this->loadSFMLInstance();
-    this->libs[SDLCODE] = this->loadSDLInstance();
-    this->libs[GLCODE] = this->loadGLInstance();
+    this->lib = this->loadGLInstance();
 }
 
 Instance::Instance(const Instance &original) {
@@ -19,10 +15,8 @@ Instance::Instance(const Instance &original) {
 Instance& Instance::operator=(const Instance &original) {
     if (this != &original)
     {
-        this->actualLib = original.actualLib;
         this->audio = original.audio;
-        for (size_t i = 0; i < 3; i++)
-            this->libs[i] = original.libs[i];
+        this->lib = original.lib;
     }
     return *this;
 }
@@ -92,33 +86,33 @@ GL* Instance::loadGLInstance() {
     return instance;
 }
 
-SDL* Instance::loadSDLInstance() {
-    const std::string funcName = "createSDLInstance";
+NC* Instance::loadNCInstance() {
+    const std::string funcName = "createNCInstance";
 
     void* dl_handle;
     void* func;
 
-    SDL* instance = NULL;
+    NC* instance = NULL;
 
-    std::cout << BLUE << "Loading SDL instance..." << RESET << std::endl;
+    std::cout << BLUE << "Loading NC instance..." << RESET << std::endl;
 
-    dl_handle = dlopen(SDL_PATH, RTLD_LAZY | RTLD_LOCAL);
-    if (!error(dl_handle, "Error: Failed to load SDL instance."))
+    dl_handle = dlopen(NC_PATH, RTLD_LAZY | RTLD_LOCAL);
+    if (!error(dl_handle, "Error: Failed to load NC instance."))
         return NULL;
 
-    std::cout << BLUE << "SDL instance creation method imported" << RESET << std::endl;
+    std::cout << BLUE << "NC instance creation method imported" << RESET << std::endl;
 
     func = dlsym(dl_handle, funcName.c_str());
     if (!error(func, "Error: Failed to get method pointer.", dl_handle, dlclose))
         return NULL;
 
-    std::cout << BLUE << "SDL instance created" << RESET << std::endl;
+    std::cout << BLUE << "NC instance created" << RESET << std::endl;
 
-    instance = reinterpret_cast<SDL * (*)(void)>(func)();
-    if (!error(instance, "Error: Failed to initialize SDL instance.", dl_handle, dlclose))
+    instance = reinterpret_cast<NC * (*)(void)>(func)();
+    if (!error(instance, "Error: Failed to initialize NC instance.", dl_handle, dlclose))
         return NULL;
 
-    std::cout << BLUE << "SDL instance initialized" << RESET << std::endl << std::endl;
+    std::cout << BLUE << "NC instance initialized" << RESET << std::endl << std::endl;
 
     return instance;
 }
@@ -155,25 +149,47 @@ SFML* Instance::loadSFMLInstance() {
 }
 
 
-size_t Instance::getActualLib() const {
-    return this->actualLib;
+void Instance::unloadAndLoad(size_t code) {
+    if (code > 2)
+        return;
+
+    if (this->lib)
+    {
+        delete this->lib;
+        this->lib = NULL;
+    }
+
+    switch(code)
+    {
+        case SFMLCODE:
+            this->lib = this->loadSFMLInstance();
+            break;
+        
+        case NCCODE:
+            this->lib = this->loadNCInstance();
+            break;
+
+        case GLCODE:
+            this->lib = this->loadGLInstance();
+            break;
+
+        default:
+            break;
+    }
 }
+
 
 Audio* Instance::getAudio() const {
     return this->audio;
 }
 
-
-void Instance::setActualLib(size_t i) {
-    if (i > 2)
-        throw std::runtime_error("Error: invalid index");
-
-    this->actualLib = i;
+Library* Instance::getLib() const {
+    return this->lib;
 }
 
+
 void Instance::setAreaSize(size_t w, size_t h) {
-    for (size_t i = 0; i < 3; i++)
-        this->libs[i]->setAreaSize(w, h);
+    this->lib->setAreaSize(w, h);
 }
 
 Audio* Instance::operator[](const std::string &str) {
@@ -184,7 +200,7 @@ Audio* Instance::operator[](const std::string &str) {
 }
 
 Library* Instance::operator[](size_t i) {
-    if (i > 2)
-        throw std::runtime_error("Error: invalid index");
-    return this->libs[i];
+    if (i == 0)
+        return this->lib;
+    return this->lib;
 }
