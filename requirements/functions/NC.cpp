@@ -40,8 +40,18 @@ NC::~NC() {
 
 
 void NC::display() {
-    wclear(this->win);
+    this->drawMap();
     wrefresh(this->win);
+}
+
+void NC::drawMap() {
+    for (int i = 0; i < this->height; i++)
+    {
+        for (int j = 0; j < this->width; j++)
+        {
+            mvwaddch(this->win, i, j, this->map[i][j]);
+        }
+    }
 }
 
 void NC::input() {
@@ -60,18 +70,22 @@ void NC::input() {
 			break;
 
         case 'W':
+        case 'w':
             this->keyCode = UP;
             break;
         
         case 'S':
+        case 's':
             this->keyCode = DOWN;
             break;
         
         case 'A':
+        case 'a':
             this->keyCode = LEFT;
             break;
         
         case 'D':
+        case 'd':
             this->keyCode = RIGHT;
             break;
 

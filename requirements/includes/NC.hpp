@@ -19,6 +19,8 @@ class NC : public Library {
         void    input(void);
         void    update(void);
 
+        void    drawMap(void);
+
     private:
         WINDOW*     win;
 };

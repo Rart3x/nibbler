@@ -1,5 +1,24 @@
 #include "includes/Utils.hpp"
 
+std::vector<std::string> mapTest = {
+    "111111",
+    "100001",
+    "100001",
+    "100001",
+    "100001",
+    "111111"
+};
+
+std::vector<std::string> mapTest1 = {
+    "111111",
+    "111111",
+    "111111",
+    "111111",
+    "111111",
+    "111111"
+};
+
+
 int main(int ac, char **av) {
     Instance instance;
     
@@ -15,7 +34,14 @@ int main(int ac, char **av) {
     instance[AUDIOCODE]->playSong(POKEROADSONG);
 
     while (instance[0]->getKeyCode() != QUIT)
-    {
+    {   
+        if (instance[0]->getKeyCode() == RIGHT)
+            instance[0]->setMap(mapTest1);
+        else if (instance[0]->getKeyCode() == LEFT)
+            instance[0]->setMap(mapTest);
+        else
+            instance[0]->setMap(mapTest);
+
         input(instance[AUDIOCODE], instance[0], &instance, instance[0]->getKeyCode());
         instance[0]->update();
     }

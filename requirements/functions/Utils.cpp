@@ -34,6 +34,7 @@ void check_args_validity(int ac, char **av) {
 
 
 void input(Audio* audio, Library *lib, Instance *instance, int code) {
+    (void)lib;
     switch(code)
     {
         case SFMLCODE:
@@ -55,7 +56,7 @@ void input(Audio* audio, Library *lib, Instance *instance, int code) {
         case DOWN:
         case LEFT:
         case RIGHT:
-            lib->setKeyCode(NONE);
+            // lib->setKeyCode(NONE);
             break;
 
         default:
