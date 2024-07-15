@@ -1,37 +1,39 @@
 #include "includes/Utils.hpp"
 
 std::vector<std::string> mapTest = {
-    "111111",
-    "100001",
-    "100001",
-    "100001",
-    "100001",
-    "111111"
+    "11111111111111111111111111111",
+    "10000000000000000000000000001",
+    "10000000000000000000000000001",
+    "10000000000000000000000000001",
+    "10000000000000000000000000001",
+    "10000000000000000000000000001",
+    "11111111111111111111111111111"
 };
 
 std::vector<std::string> mapTest1 = {
-    "111111",
-    "111111",
-    "111111",
-    "111111",
-    "111111",
-    "111111"
+    "11111111111111111111111111111",
+    "10000000000000000000000000001",
+    "10000000000000000000000000001",
+    "11111111111111111111111111111"
+    "10000000000000000000000000001",
+    "10000000000000000000000000001",
+    "11111111111111111111111111111"
 };
 
 
 int main(int ac, char **av) {
-    Instance instance;
-    
     try
     {
         check_args_validity(ac, av);
-        instance.setAreaSize(atoi(av[1]), atoi(av[2]));
     }
     catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
 
-    instance[AUDIOCODE]->playSong(POKEROADSONG);
+    Instance instance;
+
+    instance.setAreaSize(atoi(av[1]), atoi(av[2]));
+    // instance[AUDIOCODE]->playSong(POKEROADSONG);
 
     while (instance[0]->getKeyCode() != QUIT)
     {   
@@ -42,7 +44,7 @@ int main(int ac, char **av) {
         else
             instance[0]->setMap(mapTest);
 
-        input(instance[AUDIOCODE], instance[0], &instance, instance[0]->getKeyCode());
+        input(instance[AUDIOCODE], instance[0], &instance, instance[0]->getKeyCode(), mapTest);
         instance[0]->update();
     }
 

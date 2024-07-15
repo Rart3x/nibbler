@@ -19,9 +19,10 @@ class Instance {
 
         Audio*  loadAudioInstance();
         GL*     loadGLInstance();
-        NC*    loadNCInstance();
+        NC*     loadNCInstance();
         SFML*   loadSFMLInstance();
 
+        void    loadMap(std::vector<std::string> map);
         void    unloadAndLoad(size_t code);
 
         Audio*      getAudio() const;

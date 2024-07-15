@@ -33,9 +33,9 @@
 #define WHITE   255, 255, 255, 255
 #define BLACK   0, 0, 0, 255
 //--------------------Sizes--------------------//
-#define SQUARE  20
-#define WIDTH   500
-#define HEIGHT  500
+#define SQUARE  10
+#define WIDTH   1000
+#define HEIGHT  1000
 
 #define MAX_W  (WIDTH / SQUARE)
 #define MAX_H  (HEIGHT / SQUARE)

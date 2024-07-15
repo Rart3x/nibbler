@@ -33,23 +33,27 @@ void check_args_validity(int ac, char **av) {
 }
 
 
-void input(Audio* audio, Library *lib, Instance *instance, int code) {
+void input(Audio* audio, Library *lib, Instance *instance, int code, std::vector<std::string> map) {
+    (void)audio;
     (void)lib;
     switch(code)
     {
         case SFMLCODE:
             instance->unloadAndLoad(SFMLCODE);
-            audio->playSong(POKEROADSONG);
+            instance->loadMap(map);
+            // audio->playSong(POKEROADSONG);
             break;
 
         case NCCODE:
             instance->unloadAndLoad(NCCODE);
-            audio->playSong(POKEROADSONG);
+            instance->loadMap(map);
+            // audio->playSong(POKEROADSONG);
             break;
 
         case GLCODE:
             instance->unloadAndLoad(GLCODE);
-            audio->playSong(POKEROADSONG);
+            instance->loadMap(map);
+            // audio->playSong(POKEROADSONG);
             break;
 
         case UP:

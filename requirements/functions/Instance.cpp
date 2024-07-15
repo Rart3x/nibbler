@@ -26,6 +26,10 @@ Instance& Instance::operator=(const Instance &original) {
 Instance::~Instance() {}
 
 
+void Instance::loadMap(std::vector<std::string> map) {
+    this->lib->setMap(map);
+}
+
 Audio* Instance::loadAudioInstance() {
     const std::string funcName = "createAudioInstance";
 
@@ -51,8 +55,6 @@ Audio* Instance::loadAudioInstance() {
     instance = reinterpret_cast<Audio * (*)(void)>(func)();
     if (!error(instance, "Error: Failed to initialize Audio instance.", dl_handle, dlclose))
         return NULL;
-
-    std::cout << BLUE << "Audio instance initialized" << RESET << std::endl << std::endl;
 
     return instance;
 }
@@ -83,8 +85,6 @@ GL* Instance::loadGLInstance() {
     if (!error(instance, "Error: Failed to initialize GL instance.", dl_handle, dlclose))
         return NULL;
 
-    std::cout << BLUE << "GL instance initialized" << RESET << std::endl << std::endl;
-
     return instance;
 }
 
@@ -114,8 +114,6 @@ NC* Instance::loadNCInstance() {
     if (!error(instance, "Error: Failed to initialize NC instance.", dl_handle, dlclose))
         return NULL;
 
-    std::cout << BLUE << "NC instance initialized" << RESET << std::endl << std::endl;
-
     return instance;
 }
 
@@ -144,8 +142,6 @@ SFML* Instance::loadSFMLInstance() {
     instance = reinterpret_cast<SFML * (*)(void)>(func)();
     if (!error(instance, "Error: Failed to initialize SFML instance.", dl_handle, dlclose))
         return NULL;
-
-    std::cout << BLUE << "SFML instance initialized" << RESET << std::endl << std::endl;
 
     return instance;
 }

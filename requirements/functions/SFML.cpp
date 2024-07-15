@@ -42,7 +42,23 @@ void SFML::display() {
 }
 
 void SFML::drawMap() {
+    sf::RectangleShape rect(sf::Vector2f(WIDTH / this->map[0].size(), HEIGHT / this->map.size()));
+
+    for (size_t i = 0; i < this->map.size(); i++)
+    {
+        for (size_t j = 0; j < this->map[i].size(); j++)
+        {
+            if (this->map[i][j] == '0')
+                rect.setFillColor(sf::Color::White);
+            else if (this->map[i][j] == '1')
+                rect.setFillColor(sf::Color::Black);
+
+            rect.setPosition(j * (WIDTH / this->map[0].size()), i * (HEIGHT / this->map.size()));
+            this->win->draw(rect);
+        }
+    }
 }
+
 
 void SFML::input() {
     sf::Event event;
@@ -99,7 +115,6 @@ void SFML::input() {
         }
     }
 }
-
 
 void SFML::update(void) {
     this->input();

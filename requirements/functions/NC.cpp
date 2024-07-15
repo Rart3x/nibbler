@@ -13,7 +13,7 @@ NC::NC(void) : Library() {
 	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 
-    this->win = newwin(50, 50, 0, 0);
+    this->win = newwin(HEIGHT, WIDTH, 0, 0);
     this->update();
 }
 
@@ -45,11 +45,35 @@ void NC::display() {
 }
 
 void NC::drawMap() {
-    for (int i = 0; i < this->height; i++)
+    for (size_t i = 0; i < this->map.size(); i++)
     {
-        for (int j = 0; j < this->width; j++)
+        for (size_t j = 0; j < this->map[i].size(); j++)
         {
-            mvwaddch(this->win, i, j, this->map[i][j]);
+            if (i == 0 || i == this->map.size() - 1)
+            {
+                if (j == 0 || j == this->map[i].size() - 1)
+                {
+                    if (i == 0 && j == 0)
+                        mvwaddch(this->win, i, j, 'x');
+                    else if (i == this->map.size() - 1 && j == 0)
+                        mvwaddch(this->win, i, j, 'x');
+                    else if (i == 0 && j == this->map[i].size() - 1)
+                        mvwaddch(this->win, i, j, 'x');
+                    else if (i == this->map.size() - 1 && j == this->map[i].size() - 1)
+                        mvwaddch(this->win, i, j, 'x');
+                    else
+                        mvwaddch(this->win, i, j, ACS_HLINE);
+                }
+            }
+            else if (j == 0 || j == this->map[i].size() - 1)
+                mvwaddch(this->win, i, j, ACS_VLINE);
+            else
+            {
+                if (this->map[i][j] == '0')
+                    mvwaddch(this->win, i, j, ' ');
+                else if (this->map[i][j] == '1')
+                    mvwaddch(this->win, i, j, ACS_HLINE);
+            }
         }
     }
 }
