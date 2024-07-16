@@ -41,19 +41,19 @@ void input(Audio* audio, Library *lib, Instance *instance, int code, std::vector
         case SFMLCODE:
             instance->unloadAndLoad(SFMLCODE);
             instance->loadMap(map);
-            // audio->playSong(POKEROADSONG);
+            // audio->playMusic(POKEROADSONG);
             break;
 
         case NCCODE:
             instance->unloadAndLoad(NCCODE);
             instance->loadMap(map);
-            // audio->playSong(POKEROADSONG);
+            // audio->playMusic(POKEROADSONG);
             break;
 
         case GLCODE:
             instance->unloadAndLoad(GLCODE);
             instance->loadMap(map);
-            // audio->playSong(POKEROADSONG);
+            // audio->playMusic(POKEROADSONG);
             break;
 
         case UP:
@@ -66,4 +66,10 @@ void input(Audio* audio, Library *lib, Instance *instance, int code, std::vector
         default:
             break;
     }
+}
+
+void lowerMusicVolumeAndPlaySound(Audio* audio, const std::string& sound) {
+    audio->pauseMusic();
+    audio->playSound(sound);
+    audio->playMusic(POKEROADSONG);
 }

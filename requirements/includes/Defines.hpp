@@ -40,6 +40,7 @@
 #define MAX_W  (WIDTH / SQUARE)
 #define MAX_H  (HEIGHT / SQUARE)
 //--------------------Songs--------------------//
+#define APPLESONG       "./requirements/assets/audios/apple.ogg"
 #define BUTTONSONG      "./requirements/assets/audios/button.ogg"
 #define POKESONG        "./requirements/assets/audios/pokemon.ogg"
 #define POKEROADSONG    "./requirements/assets/audios/pokemon_road.ogg"

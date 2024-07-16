@@ -33,10 +33,12 @@ int main(int ac, char **av) {
     Instance instance;
 
     instance.setAreaSize(atoi(av[1]), atoi(av[2]));
-    // instance[AUDIOCODE]->playSong(POKEROADSONG);
+    instance[AUDIOCODE]->playMusic(POKEROADSONG);
 
     while (instance[0]->getKeyCode() != QUIT)
     {   
+        if (instance[0]->getKeyCode() == UP)
+            lowerMusicVolumeAndPlaySound(instance[AUDIOCODE], APPLESONG);
         if (instance[0]->getKeyCode() == RIGHT)
             instance[0]->setMap(mapTest1);
         else if (instance[0]->getKeyCode() == LEFT)
