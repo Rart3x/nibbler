@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "Audio.hpp"
-#include "GL.hpp"
+#include "SDL.hpp"
 #include "NC.hpp"
 #include "SFML.hpp"
 #include "Utils.hpp"
@@ -18,7 +18,7 @@ class Instance {
         ~Instance();
 
         Audio*  loadAudioInstance();
-        GL*     loadGLInstance();
+        SDL*     loadSDLInstance();
         NC*     loadNCInstance();
         SFML*   loadSFMLInstance();
 

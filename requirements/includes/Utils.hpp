@@ -8,7 +8,7 @@
 #include "Instance.hpp"
 
 #include "Audio.hpp"
-#include "GL.hpp"
+#include "SDL.hpp"
 #include "NC.hpp"
 #include "SFML.hpp"
 

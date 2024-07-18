@@ -109,7 +109,7 @@ void NC::input() {
 			break;
 
 		case '3':
-			this->keyCode = GLCODE;
+			this->keyCode = SDLCODE;
 			break;
 
         case 'W':

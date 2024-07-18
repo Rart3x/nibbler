@@ -14,14 +14,14 @@
 #define RIGHT       68
 //--------------------Librarys--------------------//
 #define AUDIO_PATH  "./requirements/libs/Audio.so"
-#define GL_PATH     "./requirements/libs/GL.so"
+#define SDL_PATH     "./requirements/libs/SDL.so"
 #define NC_PATH     "./requirements/libs/NC.so"
 #define SFML_PATH   "./requirements/libs/SFML.so"
 //--------------------Librarys codes--------------------//
 #define NONE        -1  
 #define SFMLCODE    0
 #define NCCODE      1
-#define GLCODE      2
+#define SDLCODE      2
 #define AUDIOCODE  "3"
 //--------------------Modes--------------------//
 #define GAME        3

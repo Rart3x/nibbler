@@ -71,7 +71,7 @@ void SFML::displayPause() {
 }
 
 void SFML::drawMap() {
-    // sf::RectangleShape rect(sf::Vector2f(WIDTH / this->map[0].size(), HEIGHT / this->map.size()));
+    // sf::RectanSDLeShape rect(sf::Vector2f(WIDTH / this->map[0].size(), HEIGHT / this->map.size()));
 
     // for (size_t i = 0; i < this->map.size(); i++)
     // {
@@ -125,7 +125,7 @@ void SFML::input() {
                 }
                 else if (event.key.code == sf::Keyboard::Num3)
                 {
-                    this->keyCode = GLCODE;
+                    this->keyCode = SDLCODE;
                 }
                 else if (event.key.code == sf::Keyboard::W)
                 {

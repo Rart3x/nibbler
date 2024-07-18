@@ -60,8 +60,8 @@ void input(Audio* audio, Library *lib, Instance *instance, int code, std::vector
             audio->playMusic(POKEROADSONG);
             break;
 
-        case GLCODE:
-            instance->unloadAndLoad(GLCODE);
+        case SDLCODE:
+            instance->unloadAndLoad(SDLCODE);
             instance->loadMap(map);
             audio->playMusic(POKEROADSONG);
             break;

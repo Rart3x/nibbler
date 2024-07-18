@@ -5,7 +5,7 @@ SRC_DIR = requirements/functions
 OBJ_DIR = .objs
 
 AUDIO_LIB = $(LIB_DIR)/Audio.so
-GL_LIB = $(LIB_DIR)/GL.so
+SDL_LIB = $(LIB_DIR)/SDL.so
 NC_LIB = $(LIB_DIR)/NC.so
 SFML_LIB = $(LIB_DIR)/SFML.so
 
@@ -20,8 +20,8 @@ SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS := $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
-all: sfml $(NAME) $(AUDIO_LIB) $(GL_LIB) $(NC_LIB) $(SFML_LIB) 
-dev: $(NAME) $(AUDIO_LIB) $(GL_LIB) $(NC_LIB) $(SFML_LIB) 
+all: sfml $(NAME) $(AUDIO_LIB) $(SDL_LIB) $(NC_LIB) $(SFML_LIB) 
+dev: $(NAME) $(AUDIO_LIB) $(SDL_LIB) $(NC_LIB) $(SFML_LIB) 
 
 sfml:
 	@chmod 777 requirements/scripts/sfml.sh
@@ -30,7 +30,7 @@ sfml:
 
 $(NAME): $(OBJS) $(MAIN_OBJ)
 	@printf "\033[0;32mCompilation successful.\033[0m\n"
-	@$(CC) $(OBJS) $(MAIN_OBJ) -lncurses -lGL -lglfw -lsfml-audio -lsfml-graphics -lsfml-system -lsfml-window -o $(NAME)
+	@$(CC) $(OBJS) $(MAIN_OBJ) -lncurses -lSDL2 -lSDL2_ttf -lsfml-audio -lsfml-graphics -lsfml-system -lsfml-window -o $(NAME)
 
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
@@ -55,7 +55,7 @@ $(OBJ_DIR)/Library.o: $(SRC_DIR)/Library.cpp
 	@$(DIRDUP)
 	@$(CC) $(CPPFLAGS) -shared -fPIC -c -o $@ $<
 
-$(OBJ_DIR)/GL.o: $(SRC_DIR)/GL.cpp
+$(OBJ_DIR)/SDL.o: $(SRC_DIR)/SDL.cpp
 	@$(DIRDUP)
 	@$(CC) $(CPPFLAGS) -shared -fPIC -c -o $@ $<
 
@@ -72,7 +72,7 @@ $(AUDIO_LIB): $(OBJ_DIR)/Audio.o
 	@mkdir -p $(dir $@)
 	@$(CC) -shared -o $@ $^
 
-$(GL_LIB): $(OBJ_DIR)/GL.o $(OBJ_DIR)/Library.o $(OBJ_DIR)/Errors.o
+$(SDL_LIB): $(OBJ_DIR)/SDL.o $(OBJ_DIR)/Library.o $(OBJ_DIR)/Errors.o
 	@mkdir -p $(dir $@)
 	@$(CC) -shared -o $@ $^
 
