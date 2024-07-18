@@ -9,12 +9,11 @@ extern "C" {
 
 NC::NC(void) : Library() {
 	initscr();
-	noecho();
-	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 
-    this->win = newwin(HEIGHT, WIDTH, 0, 0);
-    this->update();
+    this->win = newwin(LINES, COLS, 0, 0);
+    this->cols = COLS;
+    this->lines = LINES;
 }
 
 NC::NC(const NC &original) {
@@ -40,7 +39,35 @@ NC::~NC() {
 
 
 void NC::display() {
-    this->drawMap();
+    static bool pause = false;
+
+    if (this->cols != COLS || this->lines != LINES)
+    {
+        this->cols = COLS;
+        this->lines = LINES;
+
+        wclear(this->win);
+        resize_term(LINES, COLS);
+    }
+
+    if (this->mode == PAUSE)
+    {
+        if (!pause)
+        {
+            pause = true;
+            wclear(this->win);
+        }
+        mvwprintw(this->win, LINES / 2, COLS / 2, "PAUSED");
+    }
+    else
+    {
+        if (pause)
+        {
+            pause = false;
+            wclear(this->win);
+        } 
+        this->drawMap();
+    }
     wrefresh(this->win);
 }
 
@@ -49,41 +76,28 @@ void NC::drawMap() {
     {
         for (size_t j = 0; j < this->map[i].size(); j++)
         {
-            if (i == 0 || i == this->map.size() - 1)
-            {
-                if (j == 0 || j == this->map[i].size() - 1)
-                {
-                    if (i == 0 && j == 0)
-                        mvwaddch(this->win, i, j, 'x');
-                    else if (i == this->map.size() - 1 && j == 0)
-                        mvwaddch(this->win, i, j, 'x');
-                    else if (i == 0 && j == this->map[i].size() - 1)
-                        mvwaddch(this->win, i, j, 'x');
-                    else if (i == this->map.size() - 1 && j == this->map[i].size() - 1)
-                        mvwaddch(this->win, i, j, 'x');
-                    else
-                        mvwaddch(this->win, i, j, ACS_HLINE);
-                }
-            }
-            else if (j == 0 || j == this->map[i].size() - 1)
-                mvwaddch(this->win, i, j, ACS_VLINE);
-            else
-            {
-                if (this->map[i][j] == '0')
-                    mvwaddch(this->win, i, j, ' ');
-                else if (this->map[i][j] == '1')
-                    mvwaddch(this->win, i, j, ACS_HLINE);
-            }
+            if (this->map[i][j] == 'S')
+                mvwaddch(this->win, i, j, 'S');
         }
     }
 }
 
 void NC::input() {
+    static bool pause = false;
+
     switch (getch())
 	{
         case 27:
-			this->keyCode = QUIT;
+            this->keyCode = QUIT;
 			break;
+
+        case 32:
+            if (!pause)
+                this->keyCode = PAUSE;
+            else
+                this->keyCode = GAME;
+            pause = !pause;
+            break;
 
 		case '1':
 			this->keyCode = SFMLCODE;
@@ -118,7 +132,14 @@ void NC::input() {
 	}
 }
 
+void NC::pause() {
+    if (this->mode == PAUSE)
+        this->mode = GAME;
+    else
+        this->mode = PAUSE;
+}
+
 void NC::update() {
-    this->input();
     this->display();
+    this->input();
 }

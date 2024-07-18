@@ -34,33 +34,43 @@ void check_args_validity(int ac, char **av) {
 
 
 void input(Audio* audio, Library *lib, Instance *instance, int code, std::vector<std::string> map) {
-    (void)audio;
-    (void)lib;
     switch(code)
     {
+        case GAME:
+            lib->pause();
+            lib->setKeyCode(NONE);
+            audio->playMusic(POKEROADSONG);
+            break;
+
+        case PAUSE:
+            lib->pause();
+            lib->setKeyCode(NONE);
+            audio->pauseMusic();
+            break;
+
         case SFMLCODE:
             instance->unloadAndLoad(SFMLCODE);
             instance->loadMap(map);
-            // audio->playMusic(POKEROADSONG);
+            audio->playMusic(POKEROADSONG);
             break;
 
         case NCCODE:
             instance->unloadAndLoad(NCCODE);
             instance->loadMap(map);
-            // audio->playMusic(POKEROADSONG);
+            audio->playMusic(POKEROADSONG);
             break;
 
         case GLCODE:
             instance->unloadAndLoad(GLCODE);
             instance->loadMap(map);
-            // audio->playMusic(POKEROADSONG);
+            audio->playMusic(POKEROADSONG);
             break;
 
         case UP:
         case DOWN:
         case LEFT:
         case RIGHT:
-            // lib->setKeyCode(NONE);
+            lib->setKeyCode(NONE);
             break;
 
         default:

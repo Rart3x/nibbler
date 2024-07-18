@@ -1,6 +1,6 @@
 #include "../includes/Library.hpp"
 
-Library::Library() : keyCode(NONE), mode(0), height(0), width(0) {}
+Library::Library() : keyCode(NONE), mode(NONE), height(0), width(0) {}
 Library::~Library() {}
 
 

@@ -15,6 +15,7 @@ class Library {
 
         virtual void    display() = 0;
         virtual void    input() = 0;
+        virtual void    pause() = 0;
         virtual void    update() = 0;
 
         virtual int     getKeyCode() const;

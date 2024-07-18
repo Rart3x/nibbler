@@ -13,7 +13,7 @@ std::vector<std::string> mapTest = {
 std::vector<std::string> mapTest1 = {
     "11111111111111111111111111111",
     "10000000000000000000000000001",
-    "10000000000000000000000000001",
+    "100000SSSSSSSSSSSSSSS00000001",
     "11111111111111111111111111111"
     "10000000000000000000000000001",
     "10000000000000000000000000001",
@@ -37,6 +37,8 @@ int main(int ac, char **av) {
 
     while (instance[0]->getKeyCode() != QUIT)
     {   
+        instance[0]->update();
+
         if (instance[0]->getKeyCode() == UP)
             lowerMusicVolumeAndPlaySound(instance[AUDIOCODE], APPLESONG);
         if (instance[0]->getKeyCode() == RIGHT)
@@ -47,7 +49,6 @@ int main(int ac, char **av) {
             instance[0]->setMap(mapTest);
 
         input(instance[AUDIOCODE], instance[0], &instance, instance[0]->getKeyCode(), mapTest);
-        instance[0]->update();
     }
 
     if (instance[AUDIOCODE])

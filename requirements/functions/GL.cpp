@@ -49,6 +49,8 @@ void GL::drawMap() {
 }
 
 void GL::input() {
+    static bool pause = false;
+
     if (glfwGetKey(this->win, GLFW_KEY_ESCAPE))
     {
         this->keyCode = QUIT;
@@ -63,7 +65,11 @@ void GL::input() {
     }
     else if (glfwGetKey(this->win, GLFW_KEY_SPACE))
     {
-        return;
+        if (!pause)
+            this->keyCode = PAUSE;
+        else
+            this->keyCode = GAME;
+        pause = !pause;
     }
     else if (glfwGetKey(this->win, GLFW_KEY_W))
     {
@@ -83,7 +89,14 @@ void GL::input() {
     }
 }
 
+void GL::pause() {
+    if (this->mode == PAUSE)
+        this->mode = GAME;
+    else
+        this->mode = PAUSE;
+}
+
 void GL::update() {
-    this->input();
     this->display();
+    this->input();
 }

@@ -36,32 +36,36 @@ SFML::~SFML() {
 }
 
 void SFML::display() {
+    // static bool pause = false;
+
     this->win->clear();
     this->drawMap();
     this->win->display();
 }
 
 void SFML::drawMap() {
-    sf::RectangleShape rect(sf::Vector2f(WIDTH / this->map[0].size(), HEIGHT / this->map.size()));
+    // sf::RectangleShape rect(sf::Vector2f(WIDTH / this->map[0].size(), HEIGHT / this->map.size()));
 
-    for (size_t i = 0; i < this->map.size(); i++)
-    {
-        for (size_t j = 0; j < this->map[i].size(); j++)
-        {
-            if (this->map[i][j] == '0')
-                rect.setFillColor(sf::Color::White);
-            else if (this->map[i][j] == '1')
-                rect.setFillColor(sf::Color::Black);
+    // for (size_t i = 0; i < this->map.size(); i++)
+    // {
+    //     for (size_t j = 0; j < this->map[i].size(); j++)
+    //     {
+    //         if (this->map[i][j] == '0')
+    //             rect.setFillColor(sf::Color::White);
+    //         else if (this->map[i][j] == '1')
+    //             rect.setFillColor(sf::Color::Black);
 
-            rect.setPosition(j * (WIDTH / this->map[0].size()), i * (HEIGHT / this->map.size()));
-            this->win->draw(rect);
-        }
-    }
+    //         rect.setPosition(j * (WIDTH / this->map[0].size()), i * (HEIGHT / this->map.size()));
+    //         this->win->draw(rect);
+    //     }
+    // }
 }
 
 
 void SFML::input() {
     sf::Event event;
+
+    static bool pause = false;
 
     while (this->win->pollEvent(event))
     {
@@ -82,7 +86,11 @@ void SFML::input() {
                 }
                 else if (event.key.code == sf::Keyboard::Space)
                 {
-                    return;
+                    if (!pause)
+                        this->keyCode = PAUSE;
+                    else
+                        this->keyCode = GAME;
+                    pause = !pause;
                 }
                 else if (event.key.code == sf::Keyboard::Num2)
                 {
@@ -116,7 +124,14 @@ void SFML::input() {
     }
 }
 
+void SFML::pause() {
+    if (this->mode == PAUSE)
+        this->mode = GAME;
+    else
+        this->mode = PAUSE;
+}
+
 void SFML::update(void) {
-    this->input();
     this->display();
+    this->input();
 }

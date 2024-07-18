@@ -5,7 +5,7 @@ Instance::Instance() {
     this->lib = NULL;
 
     this->audio = this->loadAudioInstance();
-    this->lib = this->loadNCInstance();
+    this->lib = this->loadSFMLInstance();
 
     ifNullLibraryDelete(*this);
 }
@@ -56,6 +56,8 @@ Audio* Instance::loadAudioInstance() {
     if (!error(instance, "Error: Failed to initialize Audio instance.", dl_handle, dlclose))
         return NULL;
 
+    std::cout << std::endl;
+
     return instance;
 }
 
@@ -84,6 +86,8 @@ GL* Instance::loadGLInstance() {
     instance = reinterpret_cast<GL * (*)(void)>(func)();
     if (!error(instance, "Error: Failed to initialize GL instance.", dl_handle, dlclose))
         return NULL;
+
+    std::cout << std::endl;
 
     return instance;
 }
@@ -114,6 +118,8 @@ NC* Instance::loadNCInstance() {
     if (!error(instance, "Error: Failed to initialize NC instance.", dl_handle, dlclose))
         return NULL;
 
+    std::cout << std::endl;
+
     return instance;
 }
 
@@ -142,6 +148,8 @@ SFML* Instance::loadSFMLInstance() {
     instance = reinterpret_cast<SFML * (*)(void)>(func)();
     if (!error(instance, "Error: Failed to initialize SFML instance.", dl_handle, dlclose))
         return NULL;
+    
+    std::cout << std::endl;
 
     return instance;
 }

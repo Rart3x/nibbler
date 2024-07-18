@@ -24,9 +24,8 @@
 #define GLCODE      2
 #define AUDIOCODE  "3"
 //--------------------Modes--------------------//
-#define MENU        0
-#define GAME        1
-#define PAUSE       2
+#define GAME        3
+#define PAUSE       4
 #define QUIT        404
 //--------------------RGBA--------------------//
 #define CYAN    0, 255, 255, 255

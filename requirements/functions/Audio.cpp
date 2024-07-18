@@ -46,7 +46,6 @@ void Audio::playMusic(const std::string& music) {
         }
         this->music.setLoop(true);
         this->music.play();
-
     }
 }
 

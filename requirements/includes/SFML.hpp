@@ -12,10 +12,11 @@ class SFML : public Library {
         SFML();
         SFML(const SFML &other);
         SFML& operator=(const SFML &other);
-        virtual ~SFML();
+        ~SFML();
 
         void    display(void);
         void    input(void);
+        void    pause(void);
         void    update(void);
 
         void    drawMap(void);
