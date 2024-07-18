@@ -36,11 +36,38 @@ SFML::~SFML() {
 }
 
 void SFML::display() {
-    // static bool pause = false;
-
     this->win->clear();
-    this->drawMap();
+
+    if (this->mode == PAUSE)
+        this->displayPause();
+    else
+        this->drawMap();
+
     this->win->display();
+}
+
+void SFML::displayPause() {
+    sf::Font font;
+    sf::Text pauseText;
+
+    if (!errorQuitLibWithBool(font.loadFromFile(ARIAL), "Error: Could not load font", this))
+        return;
+
+    pauseText.setFont(font);
+    pauseText.setString("Pause");
+    pauseText.setCharacterSize(72);
+    pauseText.setFillColor(sf::Color::White);
+
+    int windowWidth = this->win->getSize().x;
+    int windowHeight = this->win->getSize().y;
+
+    float textWidth = pauseText.getLocalBounds().width;
+    float textHeight = pauseText.getLocalBounds().height;
+    float centerX = windowWidth / 2.0f - textWidth / 2.0f;
+    float centerY = windowHeight / 2.0f - textHeight / 2.0f;
+
+    pauseText.setPosition(centerX, centerY);
+    this->win->draw(pauseText);
 }
 
 void SFML::drawMap() {

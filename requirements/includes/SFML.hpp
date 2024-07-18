@@ -15,6 +15,7 @@ class SFML : public Library {
         ~SFML();
 
         void    display(void);
+        void    displayPause(void);
         void    input(void);
         void    pause(void);
         void    update(void);
