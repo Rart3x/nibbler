@@ -20,6 +20,7 @@ class Library {
 
         virtual int     getKeyCode() const;
         virtual std::vector<std::string> getMap() const;
+        virtual int     getMode() const;
 
         virtual void    setAreaSize(int h, int w);
         virtual void    setKeyCode(int code);

@@ -14,6 +14,9 @@ NC::NC(void) : Library() {
     this->win = newwin(LINES, COLS, 0, 0);
     this->cols = COLS;
     this->lines = LINES;
+
+    box(this->win, 0, 0);
+    wrefresh(this->win);
 }
 
 NC::NC(const NC &original) {
@@ -57,7 +60,7 @@ void NC::display() {
             pause = true;
             wclear(this->win);
         }
-        mvwprintw(this->win, LINES / 2, COLS / 2, "PAUSED");
+        mvwprintw(this->win, LINES / 2, COLS / 2, "PAUSE");
     }
     else
     {
@@ -72,12 +75,14 @@ void NC::display() {
 }
 
 void NC::drawMap() {
+    box(this->win, 0, 0);
+
     for (size_t i = 0; i < this->map.size(); i++)
     {
         for (size_t j = 0; j < this->map[i].size(); j++)
         {
             if (this->map[i][j] == 'S')
-                mvwaddch(this->win, i, j, 'S');
+                mvwaddch(this->win, i + 1, j + 1, 'S');
         }
     }
 }

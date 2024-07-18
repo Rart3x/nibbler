@@ -12,6 +12,10 @@ std::vector<std::string> Library::getMap(void) const {
     return this->map;
 }
 
+int Library::getMode(void) const {
+    return this->mode;
+}
+
 
 void Library::setAreaSize(int h, int w) {
     this->height = h;

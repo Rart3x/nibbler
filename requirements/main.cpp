@@ -39,7 +39,7 @@ int main(int ac, char **av) {
     {   
         instance[0]->update();
 
-        if (instance[0]->getKeyCode() == UP)
+        if (instance[0]->getKeyCode() == UP && instance[0]->getMode() == GAME)
             lowerMusicVolumeAndPlaySound(instance[AUDIOCODE], APPLESONG);
         if (instance[0]->getKeyCode() == RIGHT)
             instance[0]->setMap(mapTest1);
