@@ -83,3 +83,23 @@ void lowerMusicVolumeAndPlaySound(Audio* audio, const std::string& sound) {
     audio->playSound(sound);
     audio->playMusic(POKEROADSONG);
 }
+
+int windowHeight(const std::vector<std::string>& map) {
+    int maxHeight = 0;
+
+    for (const auto& line : map)
+        if (line.length() > (size_t)maxHeight)
+            maxHeight = line.length();
+
+    return maxHeight;
+}
+
+int windowWidth(const std::vector<std::string>& map) {
+    int maxWidth = 0;
+
+    for (const auto& line : map)
+        if (line.length() > (size_t)maxWidth)
+            maxWidth = line.length();
+
+    return maxWidth;
+}

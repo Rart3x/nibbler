@@ -117,20 +117,24 @@ void SDL::input() {
                         this->keyCode = SFMLCODE;
                         break;
 
-                    case SDL_SCANCODE_3:
-                        this->keyCode = SDLCODE;
+                    case SDL_SCANCODE_2:
+                        this->keyCode = NCCODE;
                         break;
 
                     case SDL_SCANCODE_W:
+                        this->keyCode = UP;
                         break;
 
                     case SDL_SCANCODE_A:
+                        this->keyCode = LEFT;
                         break;
 
                     case SDL_SCANCODE_S:
+                        this->keyCode = DOWN;
                         break;
 
                     case SDL_SCANCODE_D:
+                        this->keyCode = RIGHT;
                         break;
 
                     case SDL_SCANCODE_UP:
